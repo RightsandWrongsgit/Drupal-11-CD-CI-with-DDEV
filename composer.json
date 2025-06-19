@@ -16,9 +16,12 @@
   ],
   "require": {
     "composer/installers": "^2.0",
+    "drupal/config_split": "^2.0",
     "drupal/core-composer-scaffold": "^11.0",
     "drupal/core-project-message": "^11.0",
     "drupal/core-recommended": "^11.0",
+    "drupal/environment_indicator": "^4.0",
+    "drupal/stage_file_proxy": "^3.1",
     "drush/drush": "^13.6",
     "platformsh/config-reader": "^2.4"
   },

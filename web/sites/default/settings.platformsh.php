@@ -8,6 +8,7 @@ use Drupal\Core\Installer\InstallerKernel;
 
 $platformsh = new \Platformsh\ConfigReader\Config();
 
+// NOTE THAT IS SET OF THE NEXT FIVE LINE WAS NOT IN DRUPAL 10 VERSION
 // Set up a config sync directory.
 //
 // This is defined inside the read-only "config" directory, deployed via Git.
