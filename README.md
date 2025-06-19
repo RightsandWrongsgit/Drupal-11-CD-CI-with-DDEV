@@ -56,7 +56,7 @@
 
 ## About
 
-This template builds Drupal 11 using the "Drupal Recommended" Composer project. It is pre-configured to use MariaDB and Redis for caching. The Drupal installer will skip asking for database credentials as they are already provided.
+This template builds Drupal 11 using the "Drupal Recommended" Composer project. It is pre-configured to use MariaDB and Redis for caching. The Drupal installer will skip asking for database credentials as they are already provided by the system.
 
 Drupal is a flexible and extensible PHP-based CMS framework.
 
