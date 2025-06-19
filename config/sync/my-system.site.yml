@@ -2,7 +2,7 @@ _core:
   default_config_hash: 
 langcode: en
 uuid: 
-name: 'Drupal CD/CD with DDEV'
+name: 'Drupal 11 CD/CD with DDEV'
 mail: emofsnead@gmail.com
 slogan: ''
 page:
