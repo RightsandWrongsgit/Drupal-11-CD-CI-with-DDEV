@@ -3,6 +3,8 @@ type: drupal11
 docroot: web
 php_version: "8.3"
 webserver_type: nginx-fpm
+router_http_port: "8000"
+router_https_port: "8443"
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
@@ -12,7 +14,14 @@ database:
 use_dns_when_possible: true
 composer_version: "2"
 web_environment: []
-corepack_enable: true
+    - PLATFORM_PROJECT=vihhzm6bnyv7e
+    - PLATFORM_BRANCH=main
+nodejs_version: "22"
+corepack_enable: false
+
+hookks:
+  post-start:
+    - exec: mkdir -p /var/www/html/sites/default/files/config/sync && chmod -R 775 /var/www/html/sites/default/files/config/sync
 
 # Key features of DDEV's config.yaml:
 
