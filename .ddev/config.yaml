@@ -14,12 +14,12 @@ database:
 use_dns_when_possible: true
 composer_version: "2"
 web_environment: []
-    - PLATFORM_PROJECT=vihhzm6bnyv7e
-    - PLATFORM_BRANCH=main
+  - PLATFORM_PROJECT=vihhzm6bnyv7e
+  - PLATFORM_BRANCH=main
 nodejs_version: "22"
 corepack_enable: false
 
-hookks:
+hooks:
   post-start:
     - exec: mkdir -p /var/www/html/sites/default/files/config/sync && chmod -R 775 /var/www/html/sites/default/files/config/sync
 
