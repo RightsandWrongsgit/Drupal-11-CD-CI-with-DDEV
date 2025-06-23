@@ -1,15 +1,16 @@
+<h1 align="center">Using this Drupal 11 CD/CI with DDEV template on Platform.sh</h1>
 
-<p align="right">
-<a href="https://platform.sh">
-<img src="https://platform.sh/logos/redesign/Platformsh_logo_black.svg" width="150px">
-</a>
-</p>
+<h2 align="center">Secure your work and see the results of your efforts!</h2>
 
 <p align="center">
 <a href="https://www.drupal.org/">
 <img src="header.svg">
 </a>
 </p>
+
+<h5 align="left">CREDIT and Enhancement:  The foundations for this template are cloned from the Platform.sh set of templates.  However, it is NOT forked from that template and is heavily modified.  The advantages of the modifications are done in a manner that leverages the core strengths of Platform.sh for multiple, linked environments and Git:GitReposity Version Control.  Core to the advantages of this template are the interlinking of a local machine development environment under Git version control tied directly to a GitRepository and that repository taking advantage of Platform.sh capability to integrate with the hosted environments.  This template then utilizes Drupal's Config_Split and Environment_Indicator modules for a workflow between the local environment and three hosted environments on Platform.sh; develop, staged, and main.  With the repository integration to Platform.sh, the three GitReposity branches drive the three hosted environments.  Thus, every time you update any of those repository branches, Platform.sh rebuilds its hosted environment counter-part.  You, friends, or clients can see the actual operating environment in a browser at any point for each environment.  The version control aspects of this set up help assure your efforts are secured while the browser visibility of your progress provides excellent prospective on how your efforts are playing out in the real world. </h5>
+
+
 
 <h1 align="center">Deploy Drupal 11 on Platform.sh</h1>
 
@@ -380,8 +381,7 @@ $ git merge --allow-unrelated-histories -X theirs 11.x
 
 ### Adding and updating files
 
-A small number of files need to be added to or modified in your repository at this point.
-Some of them explicitly configure how the application is built and deployed on Platform.sh, while others simply modify files you may already have locally, in which case you will need to replicate those changes.
+This project has been preconfigured beyond what is done using the standard Platform.sh template.  Therefore, the series of files noted in the standard template should already be found where expected.  However, the list of those files and their descriptions from the standard Platform.sh template GitHub repository is repeated here in case you want to check or if you might want to learn about potential modifications you might make.  
 
 Open the dropdown below to view all of the **Added** and **Updated** files you'll need to reproduce in your migration.
 
@@ -744,70 +744,7 @@ This template includes a starting [`.blackfire.yml`](.blackfire.yml) file that c
 
 
 
-### Contact
 
-This template is maintained by the Platform.sh Developer Relations team, and they will be notified of all issues and pull requests you open here.
-
-- **Community:** Share your question with the community, or see if it's already been asked on our [Community site](https://community.platform.sh).
-- **Slack:** If you haven't done so already, you can join Platform.sh's [public Slack](https://chat.platform.sh/) channels and ping the `@devrel_team` with any questions.
-
-
-### About Platform.sh
-
-This template has been specifically designed to deploy on Platform.sh.
-
-<details>
-<summary>What is Platform.sh?</summary><br/>
-
-Platform.sh is a unified, secure, enterprise-grade platform for building, running and scaling web applications. We’re the leader in Fleet Ops: Everything you need to manage your fleet of websites and apps is available from the start. Because infrastructure and workflows are handled from the start, apps just work, so teams can focus on what really matters: making faster changes, collaborating confidently, and scaling responsibly. Whether managing a fleet of ten or ten thousand sites and apps, Platform.sh is the Developer- preferred solution that scales right.
-
-Our key features include:
-
-* **GitOps: Git as the source of truth**
-
-    Every branch becomes a development environment, and nothing can change without a commit.
-
-* **Batteries included: Managed infrastructure**
-
-    [Simple abstraction in YAML](https://docs.platform.sh/configuration/yaml.html) for [committing and configuring infrastructure](https://docs.platform.sh/overview/structure.html), fully managed patch updates, and 24 [runtimes](https://docs.platform.sh/languages.html) & [services](https://docs.platform.sh/configuration/services.html) that can be added with a single line of code.
-
-* **Instant cloning: Branch, merge, repeat**
-
-    [Reusable builds](https://docs.platform.sh/overview/build-deploy.html) and automatically inherited production data provide true staging environments - experiment in isolation, test, then destroy or merge.
-
-* **FleetOps: Fleet management platform**
-
-    Leverage our public API along with custom tools like [Source Operations](https://docs.platform.sh/configuration/app/source-operations.html) and [Activity Scripts](https://docs.platform.sh/integrations/activity.html) to [manage thousands of applications](https://youtu.be/MILHG9OqhmE) - their dependency updates, fresh content, and upstream code.
-
-
-To find out more, check out the demo below and go to our [website](https://platform.sh/product/).
-
-<br/>
-<p align="center">
-<a href="https://platform.sh/demo/"><img src="https://img.youtube.com/vi/ny2YeD6Qt3M/0.jpg" alt="The Platform.sh demo"></a>
-</p>
-
-
-</details>
-
-
-
-## Contribute
-
-<h3 align="center">Help us keep top-notch templates!</h3>
-
-Every one of our templates is open source, and they're important resources for users trying to deploy to Platform.sh for the first time or better understand the platform. They act as getting started guides, but also contain a number of helpful tips and best practices when working with certain languages and frameworks.
-
-See something that's wrong with this template that needs to be fixed? Something in the documentation unclear or missing? Let us know!
-
-<p align="center">
-<strong>How to contribute</strong>
-<br /><br />
-<a href="https://github.com/platformsh-templates/drupal11/issues/new?assignees=&labels=bug&template=bug_report.yml"><strong>Report a bug</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<a href="https://github.com/platformsh-templates/drupal11/issues/new?assignees=&labels=feature+request&template=improvements.yml"><strong>Submit a feature request</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<a href="https://github.com/platformsh-templates/drupal11/pulls"><strong>Open a pull request</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<br />
-</p>
 <br />
 <p align="center">
 <strong>Need help?</strong>
@@ -816,17 +753,4 @@ See something that's wrong with this template that needs to be fixed? Something 
 <a href="https://chat.platform.sh"><strong>Join us on Slack</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <br />
 </p>
-<br />
-<h3 align="center"><strong>Thanks to all of our amazing contributors!</strong></h3>
-<br/>
-<p align="center">
-<a href="https://github.com/platformsh-templates/drupal11/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=platformsh-templates/drupal11" />
-</a>
-</p>
-
-<p align="center">
-<em>Made with <a href="https://contrib.rocks">contrib.rocks</a><em>
-</p>
-
 <br />

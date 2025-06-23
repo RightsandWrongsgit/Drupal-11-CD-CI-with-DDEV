@@ -1,0 +1,32 @@
+# This file is a starting point to use Lando rather than DDEV for local. Expect to edit it.
+name: Drupal 11 CD/CI with DDEV
+recipe: platformsh
+config:
+#  id: <add your ID here>
+services:
+  drupal:
+    overrides:
+      image: 'docker.registry.platform.sh/php-8.1:stable'
+      environment:
+        XDEBUG_MODE: 'debug,develop'
+tooling:
+  drush:
+    service: drupal
+xdebug-on:
+  service: appserver
+  description: Enable Xdebug.
+  user: root
+  cmd:
+    - >-
+      docker-php-ext-enable xdebug && kill -USR2 $(pgrep -o php-fpm) > /dev/null
+      || /etc/init.d/apache2 reload
+    - tput setaf 2 && echo "Xdebug On" && tput sgr 0 && echo
+xdebug-off:
+  service: appserver
+  description: Disable Xdebug.
+  user: root
+  cmd:
+    - >-
+      rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && kill -USR2
+      $(pgrep -o php-fpm) > /dev/null || /etc/init.d/apache2 reload
+    - tput setaf 1 && echo "Xdebug Off" && tput sgr 0 && echo
