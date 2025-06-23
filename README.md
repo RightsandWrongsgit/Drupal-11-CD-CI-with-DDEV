@@ -737,6 +737,11 @@ This template includes a starting [`.blackfire.yml`](.blackfire.yml) file that c
 - [Git & GitHub Basics](https://www.youtube.com/watch?v=Fk12ELJ9Bww)
 - [VSCode](https://code.visualstudio.com/docs)
 - [Working with GitHub in VS Code](https://code.visualstudio.com/docs/sourcecontrol/github)
+- [YML,HTML,CSS,JS,SQL,Bootstrap,PHP Tutorials](https://www.tutorialspoint.com/yaml/index.htm)
+- [Computer Setup for a new MacBook](https://www.youtube.com/watch?v=GK7zLYAXdDs)
+- [OhMyZSH Enhanced Prompt](https://ohmyz.sh)
+[Information Basics](https://armtec.services/book/infotechoverview)
+- [Pure Novice](https://armtec.services/book/Novice.html)
 
 
 
