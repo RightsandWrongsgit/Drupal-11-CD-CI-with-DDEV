@@ -796,7 +796,7 @@ After that, here are a collection of additional resources you might find interes
 
 
 <details>
-<summary><strong>Accessing logs</strong></summary><br/>
+<summary><strong>Accessing logs (Click to open)</strong></summary><br/>
 
 After the environment has finished its deployment, you can investigate issues that occured on startup, `deploy` and `post_deploy` hooks, and generally at runtime using the CLI. Run the command:
 
@@ -811,7 +811,7 @@ Once you have connected to the container, [logs](https://docs.platform.sh/develo
 
 
 <details>
-<summary><strong>Rebuilding cache</strong></summary><br/>
+<summary><strong>Rebuilding cache (Click to open)</strong></summary><br/>
 
 You may run into a database error after installing Drupal on your production environment initially.
 To fix, SSH into the application container (`platform ssh`) and rebuild the cache using Drush:
@@ -828,7 +828,7 @@ drush cr
 
 
 <details>
-<summary><strong>Default <code>hash_salt</code> behavior</strong></summary><br/>
+<summary><strong>Default <code>hash_salt</code> behavior (Click to open)</strong></summary><br/>
 
 Drupal's [default settings set](https://github.com/drupal/drupal/blob/10.3.x/core/assets/scaffold/files/default.settings.php#L252) `hash_salt` to an empty string:
 
@@ -873,8 +873,8 @@ This template includes a starting [`.blackfire.yml`](.blackfire.yml) file that c
 * [Using Builds](https://blackfire.io/docs/builds-cookbooks/index)
 * [Configuring Integrations](https://blackfire.io/docs/integrations/index)
 
-
-### Resources
+<details>
+<summary><strong>Resources and Reference Material (Click to Open)</strong></summary>
 
 
 - [Drupal](https://www.drupal.org/)
@@ -897,7 +897,7 @@ This template includes a starting [`.blackfire.yml`](.blackfire.yml) file that c
 
 
 <details>
-<summary><strong>Open Source Tools for Design and Development:</strong></summary>
+<summary><strong>Open Source Tools for Design and Development (Click to Open)</strong></summary>
 
 
 # Open Source Solutions
