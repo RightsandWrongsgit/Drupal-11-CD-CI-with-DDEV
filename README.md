@@ -895,6 +895,7 @@ This template includes a starting [`.blackfire.yml`](.blackfire.yml) file that c
 - [Information Basics](https://armtec.services/book/infotechoverview)
 - [Pure Novice](https://armtec.services/book/Novice.html)
 
+</details>
 
 <details>
 <summary><strong>Open Source Tools for Design and Development (Click to Open)</strong></summary>
