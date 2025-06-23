@@ -77,18 +77,163 @@ This will automatically create a new project and initialize the repository for y
 
 
 
-You can also quickly recreate this project locally with the following command:
-
-```bash
-composer create-project platformsh/drupal11 -s dev
-```
-
-
-> **Note:**
->
-> Platform.sh templates prioritize upstream release versions over our own. Despite this, we update template dependencies on a scheduled basis independent of those upstreams. Because of this, template repos do not contain releases. This may change in the future, but until then the `-s dev` flag is necessary to use `composer create-project`.
-
 ### Preferred Deployment Option
+
+## Prerequisites
+
+To set up and deploy this project, ensure you have the following tools and accounts. These are essential for local development, version control, and Platform.sh hosting.
+
+### Software Requirements
+- **Docker Desktop**: Runs DDEV for local development. Download from [docker.com](https://www.docker.com/products/docker-desktop/).  
+  **[Beginner Tip]**: Docker is a tool that creates isolated environments (containers) to run your site locally, mimicking a web server without manual setup. Install Docker Desktop, ensure it’s running, and allocate at least 4GB RAM in its settings.
+- **DDEV**: A Docker-based tool for Drupal development. Install via `brew install ddev` (macOS/Linux) or follow [DDEV installation instructions](https://ddev.readthedocs.io/en/stable/#installation) for Windows.  
+  **[Beginner Tip]**: DDEV simplifies setting up a local Drupal site with PHP, MySQL, and a web server. It’s like a pre-packaged kitchen for cooking your Drupal site locally.
+- **Composer**: PHP dependency manager for Drupal. Install via [getcomposer.org](https://getcomposer.org/download/).  
+  **[Beginner Tip]**: Composer is like a shopping list that automatically downloads Drupal’s core files and modules. Run `composer --version` to check if it’s installed.
+- **Git**: Version control system. Install via `brew install git` (macOS), `apt-get install git` (Linux), or [git-scm.com](https://git-scm.com/downloads) for Windows.  
+  **[Beginner Tip]**: Git tracks changes to your code, like a time machine for your project. You’ll use it to save and share your work.
+- **Platform.sh CLI**: Command-line tool for managing Platform.sh projects. Install via `curl -fsS https://platform.sh/cli/installer | php`.  
+  **[Beginner Tip]**: The Platform.sh CLI lets you control your cloud-hosted site from your terminal, like a remote control for your website.
+- **Visual Studio Code (VSCode)**: Recommended Integrated Development Environment (IDE) for editing code and managing Git. Download from [code.visualstudio.com](https://code.visualstudio.com/).  
+  **[Why Use VSCode?]**: VSCode is beginner-friendly, free, and supports Drupal development with syntax highlighting, debugging, and Git integration. It’s like a smart notebook that helps you write, organize, and track code changes. Install these VSCode extensions for Git/GitHub support:
+    - **GitLens** (`eamodio.gitlens`): Enhances Git features, showing commit history and changes inline.
+    - **GitHub Pull Requests and Issues** (`github.vscode-pull-request-github`): Manages GitHub repositories directly in VSCode.
+    - **Drupal** (`marabesi.drupal`): Adds Drupal-specific syntax and snippets.
+    - **PHP Intelephense** (`bmewburn.vscode-intelephense-client`): Improves PHP code completion and debugging.
+  **[Beginner Tip]**: Install extensions in VSCode by clicking the Extensions icon (square with an arrow) in the sidebar, searching for the extension name, and clicking “Install.” Watch these videos for VSCode and Git basics:
+    - [VSCode Git Basics](https://www.youtube.com/watch?v=i_23KUAetlM) (5 min)
+    - [Using GitHub with VSCode](https://www.youtube.com/watch?v=D6yUK3W2bH0) (10 min)
+
+### Account Requirements
+- **GitHub Account**: For version control and CI/CD. Sign up at [github.com](https://github.com/). Ensure your SSH key is added to GitHub ([instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)).  
+  **[Beginner Tip]**: GitHub is like a cloud storage for your code, where you save and share your project. SSH keys are like a password to securely connect your computer to GitHub.
+- **Platform.sh Account**: For cloud hosting. Sign up for a trial at [platform.sh](https://platform.sh/trial/).  
+  **[Beginner Tip]**: Platform.sh is a service that hosts your Drupal site online, like renting a server to make your site accessible to the world.
+
+### System Requirements
+- **Operating System**: macOS, Linux, or Windows 10/11.
+- **RAM**: At least 8GB (16GB recommended for Docker/DDEV).
+- **Disk Space**: 5GB free for Docker images, Drupal files, and database.
+- **PHP**: Version 8.3 (handled by DDEV).  
+  **[Beginner Tip]**: PHP is the programming language Drupal uses. DDEV sets it up for you, so you don’t need to install it manually.
+- **Node.js** (optional): For running Gulp tasks or front-end tools. Install via [nodejs.org](https://nodejs.org/).  
+  **[Beginner Tip]**: Node.js is only needed if you work on custom themes with tools like Gulp. You can skip this for now.
+
+## Local Development Setup
+
+This section guides you through setting up the project locally using DDEV. Experienced users can run the provided setup script or follow the manual steps. Beginners should read the detailed explanations for clarity.
+
+### Setup Script
+For convenience, a setup script (`setup-local.sh`) automates cloning the repository, configuring DDEV, installing dependencies, and setting up Drupal. Save the script, make it executable (`chmod +x setup-local.sh`), and run it (`./setup-local.sh`).
+
+
+#!/bin/bash
+# Setup script for Drupal 10 CD/CI with DDEV and Platform.sh
+# Run this in a new directory to set up the project locally
+
+# Exit on error
+set -e
+
+echo "Starting local setup for Drupal 10 project..."
+
+# Check for prerequisites
+command -v git >/dev/null 2>&1 || { echo "Git is required. Install it from https://git-scm.com/downloads"; exit 1; }
+command -v ddev >/dev/null 2>&1 || { echo "DDEV is required. Install it from https://ddev.readthedocs.io/en/stable/#installation"; exit 1; }
+command -v composer >/dev/null 2>&1 || { echo "Composer is required. Install it from https://getcomposer.org/download/"; exit 1; }
+command -v docker >/dev/null 2>&1 || { echo "Docker is required. Install it from https://www.docker.com/products/docker-desktop/"; exit 1; }
+
+# Clone the repository
+echo "Cloning the repository..."
+git clone git@github.com:RightsandWrongsgit/Drupal-10-CD-CI-with-DDEV.git
+cd Drupal-10-CD-CI-with-DDEV
+
+# Configure DDEV
+echo "Configuring DDEV..."
+ddev config --project-type drupal10 --docroot web --php-version 8.3
+ddev start
+
+# Install dependencies
+echo "Installing Composer dependencies..."
+ddev composer install
+
+# Install Drupal
+echo "Installing Drupal with Drush..."
+ddev drush site:install standard --account-name=admin --account-pass=admin --site-name="My Drupal Site" -y
+
+# Enable config_split and environment_indicator
+echo "Enabling config_split and environment_indicator modules..."
+ddev drush pm:enable config_split environment_indicator -y
+
+# Generate a one-time login link
+echo "Generating login link..."
+ddev drush uli
+
+echo "Setup complete! Access your site via 'ddev launch' or the URL above."
+echo "Use VSCode to open the project folder for editing and Git management."
+
+*******************************************************************************************************************
+**For Experienced Users**:
+1. Clone the repo: `git clone git@github.com:RightsandWrongsgit/Drupal-10-CD-CI-with-DDEV.git && cd Drupal-10-CD-CI-with-DDEV`
+2. Configure DDEV: `ddev config --project-type drupal10 --docroot web --php-version 8.3`
+3. Start DDEV: `ddev start`
+4. Install dependencies: `ddev composer install`
+5. Install Drupal: `ddev drush site:install standard --account-name=admin --account-pass=admin -y`
+6. Enable modules: `ddev drush pm:enable config_split environment_indicator -y`
+7. Launch site: `ddev launch`
+
+**For Beginners**:
+- **[Step 1: Clone the Repository]** Clone the project using Git. Open your terminal (or VSCode’s integrated terminal: `Ctrl+``), navigate to a directory (e.g., `~/Sites`), and run:
+
+Inline image
+
+
+  ```bash
+  git clone git@github.com:RightsandWrongsgit/Drupal-10-CD-CI-with-DDEV.git
+  cd Drupal-10-CD-CI-with-DDEV
+  ```
+
+
+  This downloads the project to your computer. If you get an SSH error, ensure your GitHub SSH key is set up ([guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)).
+- **[Step 2: Set Up DDEV]** Run `ddev config --project-type drupal10 --docroot web --php-version 8.3` to configure DDEV for Drupal 10. Then, start DDEV with `ddev start`. This creates a local server with PHP 8.3 and MariaDB, like a mini web host on your computer.
+- **[Step 3: Install Dependencies]** Run `ddev composer install` to download Drupal core and modules, like ordering ingredients for a recipe.
+- **[Step 4: Install Drupal]** Run `ddev drush site:install standard --account-name=admin --account-pass=admin -y` to set up Drupal with an admin account (username: admin, password: admin). Drush is a command-line tool that simplifies Drupal tasks.
+- **[Step 5: Enable Modules]** Run `ddev drush pm:enable config_split environment_indicator -y` to enable environment-specific settings and visual indicators. These modules help manage different settings for local, staging, and production environments and show which environment you’re in (e.g., a colored bar in the admin interface).
+- **[Step 6: Access the Site]** Run `ddev launch` to open the site in your browser, or use `ddev drush uli` to get a one-time login link for the admin account.
+
+**VSCode Tip**: Open the project folder in VSCode (`code .` in the terminal). Use GitLens to view changes, commit with `Ctrl+Enter`, and push to GitHub via the Source Control panel. See the [VSCode Git video](https://www.youtube.com/watch?v=i_23KUAetlM) for details.
+
+## Platform.sh Deployment
+
+Deploying to Platform.sh hosts your site in the cloud with automated scaling and services. The project includes a `.platform.app.yaml` file for Platform.sh configuration and a `settings.platformsh.php` file for environment-specific settings.
+
+**For Experienced Users**:
+1. Create a Platform.sh project: `platform project:create --title "My Drupal Site" --region <region>`.
+2. Add Git remote: `platform project:set-remote <project-id>`.
+3. Push code: `git push platform main`.
+4. Upload files (if migrating): `platform mount:upload --mount web/sites/default/files --source ./files`.
+5. Run Drupal installer via browser (`platform url`) or Drush: `ddev drush site:install`.
+6. Enable `config_split` settings: `platform variable:set -e main drupalsettings:config_split.config_split.local.enabled true` (for local-specific settings).
+
+**For Beginners**:
+- **[Step 1: Set Up Platform.sh]** Sign up for a Platform.sh trial ([platform.sh](https://platform.sh/trial/)). Install the Platform.sh CLI (`curl -fsS https://platform.sh/cli/installer | php`). Create a new project with `platform project:create --title "My Drupal Site" --region us-2.platform.sh`. This sets up a cloud server for your site.
+- **[Step 2: Link to GitHub]** Run `platform project:set-remote <project-id>` (replace `<project-id>` with the ID from the previous step). This connects your local Git repository to Platform.sh, like linking your phone to a cloud service.
+- **[Step 3: Push Code]** Run `git push platform main` to upload your code. Platform.sh builds and deploys your site, using the `.platform.app.yaml` file to configure PHP, MariaDB, and Redis.
+- **[Step 4: Upload Files]** If migrating an existing site, upload public files with `platform mount:upload --mount web/sites/default/files --source ./files`. This moves files (e.g., images) to Platform.sh, like copying photos to cloud storage.
+- **[Step 5: Install Drupal]** Visit the site URL (`platform url`) to run Drupal’s installer in your browser. The `settings.platformsh.php` file automatically provides database credentials, so you won’t need to enter them. Alternatively, use `ddev drush site:install` if you prefer the command line.
+- **[Step 6: Configure Environments]** The `settings.platformsh.php` file uses `config_split` to apply settings based on the environment (local, staging, production). For example, it enables verbose logging locally but disables it in production. The `environment_indicator` module adds a colored bar (e.g., green for local, red for production) to the admin interface, so you always know which environment you’re in. Set environment-specific variables with `platform variable:set -e main drupalsettings:config_split.config_split.local.enabled true` to enable local settings.
+
+**Environment-Specific Settings**:
+- The `settings.platformsh.php` file (located in `web/sites/default`) integrates with Platform.sh’s environment variables to configure database connections, Redis caching, and `config_split` settings. It checks the environment (e.g., `PLATFORM_BRANCH`) to apply settings like:
+  - Local: Enables `config_split.config_split.local` for development modules (e.g., Devel) and verbose logging.
+  - Staging/Production: Enables `config_split.config_split.production` for optimized settings and disables debugging.
+- The `environment_indicator` module visually distinguishes environments in the Drupal admin interface, reducing errors when working across local, staging, or production sites. Configure it via `/admin/config/development/environment_indicator` or Drush: `ddev drush cset environment_indicator.indicator name "Local" -y`.
+
+**VSCode Tip**: Use the Platform.sh CLI in VSCode’s terminal to manage deployments. The GitHub Pull Requests extension lets you monitor CI/CD workflows directly in VSCode.
+
+
+
+
+
 
 #### Other deployment options
 
