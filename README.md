@@ -63,7 +63,7 @@ If you are new to Drupal you probably have never heard of Drush.  You will proba
 
 ### Quick Deploy
 
-<font color=yellow>"You probably don't want to use Quick Deploy if you don't already have experience using this repository in setting up a prior project on Platform.sh and if you don't need to use the local environment to work offline or with co-developers."!</font>
+<p align="center">You probably don't want to use Quick Deploy if you don't already have experience using this repository in setting up a prior project on Platform.sh and if you don't need to use the local environment to work offline or with co-developers."!</p>
 
 The quickest way to deploy this template on Platform.sh is by clicking the button below.
 This will automatically create a new project and initialize the repository for you.
