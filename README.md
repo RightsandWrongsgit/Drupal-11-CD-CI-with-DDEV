@@ -728,6 +728,15 @@ This template includes a starting [`.blackfire.yml`](.blackfire.yml) file that c
 - [Drupal](https://www.drupal.org/)
 - [Drupal on Platform.sh](https://docs.platform.sh/guides/drupal/deploy.html)
 - [Platform.sh PHP documentation](https://docs.platform.sh/languages/php.html)
+- [Drupal at your Fingertips](https://www.drupalatyourfingertips.com)
+- [WebWash Drupal Videos](https://www.webwash.net/?s=drupal)
+- [The DropTimes](https://www.thedroptimes.com)
+- [Drupalize.me Guides](https://drupalize.me/search?f%5B0%5D=type%3Acourse&f%5B1%5D=type%3Aguide)
+- [DDEV](https://ddev.readthedocs.io/en/stable/)
+- [Drupal-Helps Tips](https://drupalhelps.com/tips)
+- [Git & GitHub Basics](https://www.youtube.com/watch?v=Fk12ELJ9Bww)
+- [VSCode](https://code.visualstudio.com/docs)
+- [Working with GitHub in VS Code](https://code.visualstudio.com/docs/sourcecontrol/github)
 
 
 
