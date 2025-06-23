@@ -32,7 +32,7 @@
 <strong>Contents</strong>
 <br /><br />
 <a href="#about"><strong>About</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<a href="#getting-started"><strong>Getting started</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<a href="#quick-deploy"><strong>Quick Deploy</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <a href="#preferred-deployment-option"><strong>Preferred Deployment Option</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <a href="#migrate"><strong>Migrate</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <a href="#learn"><strong>Learn</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -59,9 +59,8 @@ If you are new to Drupal you probably have never heard of Drush.  You will proba
 - Ablity to Associate your custom URL on the host
 
 
-## Getting started
 
-### Quick Deploy
+## Quick Deploy
 
 <p align="center"><h6>NOTE: You probably don't want to use Quick Deploy if you don't already have experience using this repository in setting up a prior project on Platform.sh and if you don't need to use the local environment to work offline or with co-developers.!</h6></p>
 
@@ -77,13 +76,28 @@ This will automatically create a new project and initialize the repository for y
 
 
 
-### Preferred Deployment Option
+## Preferred Deployment Option
 
-## Prerequisites
+### Prerequisites
 
 To set up and deploy this project, ensure you have the following tools and accounts. These are essential for local development, version control, and Platform.sh hosting.
 
-### Software Requirements
+#### System Requirements
+- **Operating System**: macOS, Linux, or Windows 10/11.
+- **RAM**: At least 8GB (16GB recommended for Docker/DDEV).
+- **Disk Space**: 5GB free for Docker images, Drupal files, and database.
+- **PHP**: Version 8.3 (handled by DDEV).  
+  **[Beginner Tip]**: PHP is the programming language Drupal uses. DDEV sets it up for you, so you don’t need to install it manually.
+- **Node.js** (optional): For running Gulp tasks or front-end tools. Install via [nodejs.org](https://nodejs.org/).  
+  **[Beginner Tip]**: Node.js is only needed if you work on custom themes with tools like Gulp. You can skip this for now.
+
+#### Account Requirements
+- **GitHub Account**: For version control and CI/CD. Sign up at [github.com](https://github.com/). Ensure your SSH key is added to GitHub ([instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)).  
+  **[Beginner Tip]**: GitHub is like a cloud storage for your code, where you save and share your project. SSH keys are like a password to securely connect your computer to GitHub.
+- **Platform.sh Account**: For cloud hosting. Sign up for a trial at [platform.sh](https://platform.sh/trial/).  
+  **[Beginner Tip]**: Platform.sh is a service that hosts your Drupal site online, like renting a server to make your site accessible to the world.
+
+#### Software Requirements
 - **Docker Desktop**: Runs DDEV for local development. Download from [docker.com](https://www.docker.com/products/docker-desktop/).  
   **[Beginner Tip]**: Docker is a tool that creates isolated environments (containers) to run your site locally, mimicking a web server without manual setup. Install Docker Desktop, ensure it’s running, and allocate at least 4GB RAM in its settings.
 - **DDEV**: A Docker-based tool for Drupal development. Install via `brew install ddev` (macOS/Linux) or follow [DDEV installation instructions](https://ddev.readthedocs.io/en/stable/#installation) for Windows.  
@@ -104,20 +118,13 @@ To set up and deploy this project, ensure you have the following tools and accou
     - [VSCode Git Basics](https://www.youtube.com/watch?v=i_23KUAetlM) (5 min)
     - [Using GitHub with VSCode](https://www.youtube.com/watch?v=D6yUK3W2bH0) (10 min)
 
-### Account Requirements
-- **GitHub Account**: For version control and CI/CD. Sign up at [github.com](https://github.com/). Ensure your SSH key is added to GitHub ([instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)).  
-  **[Beginner Tip]**: GitHub is like a cloud storage for your code, where you save and share your project. SSH keys are like a password to securely connect your computer to GitHub.
-- **Platform.sh Account**: For cloud hosting. Sign up for a trial at [platform.sh](https://platform.sh/trial/).  
-  **[Beginner Tip]**: Platform.sh is a service that hosts your Drupal site online, like renting a server to make your site accessible to the world.
 
-### System Requirements
-- **Operating System**: macOS, Linux, or Windows 10/11.
-- **RAM**: At least 8GB (16GB recommended for Docker/DDEV).
-- **Disk Space**: 5GB free for Docker images, Drupal files, and database.
-- **PHP**: Version 8.3 (handled by DDEV).  
-  **[Beginner Tip]**: PHP is the programming language Drupal uses. DDEV sets it up for you, so you don’t need to install it manually.
-- **Node.js** (optional): For running Gulp tasks or front-end tools. Install via [nodejs.org](https://nodejs.org/).  
-  **[Beginner Tip]**: Node.js is only needed if you work on custom themes with tools like Gulp. You can skip this for now.
+# Check for prerequisites
+command -v git >/dev/null 2>&1 || { echo "Git is required. Install it from https://git-scm.com/downloads"; exit 1; }
+command -v ddev >/dev/null 2>&1 || { echo "DDEV is required. Install it from https://ddev.readthedocs.io/en/stable/#installation"; exit 1; }
+command -v composer >/dev/null 2>&1 || { echo "Composer is required. Install it from https://getcomposer.org/download/"; exit 1; }
+command -v docker >/dev/null 2>&1 || { echo "Docker is required. Install it from https://www.docker.com/products/docker-desktop/"; exit 1; }
+
 
 ## Local Development Setup
 
@@ -128,28 +135,24 @@ For convenience, a setup script (`setup-local.sh`) automates cloning the reposit
 
 
 #!/bin/bash
-# Setup script for Drupal 10 CD/CI with DDEV and Platform.sh
+# Setup script for Drupal 11 CD/CI with DDEV and Platform.sh
 # Run this in a new directory to set up the project locally
 
 # Exit on error
 set -e
 
-echo "Starting local setup for Drupal 10 project..."
+echo "Starting local setup for Drupal 11 project..."
 
-# Check for prerequisites
-command -v git >/dev/null 2>&1 || { echo "Git is required. Install it from https://git-scm.com/downloads"; exit 1; }
-command -v ddev >/dev/null 2>&1 || { echo "DDEV is required. Install it from https://ddev.readthedocs.io/en/stable/#installation"; exit 1; }
-command -v composer >/dev/null 2>&1 || { echo "Composer is required. Install it from https://getcomposer.org/download/"; exit 1; }
-command -v docker >/dev/null 2>&1 || { echo "Docker is required. Install it from https://www.docker.com/products/docker-desktop/"; exit 1; }
+
 
 # Clone the repository
 echo "Cloning the repository..."
-git clone git@github.com:RightsandWrongsgit/Drupal-10-CD-CI-with-DDEV.git
+git clone git@github.com:RightsandWrongsgit/Drupal-11-CD-CI-with-DDEV.git
 cd Drupal-10-CD-CI-with-DDEV
 
 # Configure DDEV
 echo "Configuring DDEV..."
-ddev config --project-type drupal10 --docroot web --php-version 8.3
+ddev config --project-type drupal11 --docroot web --php-version 8.3
 ddev start
 
 # Install dependencies
@@ -173,8 +176,8 @@ echo "Use VSCode to open the project folder for editing and Git management."
 
 *******************************************************************************************************************
 **For Experienced Users**:
-1. Clone the repo: `git clone git@github.com:RightsandWrongsgit/Drupal-10-CD-CI-with-DDEV.git && cd Drupal-10-CD-CI-with-DDEV`
-2. Configure DDEV: `ddev config --project-type drupal10 --docroot web --php-version 8.3`
+1. Clone the repo: `git clone git@github.com:RightsandWrongsgit/Drupal-11-CD-CI-with-DDEV.git && cd Drupal-11-CD-CI-with-DDEV`
+2. Configure DDEV: `ddev config --project-type drupal11 --docroot web --php-version 8.3`
 3. Start DDEV: `ddev start`
 4. Install dependencies: `ddev composer install`
 5. Install Drupal: `ddev drush site:install standard --account-name=admin --account-pass=admin -y`
