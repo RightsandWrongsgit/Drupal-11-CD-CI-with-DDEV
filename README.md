@@ -895,15 +895,10 @@ This template includes a starting [`.blackfire.yml`](.blackfire.yml) file that c
 - [Information Basics](https://armtec.services/book/infotechoverview)
 - [Pure Novice](https://armtec.services/book/Novice.html)
 
-- Open Source Tools for Design and Development:
-<!-- <br/>
-</blockquote> -->
-</details>
 
 <details>
-<summary>Open Source tool off the opportunity to try and utilize no expense software you may find aids you greatly</summary>
-<!-- <blockquote>
-<br/> -->
+<summary><strong>Open Source Tools for Design and Development:</strong></summary>
+
 
 # Open Source Solutions
 
@@ -1011,7 +1006,7 @@ There are websites where people concentrate on listing all sorts of Open Source 
 Open Source tools are not just about big software systems, but also about filling gaps in knowledge and helping people understand how to bring different parts together.  Drupal is an expecially community oriented group of people helping each other.  Jump in!  Be a contributor in whatever way your talents might benefit others.
 
 <br>
-
+</details>
 
 <br />
 <p align="center">
