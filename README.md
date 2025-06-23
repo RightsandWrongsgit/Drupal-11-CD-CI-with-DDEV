@@ -11,27 +11,12 @@
 <h5 align="left">CREDIT and Enhancement:  The foundations for this template are cloned from the Platform.sh set of templates.  However, it is NOT forked from that template and is heavily modified.  The advantages of the modifications are done in a manner that leverages the core strengths of Platform.sh for multiple, linked environments and Git:GitRepository Version Control.  Core to the advantages of this template are the interlinking of a local machine development environment under Git version control tied directly to a GitRepository and that repository taking advantage of Platform.sh capability to integrate with the hosted environments.  This template then utilizes Drupal's Config_Split and Environment_Indicator modules for a workflow between the local environment and three hosted environments on Platform.sh; develop, staged, and main.  With the repository integration to Platform.sh, the three GitRepository branches drive the three hosted environments.  Thus, every time you update any of those repository branches, Platform.sh rebuilds its hosted environment counter-part.  You, friends, or clients can see the actual operating environment in a browser at any point for each environment.  The version control aspects of this set up helps assure your efforts are secured while the browser visibility of your progress provides excellent prospective on how your efforts are playing out in the real world. </h5>
 
 
-
+<br>
 <h1 align="center">Deploy Drupal 11 on Platform.sh</h1>
+<br>
+
 
 <p align="center">
-<strong>Contribute, request a feature, or check out our resources</strong>
-<br />
-<br />
-<a href="https://community.platform.sh"><strong>Join our community</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<a href="https://docs.platform.sh"><strong>Documentation</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<a href="https://platform.sh/blog"><strong>Blog</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<a href="https://github.com/platformsh-templates/drupal11/issues/new?assignees=&labels=bug&template=bug_report.yml"><strong>Report a bug</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<a href="https://github.com/platformsh-templates/drupal11/issues/new?assignees=&labels=feature+request&template=improvements.yml"><strong>Request a feature</strong></a>
-<br /><br />
-</p>
-
-<p align="center">
-<a href="https://github.com/platformsh-templates/drupal11/issues">
-<img src="https://img.shields.io/github/issues/platformsh-templates/drupal11.svg?style=for-the-badge&labelColor=f4f2f3&color=ffd9d9&label=Issues" alt="Open issues" />
-</a>&nbsp&nbsp
-<a href="https://github.com/platformsh-templates/drupal11/pulls">
-<img src="https://img.shields.io/github/issues-pr/platformsh-templates/drupal11.svg?style=for-the-badge&labelColor=f4f2f3&color=ffd9d9&label=Pull%20requests" alt="Open PRs" />
 </a>&nbsp&nbsp
 <a href="https://github.com/platformsh-templates/drupal11/blob/master/LICENSE">
 <img src="https://img.shields.io/static/v1?label=License&message=MIT&style=for-the-badge&labelColor=f4f2f3&color=ffd9d9" alt="License" />
@@ -39,7 +24,7 @@
 <br /><br />
 <a href="https://console.platform.sh/projects/create-project/?template=https://raw.githubusercontent.com/platformsh/template-builder/master/templates/drupal11/.platform.template.yaml&utm_campaign=deploy_on_platform?utm_medium=button&utm_source=affiliate_links&utm_content=https://raw.githubusercontent.com/platformsh-templates/drupal11/updates/.platform.template.yaml" target="_blank" title="Deploy with Platform.sh"><img src="https://platform.sh/images/deploy/deploy-button-lg-blue.svg" width="175px"></a>
 </p>
-</p>
+
 
 <hr>
 
@@ -57,9 +42,11 @@
 
 ## About
 
-This template builds Drupal 11 using the "Drupal Recommended" Composer project. It is pre-configured to use MariaDB and Redis for caching. The Drupal installer will skip asking for database credentials as they are already provided.
+Like the original Platform.sh template this uses Drupal uses the "Drupal Recommended" Composer approach and is set up to use the MariaDB and Redis for caching.  Because it is intended to be a starting point template to build new Drupal projects, the repository code does NOT contain the database nor the YML configuration files; these being generated after installing the project and doing configuration export when appropriate. Expect that when you start the project in an environment if will ask you to input a project name that will appear on your site header and to provide the email address of you as the administrator.  However, it will skip asking for database credentials because these will be automatically provided.
 
-Drupal is a flexible and extensible PHP-based CMS framework.
+Drupal is an extraordinarily capable Content Management System (CMS) appropriate to many internet or intranet uses. It is a very flexible and extensible Open-source framework with tens of thousand of modules contributed through the efforts of its global user community.  Find these and more at [Drupal.org]( http://Drupal.org)
+
+If you are new to Drupal you probably have never heard of Drush.  You will probably start out using the Graphical User Interface (GUI) system right in the website.  But Drush can become a short-cut to you to accomplish some common things from the Command Line or Terminal of you computer.
 
 ### Features
 
@@ -67,8 +54,8 @@ Drupal is a flexible and extensible PHP-based CMS framework.
 - MariaDB 10.11
 - Redis 7.2
 - Drush included
-- Automatic TLS certificates
 - Composer-based build
+- Ablity to Associate your custom URL on the host
 
 
 ## Getting started
