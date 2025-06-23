@@ -670,6 +670,10 @@ To fix, SSH into the application container (`platform ssh`) and rebuild the cach
 
 ```bash
 drush cache-rebuild
+
+or
+
+drush cr
 ```
 
 </details>
