@@ -902,14 +902,14 @@ This template includes a starting [`.blackfire.yml`](.blackfire.yml) file that c
 
 # Open Source Solutions
 
-Discover a plethora of amazing free tools, ranging from locally installed software to browser-based ones. ARMTEC has handpicked some favorites. Remember, if you love and use an Open Source tool, give back to the community in any way you can, not just technically.
+Discover a plethora of amazing free tools, ranging from locally installed software to browser-based ones. Those below have been handpicked as some favorites. Remember, if you love and use an Open Source tool, give back to the community in any way you can, not just technically.
 
 ## Office Suite:
 
 You may already have something from Microsoft or Apple that you got when you bought your computer.  These are great.  There is an open source alternative Office Suite for documents, drawings, spreadsheets, database, and even for formulas that you might want to use.
 
-- [LibreOffice (Software)](https://www.libreoffice.org/){:target="_blank"}
-- [Remember LibreOffice Extensions](https://extensions.libreoffice.org/){:target="_blank"}
+- [LibreOffice (Software)](https://www.libreoffice.org/)
+- [Remember LibreOffice Extensions](https://extensions.libreoffice.org/)
   
 <br>
 
@@ -996,14 +996,14 @@ There are websites where people concentrate on listing all sorts of Open Source 
 
 ## YOU & Open Source
 
-[Open Source tools,](../book/opensource.md) where people contribute their time to create resources that are freely accessible to the public. In return, you can give back to the Open Source community by donating your time, resources, or skills. You don't have to be a programming genius to get involved - if you have a talent for simplifying complex topics, you can make a valuable contribution. In fact, you are probably just what Open Source software developers need...
+Open Source tools, are where people contribute their time to create resources that are freely accessible to the public. In return, you can give back to the Open Source community by donating your time, resources, or skills. You don't have to be a programming genius to get involved - if you have a talent for simplifying complex topics, you can make a valuable contribution. In fact, you are probably just what Open Source software developers need...
 
 ["Free software is suffering because coders don’t know how to write documentation", The Next Web, June 2, 2017
 ](https://thenextweb.com/news/free-software-is-suffering-because-coders-dont-know-how-to-write-documentation)
 
 <br>
 
-Open Source tools are not just about big software systems, but also about filling gaps in knowledge and helping people understand how to bring different parts together.  Drupal is an expecially community oriented group of people helping each other.  Jump in!  Be a contributor in whatever way your talents might benefit others.
+Open Source tools are not just about big software systems, but also about filling gaps in knowledge and helping people understand how to bring different parts together.  Drupal is an expecially 'community oriented' group of people helping each other.  Jump in!  Be a contributor in whatever way your talents might benefit others.
 
 <br>
 </details>
