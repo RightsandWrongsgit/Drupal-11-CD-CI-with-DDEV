@@ -137,7 +137,9 @@ command -v docker >/dev/null 2>&1 || { echo "Docker is required. Install it from
 
 This section guides you through setting up the project locally using DDEV. Experienced users can run the provided setup script or follow the manual steps. Beginners should read the detailed explanations for clarity.
 
-### Setup Script
+<details>
+<summary><h2>Setup Script (Recommended only for Experienced Users: Click to open)</h2></summary>
+
 For convenience, a setup script (`setup-local.sh`) automates cloning the repository, configuring DDEV, installing dependencies, and setting up Drupal. Save the script, make it executable (`chmod +x setup-local.sh`), and run it (`./setup-local.sh`).
 
 ```bash
@@ -167,6 +169,7 @@ echo "Installing Composer dependencies..."
 ddev composer install
 
 # Install Drupal
+# You can edit the site name on the line below before you run this script if you want
 echo "Installing Drupal with Drush..."
 ddev drush site:install standard --account-name=admin --account-pass=admin --site-name="My Drupal Site" -y
 
@@ -186,16 +189,20 @@ echo
 echo "You can work on your site through the menu system.  But is you need to run 'composer', 'drush' or code "
 echo "use VSCode to open the project folder (finder on a Mac) for editing and for Git management."
 ```
-
+</details>
 *******************************************************************************************************************
+## Setup Steps
+
 **For Experienced Users**:
-1. Clone the repo: `git clone git@github.com:RightsandWrongsgit/Drupal-11-CD-CI-with-DDEV.git && cd Drupal-11-CD-CI-with-DDEV`
-2. Configure DDEV: `ddev config --project-type drupal11 --docroot web --php-version 8.3`
-3. Start DDEV: `ddev start`
-4. Install dependencies: `ddev composer install`
-5. Install Drupal: `ddev drush site:install standard --account-name=admin --account-pass=admin -y`
-6. Enable modules: `ddev drush pm:enable config_split environment_indicator -y`
-7. Launch site: `ddev launch`
+
+1. Open your IDE; documentation uses VSCode examples
+2. Clone the repo: `git clone git@github.com:RightsandWrongsgit/Drupal-11-CD-CI-with-DDEV.git && cd Drupal-11-CD-CI-with-DDEV`
+3. Configure DDEV: `ddev config --project-type drupal11 --docroot web --php-version 8.3`
+4. Start DDEV: `ddev start`
+5. Install dependencies: `ddev composer install`
+6. Install Drupal: `ddev drush site:install standard --account-name=admin --account-pass=admin -y`
+7. Enable modules: `ddev drush pm:enable config_split environment_indicator -y`
+8. Launch site: `ddev launch`
 
 **For Beginners**:
 - **[Step 1: Clone the Repository]** Clone the project using Git. Open your terminal (or VSCode’s integrated terminal: `Ctrl+``), navigate to a directory (e.g., `~/Sites`), and run:
