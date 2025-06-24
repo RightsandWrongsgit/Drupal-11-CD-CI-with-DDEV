@@ -209,8 +209,6 @@ echo "use VSCode to open the project folder (finder on a Mac) for editing and fo
 **For Beginners**:
 - **[Step 1: Clone the Repository]** Clone the project using Git. Open your terminal (or VSCode’s integrated terminal: `Ctrl+``), navigate to a directory (e.g., `~/Sites`), and run:
 
-Inline image
-
 
   ```bash
   git clone git@github.com:RightsandWrongsgit/Drupal-10-CD-CI-with-DDEV.git
@@ -219,7 +217,7 @@ Inline image
 
 
   This downloads the project to your computer. If you get an SSH error, ensure your GitHub SSH key is set up ([guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)).
-- **[Step 2: Set Up DDEV]** Run `ddev config --project-type drupal10 --docroot web --php-version 8.3` to configure DDEV for Drupal 10. Then, start DDEV with `ddev start`. This creates a local server with PHP 8.3 and MariaDB, like a mini web host on your computer.
+- **[Step 2: Set Up DDEV]** Run `ddev config --project-type drupal11 --docroot web --php-version 8.3` to configure DDEV for Drupal 10. Then, start DDEV with `ddev start`. This creates a local server with PHP 8.3 and MariaDB, like a mini web host on your computer.
 - **[Step 3: Install Dependencies]** Run `ddev composer install` to download Drupal core and modules, like ordering ingredients for a recipe.
 - **[Step 4: Install Drupal]** Run `ddev drush site:install standard --account-name=admin --account-pass=admin -y` to set up Drupal with an admin account (username: admin, password: admin). Drush is a command-line tool that simplifies Drupal tasks.
 - **[Step 5: Enable Modules]** Run `ddev drush pm:enable config_split environment_indicator -y` to enable environment-specific settings and visual indicators. These modules help manage different settings for local, staging, and production environments and show which environment you’re in (e.g., a colored bar in the admin interface).
