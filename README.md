@@ -179,7 +179,12 @@ echo "Generating login link..."
 ddev drush uli
 
 echo "Setup complete! Access your site via 'ddev launch' or the URL above."
-echo "Use VSCode to open the project folder for editing and Git management."
+echo
+echo "Log in to your running site with User=admin and Password=admin"
+echo "You Site Name was set to 'My Drupal Site'.  Under 'Administration' you can change it in 'Site Settings'."
+echo
+echo "You can work on your site through the menu system.  But is you need to run 'composer', 'drush' or code "
+echo "use VSCode to open the project folder (finder on a Mac) for editing and for Git management."
 ```
 
 *******************************************************************************************************************
