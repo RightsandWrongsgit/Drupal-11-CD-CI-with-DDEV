@@ -190,7 +190,8 @@ echo "You can work on your site through the menu system.  But is you need to run
 echo "use VSCode to open the project folder (finder on a Mac) for editing and for Git management."
 ```
 </details>
-*******************************************************************************************************************
+
+******************************************************************************************************************
 
 ## Setup Steps
 
