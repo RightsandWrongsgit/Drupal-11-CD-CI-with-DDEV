@@ -80,7 +80,8 @@ This will automatically create a new project and initialize the repository for y
 
 
 
-<details><h3><summary>Prerequisites (Click to open)</summary></h3>
+<details>
+<summary><h3>Prerequisites (Click to open)</h3></summary>
 
 
 To set up and deploy this project, ensure you have the following tools and accounts. These are essential for local development, version control, and Platform.sh hosting.
