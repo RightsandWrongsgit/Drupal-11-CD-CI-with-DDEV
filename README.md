@@ -36,7 +36,6 @@
 <a href="#preferred-deployment-option"><strong>Preferred Deployment Option</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <a href="#migrate"><strong>Migrate</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <a href="#learn"><strong>Learn</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<a href="#contribute"><strong>Contribute</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <br />
 </p>
 <hr>
