@@ -191,6 +191,7 @@ echo "use VSCode to open the project folder (finder on a Mac) for editing and fo
 ```
 </details>
 *******************************************************************************************************************
+
 ## Setup Steps
 
 **For Experienced Users**:
