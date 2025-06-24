@@ -60,7 +60,7 @@ If you are new to Drupal you probably have never heard of Drush.  You will proba
 
 
 <details>
-<summary>## Quick Deploy (Click to open)</summary>
+<summary><h2>Quick Deploy (Click to open)</h2></summary>
 
 <p align="center"><h6>NOTE: You probably don't want to use Quick Deploy if you don't already have experience using this repository in setting up a prior project on Platform.sh and if you don't need to use the local environment to work offline or with co-developers.!</h6></p>
 
