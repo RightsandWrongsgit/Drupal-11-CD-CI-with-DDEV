@@ -31,8 +31,8 @@
 <p align="center">
 <strong>Contents</strong>
 <br /><br />
-<a href="#features"><strong>About</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<a href="#quick-deploy"><strong>Quick Deploy</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<a href="#about"><strong>About</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<a href="#features"><strong>Quick Deploy</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <a href="#preferred-deployment-option"><strong>Preferred Deployment Option</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <a href="#migrate"><strong>Migrate</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 <a href="#learn"><strong>Learn</strong></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
