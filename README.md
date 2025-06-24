@@ -1,4 +1,4 @@
-<h1 align="center">Using this Drupal 11 CD/CI with DDEV template on Platform.sh</h1>
+<h1 align="center">Drupal 11 CD/CI with DDEV template on Platform.sh Template</h1>
 
 <h2 align="center">Secure your work and see the results of your efforts!</h2>
 
@@ -59,7 +59,7 @@ If you are new to Drupal you probably have never heard of Drush.  You will proba
 - Ablity to Associate your custom URL on the host
 
 
-
+<details>
 ## Quick Deploy
 
 <p align="center"><h6>NOTE: You probably don't want to use Quick Deploy if you don't already have experience using this repository in setting up a prior project on Platform.sh and if you don't need to use the local environment to work offline or with co-developers.!</h6></p>
@@ -73,11 +73,15 @@ This will automatically create a new project and initialize the repository for y
     </a>
 </p>
 <br/>
+</details>
+
+
+# Preferred Deployment Option
 
 
 
-## Preferred Deployment Option
-
+<details>
+<summary>### Prerequisites (Click to open)</summary>
 ### Prerequisites
 
 To set up and deploy this project, ensure you have the following tools and accounts. These are essential for local development, version control, and Platform.sh hosting.
@@ -119,12 +123,14 @@ To set up and deploy this project, ensure you have the following tools and accou
     - [Using GitHub with VSCode](https://www.youtube.com/watch?v=D6yUK3W2bH0) (10 min)
 
 
-# Check for prerequisites
+### Check for prerequisites
+```bash
 command -v git >/dev/null 2>&1 || { echo "Git is required. Install it from https://git-scm.com/downloads"; exit 1; }
 command -v ddev >/dev/null 2>&1 || { echo "DDEV is required. Install it from https://ddev.readthedocs.io/en/stable/#installation"; exit 1; }
 command -v composer >/dev/null 2>&1 || { echo "Composer is required. Install it from https://getcomposer.org/download/"; exit 1; }
 command -v docker >/dev/null 2>&1 || { echo "Docker is required. Install it from https://www.docker.com/products/docker-desktop/"; exit 1; }
-
+```
+</details>
 
 ## Local Development Setup
 
