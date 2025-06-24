@@ -75,8 +75,6 @@ This will automatically create a new project and initialize the repository for y
 <br/>
 </details>
 <br>
-<br>
-<br>
 
 
 # Preferred Deployment Option
