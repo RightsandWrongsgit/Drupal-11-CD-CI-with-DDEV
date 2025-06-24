@@ -140,7 +140,7 @@ This section guides you through setting up the project locally using DDEV. Exper
 ### Setup Script
 For convenience, a setup script (`setup-local.sh`) automates cloning the repository, configuring DDEV, installing dependencies, and setting up Drupal. Save the script, make it executable (`chmod +x setup-local.sh`), and run it (`./setup-local.sh`).
 
-
+```bash
 #!/bin/bash
 # Setup script for Drupal 11 CD/CI with DDEV and Platform.sh
 # Run this in a new directory to set up the project locally
@@ -180,6 +180,7 @@ ddev drush uli
 
 echo "Setup complete! Access your site via 'ddev launch' or the URL above."
 echo "Use VSCode to open the project folder for editing and Git management."
+```
 
 *******************************************************************************************************************
 **For Experienced Users**:
