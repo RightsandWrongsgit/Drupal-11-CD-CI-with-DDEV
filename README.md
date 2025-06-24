@@ -206,13 +206,18 @@ echo "use VSCode to open the project folder (finder on a Mac) for editing and fo
 7. Enable modules: `ddev drush pm:enable config_split environment_indicator -y`
 8. Launch site: `ddev launch`
 
+<br>
+<br>
+<br>
+The Beginners set up steps are the same as above but are annotated with what is going on as you to each step.
+
 **For Beginners**:
 - **[Step 1: Clone the Repository]** Clone the project using Git. Open your terminal (or VSCode’s integrated terminal: `Ctrl+``), navigate to a directory (e.g., `~/Sites`), and run:
 
 
   ```bash
-  git clone git@github.com:RightsandWrongsgit/Drupal-10-CD-CI-with-DDEV.git
-  cd Drupal-10-CD-CI-with-DDEV
+  git clone git@github.com:RightsandWrongsgit/Drupal-11-CD-CI-with-DDEV.git
+  cd Drupal-11-CD-CI-with-DDEV
   ```
 
 
@@ -224,6 +229,8 @@ echo "use VSCode to open the project folder (finder on a Mac) for editing and fo
 - **[Step 6: Access the Site]** Run `ddev launch` to open the site in your browser, or use `ddev drush uli` to get a one-time login link for the admin account.
 
 **VSCode Tip**: Open the project folder in VSCode (`code .` in the terminal). Use GitLens to view changes, commit with `Ctrl+Enter`, and push to GitHub via the Source Control panel. See the [VSCode Git video](https://www.youtube.com/watch?v=i_23KUAetlM) for details.
+<br>
+<br>
 
 ## Platform.sh Deployment
 
