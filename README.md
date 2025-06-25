@@ -538,15 +538,13 @@ Some of the customizations in the ‘local’ and ‘develop’ splits may be fo
 
 [See what the YML files in configuration do.](https://armtec.services/cicd/configsplit4.html) By understanding their role you can look each up and determine how you might want to split their use. What you do when you want to split one is to copy the file from the ‘config/sync’ subdirectory and paste the copy into the directory you want to have some different action take place. Then open that file in your VSCode editor and review the code it contains. Since it is YML, a very “English” syntax, it is pretty easy to figure out what you would want to edit to make a change. Typically just something like changing a TRUE to a FALSE. Some examples of [how a number of Configuration keys are set to changed values in a development setting can be found here.](https://github.com/drush-ops/drush/issues/5109)
 
-Know where you are -
-
-Environment Indicator
+### Know where you are - Environment Indicator
 
 What they do and look like
 
-Any time you are running multiple environments, there is always a risk of not being clear where the heck you are looking and working. There is a contributed module that we are going to install and enable that is meant to give you signals to tell you which environment you are seeing; it is called the Environment_Indicator module.
+Any time you are running multiple environments, there is always a risk of not being clear where the heck you are looking and working. There is a contributed module that we are going to install and enable that is meant to give you signals to tell you which environment you are seeing; it is called the Environment_Indicator module.  At the top of the four columns in the table above you see the environment names of 'local', 'develop', 'staged', or 'main' and just below it the code codes have have been set for their display. (You can change the colors to your preference, but don't change the names unless you are ready to change them in the project code too.)
 
-The Environment_Indicator module shows the names you have given the environments, and color bands some of the things like toolbars to send a strong message of where you are. In the first example you see how our ‘main’ environment shows that name in a red band. Don’t worry this is only when logged in as the Administrator; users see a normal site.
+The Environment_Indicator module shows the names and colors you have given the environmentsin bands at the top of your pages to send a strong message of where you are. In the first example you see how our ‘main’ environment shows that name in a red band.  Warning this is NOT an environment you want to do edits in directly.
 
 <img src="added_documentation/EnvironmentIndicatorRed.png" alt="Example of Warning Color Environment">
 
@@ -554,7 +552,9 @@ For our ‘local’ environment we see that name in a green band signaling it is
 
 <img src="added_documentation/EnvironmentIndicatorGreen.png" alt="Example of Safe Color Environment">
 
-Who sees these indicators
+### Who sees these indicators
+
+Don’t worry they only show when logged in as the Administrator or other authorized worker; Regular site visitors see a normal website.
 
 Before we get into configuring the names and color indicators of different environments, lets take a look at an area we haven’t talked about so far. There is a menu item under Administration called ‘People’ and what this addresses if the ‘who can do and see what’ on a Drupal site. There are four default standard roles; you can make more if you need, but that is beyond the scope of the immediate need. An ‘Anonymous User’ is self explanatory. An ‘Authenticated User’ is someone who is logged in. A ‘Content Editor’ typically is granted permissions to do lots of other stuff on a site and putting in text, images, etc. would be common. You are the ‘Administrator’ and you have permission to do everything.
 
@@ -565,6 +565,16 @@ Right now, the only one who can config the Environment_Indicator is the ‘Admin
 <img src="added_documentation/EnvironmentIndicatorPermissions2.png" alt="More permissions for Environment Indicators">
 
 [For more on the Environment Indicator Module](https://www.drupal.org/project/environment_indicator) you can watch this [video](https://www.youtube.com/watch?v=8WbP9ZYxAx0)
+
+
+### Sensing The Environment
+
+All this different environment splits and indicators  stuff could make your head spin.  However, the way this template is put together all this is sort of automated.  Not in the sense that you can't customize the heck out of what you want to be happening in any given environment; so it you want to apply some test each time you update the 'develop' environment and then all sort of other tests with 'staged', you can do that.
+
+What is automated is that as you work in an environment, or you move between them, the system itself senses which you are in and activates what you have set up.  It does this with its unique `settings.php` file.  You can look in the actual file for much more detail.  However, you get a feel for how it is doing this magic by looking at the code example below:
+
+<img src="added_documentation/PHPSettings1.png" alt="PHP settings example code">
+<img src="added_documentation/PHPSettings2.png" alt="additional PHP settings example code">
 
 </details>
 
