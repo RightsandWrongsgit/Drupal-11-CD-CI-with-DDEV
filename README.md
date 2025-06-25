@@ -537,18 +537,18 @@ Any time you are running multiple environments, there is always a risk of not be
 
 The Environment_Indicator module shows the names you have given the environments, and color bands some of the things like toolbars to send a strong message of where you are. In the first example you see how our ‘main’ environment shows that name in a red band. Don’t worry this is only when logged in as the Administrator; users see a normal site.
 
-<img src="added_documentation/EnvironmentIndicatorRed.png" alt="Config Directory Structure Setup Table">
+<img src="added_documentation/EnvironmentIndicatorRed.png" alt="Example of Warning Color Environment">
 
 For our ‘local’ environment we see that name in a green band signaling it is safe to work in here.
-<img src="added_documentation/EnvironmentIndicatorGreen.png" alt="Config Directory Structure Setup Table">
+<img src="added_documentation/EnvironmentIndicatorGreen.png" alt="Example of Safe Color Environment">
 
 Who sees these indicators
 
 Before we get into configuring the names and color indicators of different environments, lets take a look at an area we haven’t talked about so far. There is a menu item under Administration called ‘People’ and what this addresses if the ‘who can do and see what’ on a Drupal site. There are four default standard roles; you can make more if you need, but that is beyond the scope of the immediate need. An ‘Anonymous User’ is self explanatory. An ‘Authenticated User’ is someone who is logged in. A ‘Content Editor’ typically is granted permissions to do lots of other stuff on a site and putting in text, images, etc. would be common. You are the ‘Administrator’ and you have permission to do everything.
-<img src="added_documentation/EnvironmentIndicatorPermissions.png" alt="Config Directory Structure Setup Table">
+<img src="added_documentation/EnvironmentIndicatorPermissions.png" alt="Where to Set who sees the environment warning indicators">
 
 Right now, the only one who can config the Environment_Indicator is the ‘Administrator’. This is common for foundational level items around building a website. So it is not surprising that the Config_split and even the core Configuration Manager configurations are under the control of the ‘Administrator’.
-<img src="added_documentation/EnvironmentIndicatorPermissions2.png" alt="Config Directory Structure Setup Table">
+<img src="added_documentation/EnvironmentIndicatorPermissions2.png" alt="More permissions for Environment Indicators">
 
 For more on the Environment Indicator Modulehttps://www.drupal.org/project/environment_indicator you can watch this videohttps://www.youtube.com/watch?v=8WbP9ZYxAx0
 
