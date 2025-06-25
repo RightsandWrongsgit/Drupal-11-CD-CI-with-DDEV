@@ -522,8 +522,10 @@ So how do you get the advantage of these recipes if you also want the version co
 
 Recipes will NOT populate that menu until you pull them into your site.  Just like when one sets up a basic Drupal CMS site you make a choice what you are wanting to build.  So to you want to bring in the recipe(s) you want to build and they will then appear under that menu item.  To install a recipe all you need to do is this:
 
-`# This will automatically install and unpack the recipe`
-`composer require drupal/example_recipe`
+``` bash
+# This will automatically install and unpack the recipe
+composer require drupal/example_recipe
+```
 
 If you want to do any of the recipes that Drupal CMS offers you can just go here to see the list and select the ones you want to then run the above command.
 
