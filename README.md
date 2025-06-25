@@ -511,7 +511,46 @@ Run through the Drupal installer as normal.  You will not be asked for database 
 
 <img src="added_documentation/ConfigSplitDirectories.png" alt="Config Directory Structure">
 
+Configurations by split
 
+We have the config/sync directory for the common configuration across all environments. Drupal Core modules are installed; although not all are enabled. We can add contributed modules and enable modules anytime we want. There are some advantages to doing so before we branch our splits in the sense that we don’t have to commit/synch/merge to assure they are in all environments. Therefore, you may want to add others you know you will use across all environments to the table below. The table shows the environment_indicator and the structure_sync module as examples; because we know we are going to use them as part of our CI/CD setup.
+
+The table also shows the four split names that we set up directory homes for configuration files; uniquely for ‘main’, ‘staged’, ‘develop’ and ‘local’. Under each named split are modules you should consider installing for that unique environment. Remember that the easiest way to think about config_split is that is ADDS what you put in it TO THE BASE configuration in ‘sync’.
+
+What you need to do is the classic lando composer require 'drupal/insertmodulename' for each of the modules to be added to your system just like we did when we installed the config_split module itself. But DO NOT ENABLE these modules like we previously did!
+We are going to take a special approach to doing that only within the split where we want them.
+
+
+<img src="added_documentation/ConfigSplitTable.png" alt="Config Directory Structure Setup Table">
+
+Some of the customizations in the ‘local’ and ‘develop’ splits may be for more advanced developers. Drupal is built using an Object Oriented Programming language, to a large extent a Symfony framework https://symfony.com/ version of PHP. You can do stuff at an extremely low level where you are leveraging some unique strengths of how Drupal database structures are organized and OOP programming allows reuse of fundamental function calls to literally ‘create’ not only your own modules but even core entities below those represented in Content Types made up of multiple bundles. If you are a developer familiar with OOP and PHP you might want to turn on the “D” items in the above table. The “B” items are for beginning developer and would be something that those who want to glimpse under the hood to gain in understanding. The “S” items are for site builders who are mainly oriented toward using all that is core to Drupal itself and the tens of thousands of contributed modules others have already written. This later group is for the normal humans like you and me to do 99% of anything we really want.
+
+See what the YML files in configuration do.https://armtec.services/cicd/configsplit4.html By understanding their role you can look each up and determine how you might want to split their use. What you do when you want to split one is to copy the file from the ‘config/sync’ subdirectory and paste the copy into the directory you want to have some different action take place. Then open that file in your VSCode editor and review the code it contains. Since it is YML, a very “English” syntax, it is pretty easy to figure out what you would want to edit to make a change. Typically just something like changing a TRUE to a FALSE. Some examples of how a number of Configuration keys are set to changed values in a development setting can be found here.https://github.com/drush-ops/drush/issues/5109
+
+Know where you are -
+
+Environment Indicator
+
+What they do and look like
+
+Any time you are running multiple environments, there is always a risk of not being clear where the heck you are looking and working. There is a contributed module that we are going to install and enable that is meant to give you signals to tell you which environment you are seeing; it is called the Environment_Indicator module.
+
+The Environment_Indicator module shows the names you have given the environments, and color bands some of the things like toolbars to send a strong message of where you are. In the first example you see how our ‘main’ environment shows that name in a red band. Don’t worry this is only when logged in as the Administrator; users see a normal site.
+
+<img src="added_documentation/EnvironmentIndicatorRed.png" alt="Config Directory Structure Setup Table">
+
+For our ‘local’ environment we see that name in a green band signaling it is safe to work in here.
+<img src="added_documentation/EnvironmentIndicatorGreen.png" alt="Config Directory Structure Setup Table">
+
+Who sees these indicators
+
+Before we get into configuring the names and color indicators of different environments, lets take a look at an area we haven’t talked about so far. There is a menu item under Administration called ‘People’ and what this addresses if the ‘who can do and see what’ on a Drupal site. There are four default standard roles; you can make more if you need, but that is beyond the scope of the immediate need. An ‘Anonymous User’ is self explanatory. An ‘Authenticated User’ is someone who is logged in. A ‘Content Editor’ typically is granted permissions to do lots of other stuff on a site and putting in text, images, etc. would be common. You are the ‘Administrator’ and you have permission to do everything.
+<img src="added_documentation/EnvironmentIndicatorPermissions.png" alt="Config Directory Structure Setup Table">
+
+Right now, the only one who can config the Environment_Indicator is the ‘Administrator’. This is common for foundational level items around building a website. So it is not surprising that the Config_split and even the core Configuration Manager configurations are under the control of the ‘Administrator’.
+<img src="added_documentation/EnvironmentIndicatorPermissions2.png" alt="Config Directory Structure Setup Table">
+
+For more on the Environment Indicator Modulehttps://www.drupal.org/project/environment_indicator you can watch this videohttps://www.youtube.com/watch?v=8WbP9ZYxAx0
 
 </details>
 
