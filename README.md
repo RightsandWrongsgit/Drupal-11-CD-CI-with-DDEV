@@ -501,12 +501,21 @@ Then you can clone a copy of it locally with `git clone git@github.com:YOUR_NAME
 <!--
 -->
 
-### Post-install
+## Post-install
 
 Run through the Drupal installer as normal.  You will not be asked for database credentials as those are already provided.
 
 <details>
-<summary><h2>Blackfire.io: (Performance for Production environment. Click to open)</h2></summary>
+<summary><h3>Environment Splits(Customizing your! Click to open)</h3></summary>
+
+
+<img src="/Added Documentation/ConfigSplitDirectories.png" alt="Config Directory Structure">
+</a>
+
+</details>
+
+<details>
+<summary><h3>Blackfire.io: (Performance for Production environment. Click to open)</h3></summary>
 
 ### Blackfire.io: creating a Continuous Observability Strategy
 
