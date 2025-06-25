@@ -209,7 +209,7 @@ echo "use VSCode to open the project folder (finder on a Mac) for editing and fo
 <br>
 <br>
 <br>
-The Beginners set up steps are the same as above but are annotated with what is going on as you to each step.
+NOTE: The Beginners set up steps are the same as above but are annotated with what is going on as you to each step.
 <br>
 </br>
 
@@ -230,7 +230,7 @@ The Beginners set up steps are the same as above but are annotated with what is 
 - **[Step 5: Enable Modules]** Run `ddev drush pm:enable config_split environment_indicator -y` to enable environment-specific settings and visual indicators. These modules help manage different settings for local, staging, and production environments and show which environment you’re in (e.g., a colored bar in the admin interface).
 - **[Step 6: Access the Site]** Run `ddev launch` to open the site in your browser, or use `ddev drush uli` to get a one-time login link for the admin account.
 
-**VSCode Tip**: Open the project folder in VSCode (`code .` in the terminal). Use GitLens to view changes, commit with `Ctrl+Enter`, and push to GitHub via the Source Control panel. See the [VSCode Git video](https://www.youtube.com/watch?v=i_23KUAetlM) for details.
+**VSCode Tip**: Open the project folder in VSCode (`code .` in the terminal). Use GitLens to view changes, commit with `Ctrl+Enter`, and push to GitHub via the Source Control panel. See the [Working with GitHub in VSCode](https://code.visualstudio.com/docs/sourcecontrol/github) for details.
 <br>
 <br>
 
@@ -535,6 +535,30 @@ drush en devel -y
 However, if you want to have a module used only in specific environments DO NOT ENABLE these modules like we previously did!  We are going to take a special approach to doing that only within the split where we want them.
 
 <img src="added_documentation/ConfigSplitTable.png" alt="Config Directory Structure Setup Table">
+
+Go into the ‘Configuration’ menu under Administration and find the ‘Development’ section. There select the ‘Configuration Split settings’ option.
+
+<img src="added_documentation/ConfigSplitFindSettings.png" alt="Config Split is under Administration/Development">
+
+We will ‘Add Configuration Split setting’ for each of the named splits we establish; ‘main’, ‘stage’, ‘develop’, and ‘local’.
+
+<img src="added_documentation/ConfigSplitApplySettings.png" alt="Add or review your config split settings">
+
+For now, we aren’t going to put all the different module and setting attributes we will eventually want from that table of options by environment presented earlier. We will simply start with the basics of naming those four splits and pointing the module to the location sub-directories we set up. There are fill-in boxes for the name (Label), an optional description, the location (Folder), and a checkbox for ‘Active’ or not. Leave the Weight option at its default zero. Uncheck the ‘Active’ box; remembering we have the syntax in our `settings.php` file to do this dyanmically. In the example below, we are setting up ‘main’ and pointing to the folder location sub-directory we established for that environment `../config/main`
+
+<img src="added_documentation/ConfigSplitMainPage.png" alt="Add or review your config split settings">
+
+Scroll past the ‘Complete split’ and ‘Conditional split’ sections; each of which offer options at the module or configuration item level from the decision we made in our table of environment preferences. Don’t mess with these for now. However, it is informative to see a list of your module’s checkboxes and configuration items with checkboxes. A glance at the names of the configuration items looking a lot like the file names your ‘drush cex’ exported as yml files but without that final file name extension showing.
+
+Just scroll on past the two checkboxes but this time leave them checked. Then hit the “Save” button
+
+<img src="added_documentation/ConfigSplitMainPage2.png" alt="Add or review your config split settings">
+
+When you have all four environments named and pointing to their sub-directory homes, you should see something like this:
+
+<img src="added_documentation/ConfigSplitMainPage3.png" alt="Add or review your config split settings">
+
+John Picozzi [“Configuration Management & Config Split”](https://www.youtube.com/watch?v=rwKjVVhOHs4) is a nice but long video on some additional options for splits like even Multi-site environments. He doesn’t use the same approach to environment case detection and the ‘case’ test; but something fairly similar. He also doesn’t do the environment-indicator but actually uses system.site within split configurations to do the same sort of thing manually as a demonstration of the ‘yml’ level conditional (rather than full module) splits.
 
 Some of the customizations in the ‘local’ and ‘develop’ splits may be for more advanced developers. Drupal is built using an Object Oriented Programming language, to a large extent a [Symfony framework](https://symfony.com/)[] version of PHP. You can do stuff at an extremely low level where you are leveraging some unique strengths of how Drupal database structures are organized and OOP programming allows reuse of fundamental function calls to literally ‘create’ not only your own modules but even core entities below those represented in Content Types made up of multiple bundles. If you are a developer familiar with OOP and PHP you might want to turn on the “D” items in the above table. The “B” items are for beginning developer and would be something that those who want to glimpse under the hood to gain in understanding. The “S” items are for site builders who are mainly oriented toward using all that is core to Drupal itself and the tens of thousands of contributed modules others have already written. This later group is for the normal humans like you and me to do 99% of anything we really want.
 
