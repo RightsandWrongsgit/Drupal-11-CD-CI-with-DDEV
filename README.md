@@ -509,7 +509,8 @@ Run through the Drupal installer as normal.  You will not be asked for database 
 <summary><h3>Environment Splits(Customizing your! Click to open)</h3></summary>
 
 
-<img src="../added_documentation/ConfigSplitDirectories.png" alt="Config Directory Structure">
+<img src="added_documentation/ConfigSplitDirectories.png" alt="Config Directory Structure">
+
 
 
 </details>
