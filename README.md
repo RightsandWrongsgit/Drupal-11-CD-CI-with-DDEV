@@ -210,6 +210,7 @@ echo "use VSCode to open the project folder (finder on a Mac) for editing and fo
 <br>
 <br>
 The Beginners set up steps are the same as above but are annotated with what is going on as you to each step.
+<br>
 
 **For Beginners**:
 - **[Step 1: Clone the Repository]** Clone the project using Git. Open your terminal (or VSCode’s integrated terminal: `Ctrl+``), navigate to a directory (e.g., `~/Sites`), and run:
