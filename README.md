@@ -508,12 +508,15 @@ Then you can clone a copy of it locally with `git clone git@github.com:YOUR_NAME
 Run through the Drupal installer as normal.  You will not be asked for database credentials as those are already provided.
 
 <details>
-<summary><h3>Project Browser & Recipes(Optional! Click to open)</h3></summary>
+<summary><h3>Project Browser & Recipes: (Optional! Click to open)</h3></summary>
+
+
+
 
 </details>
 
 <details>
-<summary><h3>Structure Sync(Optional! Click to open)</h3></summary>
+<summary><h3>Structure Sync: (Optional! Click to open)</h3></summary>
 
 ### Basic Different Between Code and Content
 
@@ -606,10 +609,11 @@ In case you were wondering how the Full/Safe/Force import options play out under
 
 <img src="added_documentation/StructureSyncCustomBlock5.png" alt="Custom Block Example of Sturcture Sync via CLI">
 
+
 </details>
 
 <details>
-<summary><h3>Environment Splits(Required! Click to open)</h3></summary>
+<summary><h3>Environment Splits: (Required! Click to open)</h3></summary>
 
 The templated project will run without doing the split customizations.  But you really won't get the CD/CI workflow advantages without doing these steps.  And things could become pretty strange if you left you email and analytics blasting in local development; or you left some of the development tools open in a production site exposing a security risk.  So don't complain, just do these steps:
 
