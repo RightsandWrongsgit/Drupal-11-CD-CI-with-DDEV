@@ -508,22 +508,29 @@ Run through the Drupal installer as normal.  You will not be asked for database 
 <details>
 <summary><h3>Environment Splits(Customizing your! Click to open)</h3></summary>
 
-You will notice something different in the directory structure of this repository 'config' compared to a generic Drupal project.  Notice there are subdirectories for 'develop', 'local', 'main', 'staged' and 'sync'.  This is critical to house the configurations for each of the different environments in your CD/CI workflow.  Like the normal 'sync' subdirectory they will be home to YML files which represent the settings of your website that represent what is in your associated database.  At the start of using this template, they are empty other then a .gitkeep file to hold them in the ready.  Once you have cloned the template and brought your personal version of the Drupal website up, a database will automatically be connected with a running project.  At that point you can 'config export' (CEX) the database configuration as YML files and they will populate these subdirectories.
+You will notice something different in the directory structure of this repository 'config' compared to a generic Drupal project.  Notice there are subdirectories for 'develop', 'local', 'main', 'staged' and 'sync'.  This is critical to house the configurations for each of the different environments in your CD/CI workflow.  Like the normal 'sync' subdirectory they will be home to YML files which represent the settings of your website that represent what is in your associated database.  At the start of using this template, they are empty other then a .gitkeep file to hold them in the ready.  Once you have cloned the template and brought up your personal version of the Drupal website, a database will automatically be connected with your running project.  At that point you can 'config export' (CEX) the database configuration as YML files and they will populate these subdirectories.
 
 <img src="added_documentation/ConfigSplitDirectories.png" alt="Config Directory Structure">
 
 
-### Configurations by split
+The image below shows an example of a very abbreviated list of the YML files in the standard config/sync directory that are common to configurations across all environments. 
 
 <img src="added_documentation/ClassicConfigurationYML.png" alt="YML file examples in standard configuration">
 
-The image above shows an example of a very abbreviated list of the YML files in the standard config/sync directory for files that are common to configurations across all environments. 
+### Configurations by split
 
-Glance at the very top section of the table below. That table shows Drupal Core modules and settings plust the environment_indicator and the structure_sync module as examples of contributed modules present across all environments. 
+Glance at the very top section of the table below. That table shows Drupal Core modules and settings plus the environment_indicator and the structure_sync module as examples of contributed modules present across all environments. 
 
-The table also shows the four split names that we set up directory homes for configuration files; uniquely for ‘main’, ‘staged’, ‘develop’ and ‘local’. Under each named split are modules you might consider installing for that unique environment. Remember that the easiest way to think about config_split is that is ADDS TO or OVERRIDES what you have in THE BASE configuration that is in ‘sync’.
+The table also shows the four split column names that we set up as directory homes for configuration files; uniquely for ‘main’, ‘staged’, ‘develop’ and ‘local’. Under each named split are modules you might consider installing for that unique environment. Remember that the easiest way to think about config_split is that it ADDS TO or OVERRIDES what you have in THE BASE 'sync' configuration.
 
-You can add, enable, disable, modules and site settings any time you want.  From a command line (terminal, your IDE terminal, the Platform CLI) just do the classic (composer require 'drupal/insertmodulename') for each of the modules to be added to your system and the classic (drush en 'insertmodulename') IF THEY ARE TO BE USE ACROSS 'ALL' ENVIRONMENTS.  However, if you want to have a module used only in specific environments DO NOT ENABLE these modules like we previously did!  We are going to take a special approach to doing that only within the split where we want them.
+You can add, enable, disable, modules and site settings any time you want.  From a command line (terminal, your IDE terminal, the Platform CLI) just by doing the classic (composer require 'drupal/insertmodulename') for each of the modules to be added to your system and the classic (drush en 'insertmodulename') IF THEY ARE TO BE USE ACROSS 'ALL' ENVIRONMENTS. Example below:
+
+```bash
+composer require drupal/devel
+drush en devel -y
+```
+ 
+However, if you want to have a module used only in specific environments DO NOT ENABLE these modules like we previously did!  We are going to take a special approach to doing that only within the split where we want them.
 
 <img src="added_documentation/ConfigSplitTable.png" alt="Config Directory Structure Setup Table">
 
