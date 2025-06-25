@@ -510,7 +510,32 @@ Run through the Drupal installer as normal.  You will not be asked for database 
 <details>
 <summary><h3>Project Browser & Recipes: (Optional! Click to open)</h3></summary>
 
+This template is built for both beginners and experienced users of Drupal.  The practice of using Git:GitHub version control is essential to not loosing substantial effort you put into working on a website.  Experienced people also know it offers a sharing situation where you can involve others in your project or work as a team.  For beginners, the fact that your site will also be set up for hosting automatically from your setting your self up via this template adds one other critical benefit in easy of maintenace; you don't have a DevOps team working with you so leverage the fact it is built into the Platform.sh approach with this template.
 
+All that said, beginners more so than experienced developers, will really like what they have seen if they have been exposed to [Drupal CMS.](https://www.drupal.org/project/cms)  Drupal CMS is a preconfigured version of Drupal that has recipes for things like a Blog, Events, Basic SEO, and a number of other preconfigured options in its set up.  It is great to use to spin up a site and practice or try new contributed modules hands on in what might be considered a semi-disposable site.  Since it doesn't provide the version control or hosting advantaged of this template, it probably won't serve the needs of someone who actually wants a strong website.  That said, what it does offer are its recipes.  Established Drupal websites typically have a bunch of contributed modules on top of the standard core.  Learning which you need for what can be time consuming for a beginner to feel they are making progress fast enough.  
+
+## Best of Both Worlds
+
+So how do you get the advantage of these recipes if you also want the version control and hosting advanates of this website?  The easiest way is to simply install the [Project Browser module.](https://www.drupal.org/project/project_browser). This provides not only a great way to see what modules are available to you but it can also offer menu access to recipes; note on the screen capture view here:
+
+<img src="added_documentation/ProjectBrowser.png" alt="Project Browser screenshot showing recipes in menu">
+
+Recipes will NOT populate that menu until you pull them into your site.  Just like when one sets up a basic Drupal CMS site you make a choice what you are wanting to build.  So to you want to bring in the recipe(s) you want to build and they will then appear under that menu item.  To install a recipe all you need to do is this:
+
+`# This will automatically install and unpack the recipe`
+`composer require drupal/example_recipe`
+
+If you want to do any of the recipes that Drupal CMS offers you can just go here to see the list and select the ones you want to then run the above command.
+
+[List of CMS Recipes](https://www.drupal.org/project/cms)
+
+
+Of course there are a whole lot more recipes than what they ever show you in that Drupal CMS started option.  If you want to have a view into all the recipes that are available, go here:
+
+[Recipe Browser (unvetted)](https://new.drupal.org/browse/recipes)
+
+
+Without going over the deep end, there are some who might send a sour tone about recipes.  The worry with them is they potentially install a much of stuff you don't need and won't use at the same time they offer the good stuff.  Well with recipes there has been progress made to address that issue by allowing you to "unpack' the modules underlying the recipe and just put those you want to retain in your system's `composer.json`. Then you can remove the modules you find are unneccesary overhead with `composer remove drupal/MODULENAME`. For more on all this checkout the  [Recipe Unpack](https://www.drupal.org/node/3522189) project discussion.
 
 
 </details>
