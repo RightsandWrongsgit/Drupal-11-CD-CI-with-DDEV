@@ -235,6 +235,8 @@ echo "use VSCode to open the project folder (finder on a Mac) for editing and fo
 <br>
 </details>
 
+******************************************************************************************************************
+
 ## Platform.sh Deployment
 
 Deploying to Platform.sh hosts your site in the cloud with automated scaling and services. The project includes a `.platform.app.yaml` file for Platform.sh configuration and a `settings.platformsh.php` file for environment-specific settings.
