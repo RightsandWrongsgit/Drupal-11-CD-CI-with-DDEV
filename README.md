@@ -544,30 +544,30 @@ Without going over the deep end, there are some who might send a sour tone about
 <details>
 <summary><h3>Structure Sync: (Optional! Click to open)</h3></summary>
 
-### Basic Different Between Code and Content
+#### Basic Different Between Code and Content
 
 You see the basic code that defines your website in the GitHub repository.  As you work on your site you might set up a content type that you call Members.  In it you might define fields for a first name, last name and address and phone numbers for each of your members. You have therefore configured 'code' part of your website.  Your 'content' would be a list of actual people and their address and phones that would be stored in the database. You could have tens of thousands of individual names, addresses, phone numbers and other stuff in the database.
 
-### Drupal’s Slight Idiosyncratic Code vs Content Consideration
+#### Drupal’s Slight Idiosyncratic Code vs Content Consideration
 
 There are a handful of items in Drupal where “what is code” vs “what is content” isn’t as crystal clear. Menus/taxonomy/blocks are where the line blurs. Say you have a taxonomy for a restaurant ‘style’ of dining and another for the ‘cuisine’. Well, the style and the cuisine are taxonomies defined by code but the term items within each is content; e.g. restaurant ‘style’ is code but casual, food truck, fine dinning, fast food, etc. are stored as content. ‘Cuisine’ is code but pizza, Chinese, Indian, south pacific, French, etc. are stored as content. A similar situation exists for menus.  You might have a menu in main navigation right below the hero section and another menu in the footer; these being code but the individual items you can select within each menu is stored as content.
 
 This code or content stuff is of more than academic interest. You know that you can share code between environments.  That is what we set up the ‘local’, 'develop', 'staged' and ‘main’ subdirectories of your files for with Git/GitHub so they can be used in your local and three Platform.sh hosted environments. We export configuration from the database to YML files, make those updated files available to another environment as we do our Git-GitHub pulls, updates and pushes, and Platform.sh uses those imported YML files from the correct GitHub branch to build a hosted copy of your site with its database.  All the 'content' like images, blog entries, etc. are found in your 'main' or production copy of your site.  You don't bring all that content local into your DDEV (Lando or Docker) copy of your site where you are doing development.  Therefore, as you work on your local site you don't have all that content visible locally as you do development.  You can probably wrap your head around what you are doing by just seeing that your Membership page has the name, address, and contact type of information; and don't need or want the tens of thousands of individual members hanging around to do your work. However, try to wrap your head around a mental image where you are developing around menu but none of you actual menu iten names within it are showing up; or where you see some classification taxonomy but no actual terms are in it for you to relate to. Having some of these core things being ‘content’ rather than ‘code’ can make development work uncomfortable.
 
-### Structure_Sync Module to the Rescue
+#### Structure_Sync Module to the Rescue
 
 Sure, if you were working on a really small site and had high speed bandwidth, you could move a copy of your whole database local to have ‘code’ and ‘content’ fully available in all environments. If you have a huge website of content and had to move it all every time you were working on your site you would not be happy. But, if your menus details, taxonomy items, and blocks are just in the database and not visible while your are working you would feel sort of in a contextual vacuum. So there is a module you can install that simply grabs the content from the database for menu/taxonomy/block items and folds them into your configuration workflow (with a couple extra “Drush” commands). Therefore, you might want is to install and enable the structure_sync module:
 
 lando composer require drupal/structure_sync
 lando drush en structure_sync
 
-### A Brief Explanation: Menu/Taxonomy/Blocks
+#### A Brief Explanation: Menu/Taxonomy/Blocks
 
 We said some pretty important items on the edge of the code-content borderline get synchronized in your work flow with this module. These are menu, taxonomy, and blocks. Examples were already provided for menu and taxonomy. Let’s next understand blocks.
 
 Blocks are one type of what Drupal calls ‘entities’. That doesn’t do much for me because Drupal sort of defaults to everything being some sort of entity - people, pages, blocks… I mentally simplify Blocks as being chunks of a page within a page (purest, don’t beat me up). Even UI designers tend to think of page layouts as organized into chunks and they may even plot out a grid system approach to display. Think of Drupal Blocks as doing that but because Drupal is a content management system it can reuse them on different pages. Heck, Drupal can conditionally display blocks differently within different contexts. It can retrieve database stored parts, or blocks, to make a unique whole on the fly! These are powerful capabilities that you will use. You can kind of see how these chunks would be consider content. Yet, if you think of some block that your drop into a sidebar on a variety of page types you can kind of see how having them present in a working development environment can provide a valuable context.
 
-### How to think about using Structure_Sync
+#### How to think about using Structure_Sync
 
 To wrap your head around this [Structure_Sync module](https://www.freelock.com/blog/john-locke/2023-04/deploying-blocks-and-content-other-site-environments) it helps to think about where this module places itself in the Drupal Administration. You will find it under the “Structure” main menu rather than under the “Configuration”. Why would that be since it works with configuration at that code-content borderline? The reason is because you are more likely to be using it while you are working with something you are doing with the Structure aspects of your website. And, once you set it, it simply works with the rest of Configuration naturally. I am not saying you won’t update it and then need to do a “drush cex” and “drush cim”. But unless you are adding or changing the menu, taxonomies, or blocks, once you set it up, it should fly on auto-pilot with normal configuration workflow.
 
