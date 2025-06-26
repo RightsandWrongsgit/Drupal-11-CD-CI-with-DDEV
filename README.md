@@ -1,4 +1,4 @@
-<h1 align="center">Drupal 11 CD/CI with DDEV template on Platform.sh Template</h1>
+<h1 align="center">Drupal 11 CD/CI with DDEV on Platform.sh Template</h1>
 
 <h2 align="center">Secure your work and see the results of your efforts!</h2>
 
