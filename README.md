@@ -588,11 +588,11 @@ After you select the items for export, you need to click that blue button labele
 
 To go prove to yourself how this works, you can pop over to your configuration and see that a new file has been added. In our case, you can look in that left directory map panel of VSCode and see the /config/sync subdirectory which had all those ‘yml’ files we found after our prior `drush cex` and you will find a new one called `structure_sync.data.yml` in the list.
 
-<img src="added_documentation/StructureSyncCustomBlock2.png" alt="Custom Block Example of Sturcture Sync">
+<img src="added_documentation/Structure Sync YML.png" alt="Structure Sync YML file">
 
 That little blue Git indicator should also show a count of “1” (or more if you did something else too) for the file change/addition of that file. While that `drush cex` runs, it will likely show you an expected update in a box like shown below and ask you to confirm with a ‘yes’ that you want to overwrite the prior export with the more current one.
 
-<img src="added_documentation/StructureSyncCustomBlock3.png" alt="Custom Block Example of Sturcture Sync">
+<img src="added_documentation/StructureSyncCustomBlock3.png" alt="Sturcture Sync export update">
 
 ## The STEPS
 
