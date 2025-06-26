@@ -205,7 +205,7 @@ echo "use VSCode to open the project folder (finder on a Mac) for editing and fo
 6. Install Drupal: `ddev drush site:install standard --account-name=admin --account-pass=admin -y`
 7. Enable modules: `ddev drush pm:enable config_split environment_indicator -y`
 8. Launch site: `ddev launch`
-<br>
+
 
 <details>
 <summary><h4>Beginners Option, same steps but annotated. (Click to open)</h4></summary>
