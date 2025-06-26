@@ -209,7 +209,10 @@ echo "use VSCode to open the project folder (finder on a Mac) for editing and fo
 <br>
 <br>
 <br>
-NOTE: The Beginners set up steps are the same as above but are annotated with what is going on as you to each step.
+
+<details>
+<summary><h3>Beginners same steps but annotated. (Click to open)</h3></summary>
+
 <br>
 </br>
 
@@ -233,6 +236,7 @@ NOTE: The Beginners set up steps are the same as above but are annotated with wh
 **VSCode Tip**: Open the project folder in VSCode (`code .` in the terminal). Use GitLens to view changes, commit with `Ctrl+Enter`, and push to GitHub via the Source Control panel. See the [Working with GitHub in VSCode](https://code.visualstudio.com/docs/sourcecontrol/github) for details.
 <br>
 <br>
+</details>
 
 ## Platform.sh Deployment
 
