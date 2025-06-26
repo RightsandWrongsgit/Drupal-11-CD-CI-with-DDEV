@@ -590,7 +590,7 @@ To go prove to yourself how this works, you can pop over to your configuration a
 
 <img src="added_documentation/Structure Sync YML.png" alt="Structure Sync YML file">
 
-That little blue Git indicator should also show a count of “1” (or more if you did something else too) for the file change/addition of that file. While that `drush cex` runs, it will likely show you an expected update in a box like shown below and ask you to confirm with a ‘yes’ that you want to overwrite the prior export with the more current one.
+The Structure Sync YML file will show up with an `drush cex` only if you have used the GUI interface to change something. If you do that `drush cex` from a terminal command line, it will likely show you an expected update in a box like shown below and ask you to confirm with a ‘yes’ that you want to overwrite the prior export with the more current one.
 
 <img src="added_documentation/StructureSyncCustomBlock3.png" alt="Sturcture Sync export update">
 
