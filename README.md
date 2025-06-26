@@ -207,11 +207,9 @@ echo "use VSCode to open the project folder (finder on a Mac) for editing and fo
 8. Launch site: `ddev launch`
 
 <br>
-<br>
-<br>
 
 <details>
-<summary><h3>Beginners same steps but annotated. (Click to open)</h3></summary>
+<summary><h4>Beginners Option, same steps but annotated. (Click to open)</h4></summary>
 
 <br>
 </br>
