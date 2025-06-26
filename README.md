@@ -59,7 +59,7 @@ If you are new to Drupal you probably have never heard of Drush.  You will proba
 
 
 <details>
-<summary><h3>Quick Deploy Option(Click to open)</h3></summary>
+<summary><h3>Quick Deploy Option (Click to open)</h3></summary>
 
 <p align="center"><h6>NOTE: You probably don't want to use Quick Deploy if you don't already have experience using this repository in setting up a prior project on Platform.sh and if you don't need to use the local environment to work offline or with co-developers.!</h6></p>
 
@@ -135,7 +135,7 @@ command -v docker >/dev/null 2>&1 || { echo "Docker is required. Install it from
 
 ## Local Development Setup
 
-This section guides you through setting up the project locally using DDEV. Experienced users can run the provided setup script or follow the manual steps. Beginners should read the detailed explanations for clarity.
+This section guides you through setting up the project locally using DDEV. Experienced users can run the provided setup script above or follow the manual steps. Beginners should read the detailed explanations for clarity.
 
 <details>
 <summary><h2>Setup Script (Recommended only for Experienced Users: Click to open)</h2></summary>
