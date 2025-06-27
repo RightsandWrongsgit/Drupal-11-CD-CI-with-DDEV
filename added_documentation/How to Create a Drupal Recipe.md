@@ -59,7 +59,12 @@ recipes/
    ```
    - This example installs the `node`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
 
-### **Why UUIDs Can Cause Conflicts**
+---
+
+### **How to Handle UUIDs in Recipes**
+
+<details>
+<summary>Why UUIDs Can Cause Conflicts (Click to Open)</summary>
 
 - **UUIDs in Drupal Configuration**:
   - Drupal’s configuration management system assigns Universally Unique Identifiers (UUIDs) to configuration entities (e.g., content types, fields, or roles) to track them across environments.
@@ -70,9 +75,8 @@ recipes/
   - If the configuration name exists but the UUID differs, Drupal’s configuration import system may fail due to a mismatch, as it expects the UUIDs to align.
   - In a fresh site, if the recipe’s configuration is imported without proper handling, the UUIDs may be applied as-is, which could cause problems if the same recipe is applied to multiple sites or combined with other configurations.
 
----
+</details>
 
-### **How to Handle UUIDs in Recipes**
 
 To avoid UUID-related conflicts when creating and installing a Drupal recipe in Drupal 11, follow these best practices:
 
