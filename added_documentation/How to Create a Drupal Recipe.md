@@ -9,7 +9,7 @@
     - [Understand the Recipe Structure](#understand-the-recipe-structure)
     - [Set Up a Recipe Directory](#set-up-a-recipe-directory)
     - [Create a Custom Composer Package](#create-a-custom-composer-package)
-    - [Create the recipeyml File](#create-the-recipeyml-file)
+    - [Create the recipeyml File](#create-the-recipe-yml-file)
 4. [Handling UUIDs](#how-to-handle-uuids-in-recipes)
 5. [Adding Default Content](#add-default-content-optional)
 6. [Version Control](#version-control-the-recipe)
@@ -27,13 +27,14 @@ Creating and installing a Drupal recipe in Drupal 11 involves defining a set of 
 
 # Creating a Drupal Recipe
 
-1. **Understand the Recipe Structure**:
+# Understand the Recipe Structure**:
+
    - A Drupal recipe is primarily defined by a `recipe.yml` file, which specifies metadata, module/theme installations, configurations, and dependencies.
    - Optionally, it can include a `composer.json` file for managing dependencies, a `config` directory for configuration files, and a `content` directory for default content.
    - Recipes are declarative, meaning they describe the desired state (e.g., modules to install, configurations to apply) without including custom PHP code or hooks.
 
 # Set up a Recipe Directory
-2. **Set Up a Recipe Directory**:
+
    - Create a directory for your recipe, typically in the `/recipes` folder of your Drupal project (e.g., `recipes/my_recipe`).
    - Alternatively, recipes can reside in the `/vendor` directory if managed by Composer, but `/recipes` is the emerging convention.
 
@@ -61,7 +62,7 @@ recipes/
   - my_recipe.install: for any procedural setup needed
 
 # Create a Custom Composer Package
-3. Create a Custom Composer Package
+
 Inside `recipes/my_recipe/composer.json` File (Optional):
    - If your recipe depends on contributed modules or themes, include a `composer.json` file to specify these dependencies.
 ```composer.json
@@ -86,7 +87,8 @@ Inside `recipes/my_recipe/composer.json` File (Optional):
   - drupal/default_content is required to handle content importing.
   - This ensures Composer downloads the required modules when the recipe is added.
 
-# Create the Recipeyml File
+# Create the Recipe YML Files
+
 We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our recipe. The key differences are the Functional role of `my_recipe.yml` defining the actions and configuration the recipe applies vs the Metadata role of `my_recipe.info.yml` for Drupal's system to recognize the recipe. Both files are typically required for a recipe to work properly. Without `my_recipe.yml`, the recipe has no instructions to execute. Without `my_recipe.info.yml`, Drupal won't recognize the recipe.
 
 4. **Create the `my_recipe.yml` File**:
