@@ -267,7 +267,28 @@ Alternatively you can ...
 
 ---
 
-### **Additional Tips**
+### **Additional Notes and Tips**
+
+- **UUIDs in Development**:
+  - If you’re using copies of an existing Drupal site's configuration YML files from the Config/sync directory (e.g., you did a `drush config:export`) of the database settings of an existing site, the exported YAML files will include UUIDs. Before including them in a recipe to leverage all the settings in them configure how you like them, remember to manually remove the `uuid` key unless you specifically need to enforce the same UUID across environments.
+  
+- **Existing Sites**:
+  - If applying a recipe to an existing site with a content type already in it (e.g. a `blog` in the examples through this documentation), you may need to either:
+    - Rename the content type in the recipe (e.g., `node.type.mycompany_blog`).
+    - Use `--force` to overwrite the existing configuration.
+    - Manually delete the existing content type before applying the recipe (`drush config:delete node.type.blog`).
+
+- **Recipe Testing**:
+  - Test your recipe on a clean Drupal 11 installation to confirm it applies without errors. Use tools like DDEV or Lando for quick setup:
+    ```bash
+    ddev start
+    ddev drush site:install minimal
+    ddev exec php core/scripts/drupal recipe ../recipes/blog_feature
+    ```
+
+- **Drupal Recipe Limitations**:
+  - Recipes are designed for initial setup and don’t handle ongoing configuration updates. If you need to update configurations later, consider using configuration management (`drush config:import`) and remember to also use the Configuration Split settings to uniquely leverage certain capabilities only appropriate to a given environment (e.g. testing in 'staged', analytics and mail only in production 'main', etc.).
+
 
 - **Use the Recipe Generator**:
   - The `recipe_generator` Drush add-on simplifies recipe creation by generating `recipe.yml` and `composer.json` files interactively:
@@ -315,12 +336,8 @@ Alternatively you can ...
 
 This process leverages Drupal 11’s Recipe API, which is stable and functional as of version 11.1. For further details, consult the official Drupal Recipes documentation on Drupal.org or the Distributions and Recipes Initiative page.[](https://opensenselabs.com/blog/drupal-recipe-module)[](https://www.drupal.org/docs/extending-drupal/drupal-recipes/how-to-download-and-apply-drupal-recipes)[](https://www.drupal.org/project/distributions_recipes)
 
-******************************* UUID WARNING TO ABOVE EXAMPLES *******
-
-You're absolutely correct that UUIDs in configuration YAML files can cause issues if not handled properly when a Drupal recipe is applied to a new site. Let’s clarify why this happens and how to address it to avoid conflicts with the site’s database.
 
 ---
-
 
 
 4. **Test on a Fresh Site**:
@@ -368,30 +385,4 @@ When you run `php core/scripts/drupal recipe`, Drupal:
 
 If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID), the import will fail unless `--force` is used or the UUID is omitted.
 
----
 
-### **Additional Notes**
-
-- **UUIDs in Development**:
-  - If you’re exporting configurations from a development site (e.g., using `drush config:export`), the exported YAML files will include UUIDs. Before including them in a recipe, manually remove the `uuid` key unless you specifically need to enforce the same UUID across environments.
-  
-- **Existing Sites**:
-  - If applying a recipe to an existing site with a `blog` content type, you may need to either:
-    - Rename the content type in the recipe (e.g., `node.type.mycompany_blog`).
-    - Use `--force` to overwrite the existing configuration.
-    - Manually delete the existing content type before applying the recipe (`drush config:delete node.type.blog`).
-
-- **Recipe Testing**:
-  - Test your recipe on a clean Drupal 11 installation to confirm it applies without errors. Use tools like DDEV or Lando for quick setup:
-    ```bash
-    ddev start
-    ddev drush site:install minimal
-    ddev exec php core/scripts/drupal recipe ../recipes/blog_feature
-    ```
-
-- **Drupal Recipe Limitations**:
-  - Recipes are designed for initial setup and don’t handle ongoing configuration updates. If you need to update configurations later, consider using configuration management (`drush config:import`) or a new recipe.
-
----
-
-By omitting UUIDs from configuration and content files, your recipe will be portable and safe to apply to new or existing Drupal 11 sites without conflicts. If you need to enforce specific UUIDs for a controlled environment, document this clearly and use the `--force` option, but this is rarely recommended for reusable recipes. For further guidance, check the Drupal Recipes documentation on Drupal.org or the `#recipes` channel on Drupal Slack.
