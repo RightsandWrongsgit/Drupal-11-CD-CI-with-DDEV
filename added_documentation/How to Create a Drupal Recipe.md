@@ -59,29 +59,6 @@ recipes/
    ```
    - This example installs the `node`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
 
-4. **Add Configuration Files (Optional)**:
-   - Create a `config` directory in your recipe folder (e.g., `recipes/my_custom_recipe/config`).
-   - Add YAML configuration files for entities like content types or views. For example, `node.type.blog.yml` might define a blog content type:
-     ```yaml
-     uuid: 123e4567-e89b-12d3-a456-426614174000
-     langcode: en
-     status: true
-     dependencies:
-       module:
-         - menu_ui
-     name: Blog
-     type: blog
-     description: 'A blog post content type.'
-     help: ''
-     new_revision: true
-     display_submitted: true
-     menu_ui:
-       available_menus:
-         - main
-       parent: 'main:'
-     ```
-   - Place these files in the `config` directory, and reference them in the `recipe.yml` under `config.import`.
-
 
 To avoid UUID-related conflicts when creating and installing a Drupal recipe in Drupal 11, follow these best practices:
 
@@ -106,6 +83,7 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
        parent: 'main:'
      ```
    - By omitting the UUID, Drupal creates a new one specific to the target site, preventing conflicts.
+   - Place these files in the `config` directory, and reference them in the `recipe.yml` under `config.import`.
 
 2. **Ensure Configuration Names Are Unique**:
    - Make sure the configuration names (e.g., `node.type.blog`) used in the recipe are unique or intended to override existing configurations. If a content type like `blog` already exists on the target site, the recipe’s configuration will replace it, which may or may not be desired.
