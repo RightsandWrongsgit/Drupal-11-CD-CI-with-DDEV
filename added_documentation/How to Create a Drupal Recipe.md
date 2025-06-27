@@ -179,12 +179,9 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
 ### **Installing a Drupal Recipe**
 
 1. **Prerequisites**:
-   - Ensure you have a Drupal 11 site set up. You can create one using Composer:
-     ```bash
-     composer create-project drupal/recommended-project:11.x my_site
-     cd my_site
-     ```
-   - Install Drush (Drupal’s command-line tool) for easier recipe application:
+   - Ensure you have a Drupal 11 site set up. 
+
+   - Make sure you have nstalled Drush (Drupal’s command-line tool). This Drupal 11 CD/CI with DDEV template automatically puts it in place for your DDEV local environment when you should be doing all your work.
      ```bash
      composer require drush/drush
      ```
