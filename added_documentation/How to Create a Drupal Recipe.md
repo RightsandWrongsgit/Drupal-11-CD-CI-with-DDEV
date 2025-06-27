@@ -114,9 +114,11 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
 
 5. **Add Default Content (Optional)**:
    - Create a `content` directory (e.g., `recipes/my_custom_recipe/content`) to include default content in YAML format, leveraging the Default Content API.
-   - For example, a file like `node/blog/1.yml` could define a sample blog post:
+   - For example, a file like `node/blog/1.yml` could define a sample blog post.
+   - For content in the `content` directory (e.g., `node/blog/1.yml`), UUIDs are also included to uniquely identify entities. Similar to configuration, you can omit UUIDs in content YAML files, and Drupal’s Default Content API will generate new ones on import.
+   - Example of a content file without a UUID:
+
      ```yaml
-     uuid: 223e4567-e89b-12d3-a456-426614174001
      langcode: en
      type: blog
      title: 'Sample Blog Post'
@@ -125,6 +127,7 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
        format: basic_html
      status: 1
      ```
+   - Alternatively, if UUIDs are included, ensure they are unique or use the `--force` option to overwrite existing content entities.
    - The Default Content API will create this content when the recipe is applied.
 
 6. **Create a `composer.json` File (Optional)**:
@@ -317,19 +320,7 @@ You're absolutely correct that UUIDs in configuration YAML files can cause issue
      ```
 
 6. **Use the Default Content API for Content**:
-   - For content in the `content` directory (e.g., `node/blog/1.yml`), UUIDs are also included to uniquely identify entities. Similar to configuration, you can omit UUIDs in content YAML files, and Drupal’s Default Content API will generate new ones on import.
-   - Example of a content file without a UUID:
-     ```yaml
-     langcode: en
-     type: blog
-     title: 'Sample Blog Post'
-     body:
-       value: 'This is a sample blog post created by the recipe.'
-       format: basic_html
-     status: 1
-     ```
-   - Alternatively, if UUIDs are included, ensure they are unique or use the `--force` option to overwrite existing content entities.
-
+   
 7. **Validate with Configuration Inspector**:
    - Use the Configuration Inspector module (`drupal/config_inspector`) to validate your recipe’s configuration files before distribution. This helps identify potential UUID or dependency issues:
      ```bash
