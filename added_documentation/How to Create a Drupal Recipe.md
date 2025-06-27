@@ -18,14 +18,62 @@ recipes/
 └── my_recipe/
     ├── composer.json
     ├── my_recipe.info.yml
+    ├── my_recipe.install
     ├── config/
     │   └── install/
-    │       └── (your config yml files)
-    ├── my_recipe.install
-    └── README.md
-```
+    │       └── (configuration YAML files)
+    ├── content/
+    │   └── node/
+    │       └── article/
+    │           ├── default_content.my-first-article.yml
+    │           └── default_content.my-second-article.yml
+    ├── README.md
 
-3. **Create the `recipe.yml` File**:
+```
+  - config/install/: for standard Drupal configuration (content types, views, etc.)
+  - content/: for default entity content, such as example nodes
+  - my_recipe.install: for any procedural setup needed
+
+3. Create a Custom Composer Package
+Inside recipes/my_recipe/composer.json:
+```
+{
+  "name": "myvendor/my-recipe",
+  "description": "A Drupal recipe for blog functionality with starter content",
+  "type": "drupal-recipe",
+  "require": {
+    "drupal/node": "^1.0",
+    "drupal/views": "^1.0",
+    "drupal/ckeditor5": "^1.0",
+    "drupal/default_content": "^1.0"
+  },
+  "extra": {
+    "drupal-recipe": {
+      "version": "1.0"
+    }
+  }
+}
+```
+  - type: drupal-recipe signals this is a recipe.
+  - drupal/default_content is required to handle content importing.
+
+9. **Create a `composer.json` File (Optional)**:
+   - If your recipe depends on contributed modules or themes, include a `composer.json` file to specify these dependencies:
+     ```json
+     {
+       "name": "my_vendor/my_custom_recipe",
+       "type": "drupal-recipe",
+       "description": "A custom Drupal recipe for blog functionality",
+       "require": {
+         "drupal/pathauto": "^1.12",
+         "drupal/metatag": "^2.0"
+       }
+     }
+     ```
+   - This ensures Composer downloads the required modules when the recipe is added.
+
+
+4. **Create the `recipe.yml` File**:
    - This file defines the recipe’s metadata and instructions. At a minimum, it should include:
      - `name`: A human-readable name for the recipe.
      - `description`: A brief explanation of the recipe’s purpose.
@@ -80,7 +128,7 @@ recipes/
 
 To avoid UUID-related conflicts when creating and installing a Drupal recipe in Drupal 11, follow these best practices:
 
-4. **Omit UUIDs in any (Optional) Recipe Configuration Files**:
+5. **Omit UUIDs in any (Optional) Recipe Configuration Files**:
    - When crafting configuration files for a recipe (e.g., `config/node.type.blog.yml`), **remove the `uuid` key** from the YAML files. Drupal’s configuration import system will generate a new UUID automatically when the recipe is applied to a site.
    - Example of a `node.type.blog.yml` without a UUID:
      ```yaml
@@ -103,11 +151,11 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
    - By omitting the UUID, Drupal creates a new one specific to the target site, preventing conflicts.
    - Place these files in the `config` directory, and reference them in the `recipe.yml` under `config.import`.
 
-2. **Ensure Configuration Names Are Unique**:
+6. **Ensure Configuration Names Are Unique**:
    - Make sure the configuration names (e.g., `node.type.blog`) used in the recipe are unique or intended to override existing configurations. If a content type like `blog` already exists on the target site, the recipe’s configuration will replace it, which may or may not be desired.
    - To avoid unintended overwrites, consider prefixing configuration names (e.g., `node.type.mycompany_blog`) or checking for existing configurations before applying the recipe.
 
-3. **Use the `force` Option for Overwrites**:
+7. **Use the `force` Option for Overwrites**:
    - If you intentionally want to overwrite existing configurations (e.g., to update an existing content type), you can use the `--force` option when applying the recipe:
      ```bash
      php core/scripts/drupal recipe ../recipes/my_custom_recipe --force
@@ -116,7 +164,7 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
 
 
 
-5. **Add Default Content (Optional)**:
+8. **Add Default Content (Optional)**:
    - Create a `content` directory (e.g., `recipes/my_custom_recipe/content`) to include default content in YAML format, leveraging the Default Content API.
    - For example, a file like `node/blog/1.yml` could define a sample blog post.
    - For content in the `content` directory (e.g., `node/blog/1.yml`), UUIDs are also included to uniquely identify entities. Similar to configuration, you can omit UUIDs in content YAML files, and Drupal’s Default Content API will generate new ones on import.
@@ -134,22 +182,9 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
    - Alternatively, if UUIDs are included, ensure they are unique or use the `--force` option to overwrite existing content entities.
    - The Default Content API will create this content when the recipe is applied.
 
-6. **Create a `composer.json` File (Optional)**:
-   - If your recipe depends on contributed modules or themes, include a `composer.json` file to specify these dependencies:
-     ```json
-     {
-       "name": "my_vendor/my_custom_recipe",
-       "type": "drupal-recipe",
-       "description": "A custom Drupal recipe for blog functionality",
-       "require": {
-         "drupal/pathauto": "^1.12",
-         "drupal/metatag": "^2.0"
-       }
-     }
-     ```
-   - This ensures Composer downloads the required modules when the recipe is added.
 
-7. **Version Control the Recipe**:
+
+9. **Version Control the Recipe**:
    - Store your recipe in a version-controlled repository (e.g., Git) to make it reusable across projects. You can host it on a platform like GitHub or Drupal.org.
 
 ---
