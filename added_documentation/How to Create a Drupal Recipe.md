@@ -27,7 +27,7 @@ Creating and installing a Drupal recipe in Drupal 11 involves defining a set of 
 
 # Creating a Drupal Recipe
 
-# Understand the Recipe Structure**:
+# Understand the Recipe Structure:
 
    - A Drupal recipe is primarily defined by a `recipe.yml` file, which specifies metadata, module/theme installations, configurations, and dependencies.
    - Optionally, it can include a `composer.json` file for managing dependencies, a `config` directory for configuration files, and a `content` directory for default content.
@@ -136,8 +136,7 @@ dependencies:
   - drupal:views
 ```
 ---
-# How to Handle UUIDs in- Recipes
-### **How to Handle UUIDs in Recipes**
+# How to Handle UUIDs in Recipes
 
 <details>
 <summary>Why UUIDs Can Cause Conflicts (Click to Open)</summary>
@@ -191,8 +190,8 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
    - This tells Drupal to ignore UUID mismatches and overwrite the existing configuration. Use this cautiously, as it can lead to data loss if the existing configuration contains customizations not in the recipe.
 
 
-# Add Default Content Optional
-8. **Add Default Content (Optional)**:
+# Add Default Content (Optional)
+
    - Create a `content` directory (e.g., `recipes/my_recipe/content`) to include default content in YAML format, leveraging the Default Content API.
    - For example, a file like `node/blog/1.yml` could define a sample blog post.
    - For content in the `content` directory (e.g., `node/blog/1.yml`), UUIDs are also included to uniquely identify entities. Similar to configuration, you can omit UUIDs in content YAML files, and Drupal’s Default Content API will generate new ones on import.
@@ -212,12 +211,11 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
 
 
 # Version Control the Recipe
-9. **Version Control the Recipe**:
+
    - Store your recipe in a version-controlled repository (e.g., Git) to make it reusable across projects. You can host it on a platform like GitHub or Drupal.org.
 
 ---
-#installing-a-drupal-recipe
-### **Installing a Drupal Recipe**
+# Installing a Drupal Recipe
 
 1. **Prerequisites**:
    - Ensure you have a Drupal 11 site set up. 
@@ -386,7 +384,7 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
 5. Verify that the blog content type and sample post are created in the Drupal admin interface.
 
 ---
-#references
+# Rreferences
 This process leverages Drupal 11’s Recipe API, which is stable and functional as of version 11.1. For further details, consult the official Drupal Recipes documentation on Drupal.org or the Distributions and Recipes Initiative page.[](https://opensenselabs.com/blog/drupal-recipe-module)[](https://www.drupal.org/docs/extending-drupal/drupal-recipes/how-to-download-and-apply-drupal-recipes)[](https://www.drupal.org/project/distributions_recipes)
 
 
