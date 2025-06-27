@@ -224,6 +224,16 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
      ```
 
 3. **Apply the Recipe**:
+   - For our DDEV development environment or Lando, use their respective commands:
+     - **DDEV**:
+       ```bash
+       ddev exec -d /var/www/html/web php core/scripts/drupal recipe ../recipes/my_custom_recipe
+       ```
+     - **Lando**:
+       ```bash
+       lando recipe-apply my_custom_recipe
+       ```
+Alternatively you can ...
    - Navigate to your Drupal webroot (e.g., `web` or `docroot`):
      ```bash
      cd web
@@ -234,15 +244,6 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
      ```
      - The `-v` flag provides verbose output for debugging.
      - Replace `../recipes/my_custom_recipe` with the path to your recipe if it’s located elsewhere (e.g., `vendor/my_vendor/my_custom_recipe`).
-   - Alternatively, if using a development environment like DDEV or Lando, use their respective commands:
-     - **DDEV**:
-       ```bash
-       ddev exec -d /var/www/html/web php core/scripts/drupal recipe ../recipes/my_custom_recipe
-       ```
-     - **Lando**:
-       ```bash
-       lando recipe-apply my_custom_recipe
-       ```
 
 4. **Clear the Cache**:
    - After applying the recipe, clear the Drupal cache to ensure changes take effect:
