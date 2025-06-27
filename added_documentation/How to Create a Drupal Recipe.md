@@ -9,6 +9,10 @@ Creating and installing a Drupal recipe in Drupal 11 involves defining a set of 
    - Optionally, it can include a `composer.json` file for managing dependencies, a `config` directory for configuration files, and a `content` directory for default content.
    - Recipes are declarative, meaning they describe the desired state (e.g., modules to install, configurations to apply) without including custom PHP code or hooks.
 
+2. **Set Up a Recipe Directory**:
+   - Create a directory for your recipe, typically in the `/recipes` folder of your Drupal project (e.g., `recipes/my_custom_recipe`).
+   - Alternatively, recipes can reside in the `/vendor` directory if managed by Composer, but `/recipes` is the emerging convention.
+
 ```
 recipes/
 └── my_recipe/
@@ -20,10 +24,6 @@ recipes/
     ├── my_recipe.install
     └── README.md
 ```
-
-2. **Set Up a Recipe Directory**:
-   - Create a directory for your recipe, typically in the `/recipes` folder of your Drupal project (e.g., `recipes/my_custom_recipe`).
-   - Alternatively, recipes can reside in the `/vendor` directory if managed by Composer, but `/recipes` is the emerging convention.
 
 3. **Create the `recipe.yml` File**:
    - This file defines the recipe’s metadata and instructions. At a minimum, it should include:
