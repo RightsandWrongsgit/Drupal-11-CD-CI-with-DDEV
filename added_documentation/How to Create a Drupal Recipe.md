@@ -50,9 +50,11 @@ recipes/
     │       └── article/
     │           ├── default_content.my-first-article.yml
     │           └── default_content.my-second-article.yml
-    ├── README.md
+    ├── my_recipe.yml
+    └── README.md
 
 ```
+
   - config/install/: for standard Drupal configuration (content types, views, etc.)
   - content/: for default entity content, such as example nodes
   - my_recipe.install: for any procedural setup needed
@@ -84,7 +86,9 @@ Inside `recipes/my_recipe/composer.json` File (Optional):
   - This ensures Composer downloads the required modules when the recipe is added.
 
 #create-the-recipeyml-file
-4. **Create the `recipe.yml` File**:
+We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our recipe. The key differences are the Functional role of `my_recipe.yml` defining the actions and configuration the recipe applies vs the Metadata role of `my_recipe.info.yml` for Drupal's system to recognize the recipe. Both files are typically required for a recipe to work properly. Without `my_recipe.yml`, the recipe has no instructions to execute. Without `my_recipe.info.yml`, Drupal won't recognize the recipe.
+
+4. **Create the `my_recipe.yml` File**:
    - This file defines the recipe’s metadata and instructions. At a minimum, it should include:
      - `name`: A human-readable name for the recipe.
      - `description`: A brief explanation of the recipe’s purpose.
@@ -118,6 +122,16 @@ Inside `recipes/my_recipe/composer.json` File (Optional):
    ```
    - This example installs the `node`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
 
+You creat the `my_recipe.info.yml` file like this:
+```yml
+name: 'My Recipe'
+type: recipe
+description: 'A recipe to set up a basic blog feature.'
+core_version_requirement: ^11
+dependencies:
+  - drupal:node
+  - drupal:views
+```
 ---
 #how-to-handle-uuids-in-recipes
 ### **How to Handle UUIDs in Recipes**
