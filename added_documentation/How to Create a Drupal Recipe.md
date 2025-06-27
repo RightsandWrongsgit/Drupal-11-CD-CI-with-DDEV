@@ -384,7 +384,7 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
 5. Verify that the blog content type and sample post are created in the Drupal admin interface.
 
 ---
-# Rreferences
+# References
 This process leverages Drupal 11’s Recipe API, which is stable and functional as of version 11.1. For further details, consult the official Drupal Recipes documentation on Drupal.org or the Distributions and Recipes Initiative page.[](https://opensenselabs.com/blog/drupal-recipe-module)[](https://www.drupal.org/docs/extending-drupal/drupal-recipes/how-to-download-and-apply-drupal-recipes)[](https://www.drupal.org/project/distributions_recipes)
 
 
