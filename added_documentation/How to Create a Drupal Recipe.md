@@ -266,8 +266,8 @@ Alternatively you can ...
    - This copies the recipe’s dependencies into your project’s `composer.json` and `composer.lock` files.
 
 <details>
-<summary> **What Happens When a Recipe Is Applied**</summary>
-
+<summary> **What Happens When a Recipe Is Applied** (Click to Open)</summary>
+<br>
 When you run `php core/scripts/drupal recipe`, Drupal:
 1. Installs any modules or themes listed in the `install` section.
 2. Imports configuration files from the `config` directory, generating new UUIDs if none are provided or respecting existing UUIDs if present (unless `--force` is used).
