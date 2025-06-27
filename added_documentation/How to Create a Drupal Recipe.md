@@ -35,8 +35,9 @@ recipes/
   - my_recipe.install: for any procedural setup needed
 
 3. Create a Custom Composer Package
-Inside recipes/my_recipe/composer.json:
-```
+Inside `recipes/my_recipe/composer.json` File (Optional):
+   - If your recipe depends on contributed modules or themes, include a `composer.json` file to specify these dependencies.
+```composer.json
 {
   "name": "myvendor/my-recipe",
   "description": "A Drupal recipe for blog functionality with starter content",
@@ -56,21 +57,7 @@ Inside recipes/my_recipe/composer.json:
 ```
   - type: drupal-recipe signals this is a recipe.
   - drupal/default_content is required to handle content importing.
-
-9. **Create a `composer.json` File (Optional)**:
-   - If your recipe depends on contributed modules or themes, include a `composer.json` file to specify these dependencies:
-     ```json
-     {
-       "name": "my_vendor/my_custom_recipe",
-       "type": "drupal-recipe",
-       "description": "A custom Drupal recipe for blog functionality",
-       "require": {
-         "drupal/pathauto": "^1.12",
-         "drupal/metatag": "^2.0"
-       }
-     }
-     ```
-   - This ensures Composer downloads the required modules when the recipe is added.
+  - This ensures Composer downloads the required modules when the recipe is added.
 
 
 4. **Create the `recipe.yml` File**:
