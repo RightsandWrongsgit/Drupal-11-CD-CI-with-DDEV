@@ -240,10 +240,10 @@ Alternatively you can ...
      ```
    - Apply the recipe using the Drupal core script:
      ```bash
-     php core/scripts/drupal recipe ../recipes/my_custom_recipe -v
+     php core/scripts/drupal recipe ../recipes/my_recipe -v
      ```
      - The `-v` flag provides verbose output for debugging.
-     - Replace `../recipes/my_custom_recipe` with the path to your recipe if it’s located elsewhere (e.g., `vendor/my_vendor/my_custom_recipe`).
+     - Replace `../recipes/my_recipe` with the path to your recipe if it’s located elsewhere (e.g., `vendor/my_vendor/my_recipe`).
 
 4. **Clear the Cache**:
    - After applying the recipe, clear the Drupal cache to ensure changes take effect:
