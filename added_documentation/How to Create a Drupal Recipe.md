@@ -265,6 +265,18 @@ Alternatively you can ...
      ```
    - This copies the recipe’s dependencies into your project’s `composer.json` and `composer.lock` files.
 
+<details>
+<summary> **What Happens When a Recipe Is Applied**</summary>
+
+When you run `php core/scripts/drupal recipe`, Drupal:
+1. Installs any modules or themes listed in the `install` section.
+2. Imports configuration files from the `config` directory, generating new UUIDs if none are provided or respecting existing UUIDs if present (unless `--force` is used).
+3. Imports content from the `content` directory using the Default Content API, similarly handling UUIDs.
+4. Executes any `actions` defined in the `recipe.yml` (e.g., granting permissions).
+
+If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID), the import will fail unless `--force` is used or the UUID is omitted.
+</details>
+
 ---
 
 ### **Additional Notes and Tips**
@@ -374,15 +386,3 @@ This process leverages Drupal 11’s Recipe API, which is stable and functional 
    - If the recipe is for a specific site or distribution, you might retain UUIDs to enforce consistency, but document this clearly and use `--force` when applying.
 
 ---
-
-### **What Happens When a Recipe Is Applied**
-
-When you run `php core/scripts/drupal recipe`, Drupal:
-1. Installs any modules or themes listed in the `install` section.
-2. Imports configuration files from the `config` directory, generating new UUIDs if none are provided or respecting existing UUIDs if present (unless `--force` is used).
-3. Imports content from the `content` directory using the Default Content API, similarly handling UUIDs.
-4. Executes any `actions` defined in the `recipe.yml` (e.g., granting permissions).
-
-If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID), the import will fail unless `--force` is used or the UUID is omitted.
-
-
