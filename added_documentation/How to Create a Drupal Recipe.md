@@ -370,46 +370,6 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
 
 ---
 
-### **Updated Example Without UUIDs**
-
-Here’s the updated `node.type.blog.yml` without a UUID to avoid conflicts:
-```yaml
-langcode: en
-status: true
-dependencies:
-  module:
-    - menu_ui
-name: Blog
-type: blog
-description: 'A blog post content type.'
-help: ''
-new_revision: true
-display_submitted: true
-menu_ui:
-  available_menus:
-    - main
-  parent: 'main:'
-```
-
-And the `content/node/blog/1.yml`:
-```yaml
-langcode: en
-type: blog
-title: 'Sample Blog Post'
-body:
-  value: 'This is a sample blog post created by the recipe.'
-  format: basic_html
-status: 1
-```
-
-With these files, the recipe can be applied to any Drupal 11 site without UUID conflicts:
-```bash
-php core/scripts/drupal recipe ../recipes/blog_feature
-drush cr
-```
-
----
-
 ### **Additional Notes**
 
 - **UUIDs in Development**:
