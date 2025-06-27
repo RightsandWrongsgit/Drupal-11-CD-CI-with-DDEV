@@ -9,7 +9,7 @@
     - [Understand the Recipe Structure](#understand-the-recipe-structure)
     - [Set Up a Recipe Directory](#set-up-a-recipe-directory)
     - [Create a Custom Composer Package](#create-a-custom-composer-package)
-    - [Create the recipeyml File](#create-the-recipe-yml-file)
+    - [Create the recipe YML Files](#create-the-recipe-yml-file)
 4. [Handling UUIDs](#how-to-handle-uuids-in-recipes)
 5. [Adding Default Content](#add-default-content-optional)
 6. [Version Control](#version-control-the-recipe)
