@@ -59,6 +59,20 @@ recipes/
    ```
    - This example installs the `node`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
 
+### **Why UUIDs Can Cause Conflicts**
+
+- **UUIDs in Drupal Configuration**:
+  - Drupal’s configuration management system assigns Universally Unique Identifiers (UUIDs) to configuration entities (e.g., content types, fields, or roles) to track them across environments.
+  - When a recipe includes configuration files (e.g., `node.type.blog.yml`) with a UUID, applying that recipe to a new site could conflict if the site’s database already contains a configuration entity with the same UUID or if the configuration name (e.g., `node.type.blog`) already exists but with a different UUID.
+
+- **Potential Issues**:
+  - If the UUID in the recipe’s configuration file matches an existing UUID in the site’s database but the configuration differs, Drupal may throw an error or overwrite the existing configuration.
+  - If the configuration name exists but the UUID differs, Drupal’s configuration import system may fail due to a mismatch, as it expects the UUIDs to align.
+  - In a fresh site, if the recipe’s configuration is imported without proper handling, the UUIDs may be applied as-is, which could cause problems if the same recipe is applied to multiple sites or combined with other configurations.
+
+---
+
+### **How to Handle UUIDs in Recipes**
 
 To avoid UUID-related conflicts when creating and installing a Drupal recipe in Drupal 11, follow these best practices:
 
@@ -280,55 +294,7 @@ You're absolutely correct that UUIDs in configuration YAML files can cause issue
 
 ---
 
-### **Why UUIDs Can Cause Conflicts**
 
-- **UUIDs in Drupal Configuration**:
-  - Drupal’s configuration management system assigns Universally Unique Identifiers (UUIDs) to configuration entities (e.g., content types, fields, or roles) to track them across environments.
-  - When a recipe includes configuration files (e.g., `node.type.blog.yml`) with a UUID, applying that recipe to a new site could conflict if the site’s database already contains a configuration entity with the same UUID or if the configuration name (e.g., `node.type.blog`) already exists but with a different UUID.
-
-- **Potential Issues**:
-  - If the UUID in the recipe’s configuration file matches an existing UUID in the site’s database but the configuration differs, Drupal may throw an error or overwrite the existing configuration.
-  - If the configuration name exists but the UUID differs, Drupal’s configuration import system may fail due to a mismatch, as it expects the UUIDs to align.
-  - In a fresh site, if the recipe’s configuration is imported without proper handling, the UUIDs may be applied as-is, which could cause problems if the same recipe is applied to multiple sites or combined with other configurations.
-
----
-
-### **How to Handle UUIDs in Recipes**
-
-To avoid UUID-related conflicts when creating and installing a Drupal recipe in Drupal 11, follow these best practices:
-
-1. **Omit UUIDs in Recipe Configuration Files**:
-   - When crafting configuration files for a recipe (e.g., `config/node.type.blog.yml`), **remove the `uuid` key** from the YAML files. Drupal’s configuration import system will generate a new UUID automatically when the recipe is applied to a site.
-   - Example of a `node.type.blog.yml` without a UUID:
-     ```yaml
-     langcode: en
-     status: true
-     dependencies:
-       module:
-         - menu_ui
-     name: Blog
-     type: blog
-     description: 'A blog post content type.'
-     help: ''
-     new_revision: true
-     display_submitted: true
-     menu_ui:
-       available_menus:
-         - main
-       parent: 'main:'
-     ```
-   - By omitting the UUID, Drupal creates a new one specific to the target site, preventing conflicts.
-
-2. **Ensure Configuration Names Are Unique**:
-   - Make sure the configuration names (e.g., `node.type.blog`) used in the recipe are unique or intended to override existing configurations. If a content type like `blog` already exists on the target site, the recipe’s configuration will replace it, which may or may not be desired.
-   - To avoid unintended overwrites, consider prefixing configuration names (e.g., `node.type.mycompany_blog`) or checking for existing configurations before applying the recipe.
-
-3. **Use the `force` Option for Overwrites**:
-   - If you intentionally want to overwrite existing configurations (e.g., to update an existing content type), you can use the `--force` option when applying the recipe:
-     ```bash
-     php core/scripts/drupal recipe ../recipes/my_custom_recipe --force
-     ```
-   - This tells Drupal to ignore UUID mismatches and overwrite the existing configuration. Use this cautiously, as it can lead to data loss if the existing configuration contains customizations not in the recipe.
 
 4. **Test on a Fresh Site**:
    - When developing a recipe, test it on a fresh Drupal 11 installation to ensure it applies cleanly without UUID conflicts. A fresh site won’t have pre-existing configurations, so Drupal will assign new UUIDs to imported configurations.
