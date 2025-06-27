@@ -18,20 +18,21 @@
 9. [Example Workflow](#example-workflow)
 10. [References](#references)
 ---
-#Introduction
+# Introduction
+
 Creating and installing a Drupal recipe in Drupal 11 involves defining a set of configurations, modules, and content in a structured format and applying it to a Drupal site. Recipes are a powerful feature introduced in Drupal 10.3 and stabilized in Drupal 11, allowing site builders to automate module installation and configuration in a flexible, reusable way. Below is a step-by-step guide to creating and installing a Drupal recipe in Drupal 11.
 
-#recipe-structure
+# Recipe Structure
 
 
-#creating-a-drupal-recipe
+# Creating a Drupal Recipe
 
 1. **Understand the Recipe Structure**:
    - A Drupal recipe is primarily defined by a `recipe.yml` file, which specifies metadata, module/theme installations, configurations, and dependencies.
    - Optionally, it can include a `composer.json` file for managing dependencies, a `config` directory for configuration files, and a `content` directory for default content.
    - Recipes are declarative, meaning they describe the desired state (e.g., modules to install, configurations to apply) without including custom PHP code or hooks.
 
-#set-up-a-recipe-directory
+# Set up a Recipe Directory
 2. **Set Up a Recipe Directory**:
    - Create a directory for your recipe, typically in the `/recipes` folder of your Drupal project (e.g., `recipes/my_recipe`).
    - Alternatively, recipes can reside in the `/vendor` directory if managed by Composer, but `/recipes` is the emerging convention.
@@ -59,7 +60,7 @@ recipes/
   - content/: for default entity content, such as example nodes
   - my_recipe.install: for any procedural setup needed
 
-#create-a-custom-composer-package
+# Create a Custom Composer Package
 3. Create a Custom Composer Package
 Inside `recipes/my_recipe/composer.json` File (Optional):
    - If your recipe depends on contributed modules or themes, include a `composer.json` file to specify these dependencies.
@@ -85,7 +86,7 @@ Inside `recipes/my_recipe/composer.json` File (Optional):
   - drupal/default_content is required to handle content importing.
   - This ensures Composer downloads the required modules when the recipe is added.
 
-#create-the-recipeyml-file
+# Create the Recipeyml File
 We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our recipe. The key differences are the Functional role of `my_recipe.yml` defining the actions and configuration the recipe applies vs the Metadata role of `my_recipe.info.yml` for Drupal's system to recognize the recipe. Both files are typically required for a recipe to work properly. Without `my_recipe.yml`, the recipe has no instructions to execute. Without `my_recipe.info.yml`, Drupal won't recognize the recipe.
 
 4. **Create the `my_recipe.yml` File**:
@@ -133,7 +134,7 @@ dependencies:
   - drupal:views
 ```
 ---
-#how-to-handle-uuids-in-recipes
+# How to Handle UUIDs in- Recipes
 ### **How to Handle UUIDs in Recipes**
 
 <details>
@@ -188,7 +189,7 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
    - This tells Drupal to ignore UUID mismatches and overwrite the existing configuration. Use this cautiously, as it can lead to data loss if the existing configuration contains customizations not in the recipe.
 
 
-#add-default-content-optional
+# Add Default Content Optional
 8. **Add Default Content (Optional)**:
    - Create a `content` directory (e.g., `recipes/my_recipe/content`) to include default content in YAML format, leveraging the Default Content API.
    - For example, a file like `node/blog/1.yml` could define a sample blog post.
@@ -208,7 +209,7 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
    - The Default Content API will create this content when the recipe is applied.
 
 
-#version-control-the-recipe
+# Version Control the Recipe
 9. **Version Control the Recipe**:
    - Store your recipe in a version-controlled repository (e.g., Git) to make it reusable across projects. You can host it on a platform like GitHub or Drupal.org.
 
@@ -316,7 +317,7 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
 </details>
 
 ---
-#additional-notes-and-tips
+# Additional Notes and Tips
 ### **Additional Notes and Tips**
 
 - **UUIDs in Development**:
@@ -365,7 +366,7 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
   - Join the `#recipes` channel on Drupal Slack for community support.[](https://www.drupal.org/about/starshot/initiatives/recipes)
 
 ---
-#example-workflow
+# Example Workflow
 ### **Example Workflow**
 
 1. Create a recipe directory: `recipes/blog_feature`.
