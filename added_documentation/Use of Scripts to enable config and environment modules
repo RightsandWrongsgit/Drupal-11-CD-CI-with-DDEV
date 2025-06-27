@@ -36,6 +36,7 @@ The `enable-modules.sh` script remains unchanged from the previous response, as 
 MODULES=(
   admin_toolbar
   pathauto
+  
   # Add more modules here, one per line
   # Example: ctools
   # Example: token
