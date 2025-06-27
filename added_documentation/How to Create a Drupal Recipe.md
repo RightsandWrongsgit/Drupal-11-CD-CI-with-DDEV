@@ -1,14 +1,37 @@
-Creating and installing a Drupal recipe in Drupal 11 involves defining a set of configurations, modules, and content in a structured format and applying it to a Drupal site. Recipes are a powerful feature introduced in Drupal 10.3 and stabilized in Drupal 11, allowing site builders to automate module installation and configuration in a flexible, reusable way. Below is a step-by-step guide to creating and installing a Drupal recipe in Drupal 11.
+
 
 ---
+## Table of Contents
 
-### **Creating a Drupal Recipe**
+1. [Introduction](#introduction)
+2. [Recipe Structure](#recipe-structure)
+3. [Creating a Recipe](#creating-a-drupal-recipe)
+    - [Understand the Recipe Structure](#understand-the-recipe-structure)
+    - [Set Up a Recipe Directory](#set-up-a-recipe-directory)
+    - [Create a Custom Composer Package](#create-a-custom-composer-package)
+    - [Create the recipeyml File](#create-the-recipeyml-file)
+4. [Handling UUIDs](#how-to-handle-uuids-in-recipes)
+5. [Adding Default Content](#add-default-content-optional)
+6. [Version Control](#version-control-the-recipe)
+7. [Installing a Recipe](#installing-a-drupal-recipe)
+8. [Troubleshooting & Best Practices](#additional-notes-and-tips)
+9. [Example Workflow](#example-workflow)
+10. [References](#references)
+---
+#Introduction
+Creating and installing a Drupal recipe in Drupal 11 involves defining a set of configurations, modules, and content in a structured format and applying it to a Drupal site. Recipes are a powerful feature introduced in Drupal 10.3 and stabilized in Drupal 11, allowing site builders to automate module installation and configuration in a flexible, reusable way. Below is a step-by-step guide to creating and installing a Drupal recipe in Drupal 11.
+
+#recipe-structure
+
+
+#creating-a-drupal-recipe
 
 1. **Understand the Recipe Structure**:
    - A Drupal recipe is primarily defined by a `recipe.yml` file, which specifies metadata, module/theme installations, configurations, and dependencies.
    - Optionally, it can include a `composer.json` file for managing dependencies, a `config` directory for configuration files, and a `content` directory for default content.
    - Recipes are declarative, meaning they describe the desired state (e.g., modules to install, configurations to apply) without including custom PHP code or hooks.
 
+#set-up-a-recipe-directory
 2. **Set Up a Recipe Directory**:
    - Create a directory for your recipe, typically in the `/recipes` folder of your Drupal project (e.g., `recipes/my_recipe`).
    - Alternatively, recipes can reside in the `/vendor` directory if managed by Composer, but `/recipes` is the emerging convention.
@@ -34,6 +57,7 @@ recipes/
   - content/: for default entity content, such as example nodes
   - my_recipe.install: for any procedural setup needed
 
+#create-a-custom-composer-package
 3. Create a Custom Composer Package
 Inside `recipes/my_recipe/composer.json` File (Optional):
    - If your recipe depends on contributed modules or themes, include a `composer.json` file to specify these dependencies.
@@ -59,7 +83,7 @@ Inside `recipes/my_recipe/composer.json` File (Optional):
   - drupal/default_content is required to handle content importing.
   - This ensures Composer downloads the required modules when the recipe is added.
 
-
+#create-the-recipeyml-file
 4. **Create the `recipe.yml` File**:
    - This file defines the recipe’s metadata and instructions. At a minimum, it should include:
      - `name`: A human-readable name for the recipe.
@@ -95,7 +119,7 @@ Inside `recipes/my_recipe/composer.json` File (Optional):
    - This example installs the `node`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
 
 ---
-
+#how-to-handle-uuids-in-recipes
 ### **How to Handle UUIDs in Recipes**
 
 <details>
@@ -150,7 +174,7 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
    - This tells Drupal to ignore UUID mismatches and overwrite the existing configuration. Use this cautiously, as it can lead to data loss if the existing configuration contains customizations not in the recipe.
 
 
-
+#add-default-content-optional
 8. **Add Default Content (Optional)**:
    - Create a `content` directory (e.g., `recipes/my_recipe/content`) to include default content in YAML format, leveraging the Default Content API.
    - For example, a file like `node/blog/1.yml` could define a sample blog post.
@@ -170,12 +194,12 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
    - The Default Content API will create this content when the recipe is applied.
 
 
-
+#version-control-the-recipe
 9. **Version Control the Recipe**:
    - Store your recipe in a version-controlled repository (e.g., Git) to make it reusable across projects. You can host it on a platform like GitHub or Drupal.org.
 
 ---
-
+#installing-a-drupal-recipe
 ### **Installing a Drupal Recipe**
 
 1. **Prerequisites**:
@@ -278,7 +302,7 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
 </details>
 
 ---
-
+#additional-notes-and-tips
 ### **Additional Notes and Tips**
 
 - **UUIDs in Development**:
@@ -327,7 +351,7 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
   - Join the `#recipes` channel on Drupal Slack for community support.[](https://www.drupal.org/about/starshot/initiatives/recipes)
 
 ---
-
+#example-workflow
 ### **Example Workflow**
 
 1. Create a recipe directory: `recipes/blog_feature`.
@@ -345,7 +369,7 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
 5. Verify that the blog content type and sample post are created in the Drupal admin interface.
 
 ---
-
+#references
 This process leverages Drupal 11’s Recipe API, which is stable and functional as of version 11.1. For further details, consult the official Drupal Recipes documentation on Drupal.org or the Distributions and Recipes Initiative page.[](https://opensenselabs.com/blog/drupal-recipe-module)[](https://www.drupal.org/docs/extending-drupal/drupal-recipes/how-to-download-and-apply-drupal-recipes)[](https://www.drupal.org/project/distributions_recipes)
 
 
