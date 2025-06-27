@@ -152,7 +152,7 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
 
 
 8. **Add Default Content (Optional)**:
-   - Create a `content` directory (e.g., `recipes/my_custom_recipe/content`) to include default content in YAML format, leveraging the Default Content API.
+   - Create a `content` directory (e.g., `recipes/my_recipe/content`) to include default content in YAML format, leveraging the Default Content API.
    - For example, a file like `node/blog/1.yml` could define a sample blog post.
    - For content in the `content` directory (e.g., `node/blog/1.yml`), UUIDs are also included to uniquely identify entities. Similar to configuration, you can omit UUIDs in content YAML files, and Drupal’s Default Content API will generate new ones on import.
    - Example of a content file without a UUID:
