@@ -10,7 +10,7 @@ Creating and installing a Drupal recipe in Drupal 11 involves defining a set of 
    - Recipes are declarative, meaning they describe the desired state (e.g., modules to install, configurations to apply) without including custom PHP code or hooks.
 
 2. **Set Up a Recipe Directory**:
-   - Create a directory for your recipe, typically in the `/recipes` folder of your Drupal project (e.g., `recipes/my_custom_recipe`).
+   - Create a directory for your recipe, typically in the `/recipes` folder of your Drupal project (e.g., `recipes/my_recipe`).
    - Alternatively, recipes can reside in the `/vendor` directory if managed by Composer, but `/recipes` is the emerging convention.
 
 ```
