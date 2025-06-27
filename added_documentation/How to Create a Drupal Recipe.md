@@ -24,8 +24,17 @@ Creating and installing a Drupal recipe in Drupal 11 involves defining a set of 
 
 # Recipe Structure
 
+The key items to have a successful recipe are to confirm or establish the `/recipes` directory off the project root and to prepare the two required YML files; `my_recipe.yml` and `my_recipe.info.yml`.  Of course you will replace the "my_recipe" part with whatever you want to call yours.  Since recipes can also set or change configuration characteristic of a site, you can include new or edited version of the files that appear in your `/config/sync` directory when you do a `drush config export` or `drush cex` or otherwise export the configuration of your site's database into yml file form.  And, recipes can also bring content into a Drupal site where you believe that would be helpful to better understand what the recipe provides by offering example material. 
 
 # Creating a Drupal Recipe
+
+The steps that follow will show you how you can create a Drupal recipe.  First there is a review of the key parts of its structure followed by an example directory layout you can use.  That is followed by how you can create a composer.json file at the Recipe level in case you need to bring additions to what your main site install brings.  In the [Trouble Shooting and Best Practices](#additional-notes-and-tips) section at the end, there is also a review of how to "unpack" recipes to fold them or parts of them into your main site Composer.json file.  
+
+The most important part to understand are the YML files and instruct the recipe and another that describes it to your Drupal site foundation so it connects properly.  See [Create the recipe YML File](#create-the-recipe-yml-files).
+
+The sections about adding content and how it leverages configuration files help get more of the full depth of what a recipe can do.  Since configuration on an existing site is found in YML files, on an existing site they have UUIDs that could conflict, so there is a discussion on [Handling UUIDs](#how-to-handle-uuids-in-recipes).
+
+Finally there is the fact you should version control your recipe and how you go about [Installing a Recipe](#installing-a-drupal-recipe).
 
 # Understand the Recipe Structure:
 
