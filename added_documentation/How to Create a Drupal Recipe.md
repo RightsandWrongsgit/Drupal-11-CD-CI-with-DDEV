@@ -1,5 +1,5 @@
 
-<a><h1>How to Creat a Drupal Recipe<H1><a>
+<a><h1>How to Create a Drupal Recipe<H1><a>
 ---
 ## Table of Contents
 
