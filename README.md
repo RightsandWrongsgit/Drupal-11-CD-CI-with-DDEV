@@ -538,6 +538,9 @@ Of course there are a whole lot more recipes than what they ever show you in tha
 
 Without going over the deep end, there are some who might send a sour tone about recipes.  The worry with them is they potentially install a bunch of stuff you don't need and won't use at the same time they offer the good stuff.  Well with recipes there has been progress made to address that issue by allowing you to "unpack' the modules underlying the recipe and just put those you want to retain in your system's `composer.json`. Then you can remove the modules you find are unneccesary overhead with `composer remove drupal/MODULENAME`. For more on all this checkout the  [Recipe Unpack](https://www.drupal.org/node/3522189) project discussion.
 
+## Learn about how recipes work or build your own
+
+[How to Create a Drupal Recipe](added_documentation/How%20to%20Create%20a%20Drupal%20Recipe.md)
 
 </details>
 
