@@ -218,6 +218,7 @@ This will:
 
 This behavior is part of Drupal's recipe system, introduced in Drupal 10.2 and later, to streamline configuration and module management. If you need further clarification or have a specific use case, let me know!
 </details>
+
 ---
 
 <a><h3>You create the `my_recipe.info.yml` file like this:<h3><a>
