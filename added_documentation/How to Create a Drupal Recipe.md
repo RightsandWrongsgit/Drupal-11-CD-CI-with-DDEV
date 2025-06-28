@@ -42,7 +42,8 @@ The sections about adding content and how it leverages configuration files help 
 
 Finally there is the fact you should version control your recipe and how you go about [Installing a Recipe](#installing-a-drupal-recipe).
 
-[⬆️ Back to Top](#top)
+
+---
 
 <details>
 <summary>**Example Workflow** (Click to Open)<summary>
@@ -74,6 +75,8 @@ Finally there is the fact you should version control your recipe and how you go 
    - If your recipe is meant for broad reuse across multiple sites, omitting UUIDs is critical to ensure it applies cleanly to any Drupal 11 site.
    - If the recipe is for a specific site or distribution, you might retain UUIDs to enforce consistency, but document this clearly and use `--force` when applying.
 </details>
+
+---
 
 [⬆️ Back to Top](#top)
 
@@ -405,7 +408,7 @@ Alternatively you can ...
      ```
    - This copies the recipe’s dependencies into your project’s `composer.json` and `composer.lock` files.
 
-
+---
 
 <details>
 <summary> **What Happens When a Recipe Is Applied** (Click to Open)</summary>
@@ -419,6 +422,8 @@ When you run `php core/scripts/drupal recipe`, Drupal:
 If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID), the import will fail unless `--force` is used or the UUID is omitted.
 
 </details>
+
+---
 
 [⬆️ Back to Top](#top)
 
