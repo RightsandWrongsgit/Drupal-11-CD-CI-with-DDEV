@@ -126,7 +126,7 @@ Inside `recipes/my_recipe/composer.json` File (Optional):
 ```composer.json
 {
   "name": "myvendor/my-recipe",
-  "description": "A Drupal recipe for blog functionality with starter content",
+  "description": "A Drupal recipe for article functionality with starter content",
   "type": "drupal-recipe",
   "require": {
     "drupal/node": "^1.0",
@@ -163,7 +163,7 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
    Example `my_recipe.yml` for a simple blog recipe:
    ```yaml
    name: 'Article Feature'
-   description: 'Sets up a article with a content type and sample content.'
+   description: 'Sets up an article content type with sample content.'
    type: 'Feature'
    recipes:
      - core/recipes/administrator_role
@@ -221,7 +221,7 @@ This will:
 
 ---
 
-<a><h3>You create the `my_recipe.info.yml` file like this:<h3><a>
+### You create the `my_recipe.info.yml` file like this:<
 ```yml
 name: 'My Recipe'
 type: recipe
@@ -266,7 +266,7 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
          - menu_ui
      name: Article
      type: article
-     description: 'A article post content type.'
+     description: 'An article post content type.'
      help: ''
      new_revision: true
      display_submitted: true
@@ -395,7 +395,7 @@ Alternatively you can ...
      ```
 
 5. **Verify the Application**:
-   - Check your Drupal site to confirm that the modules, configurations, and content specified in the recipe have been applied. For example, in the blog recipe above, verify that the blog content type exists and sample content is visible.
+   - Check your Drupal site to confirm that the modules, configurations, and content specified in the recipe have been applied. For example, in the article recipe used in the examples here, verify that the article content type exists and sample content is visible.
 
 6. **Manage Dependencies (Optional)**:
    - To ensure recipe dependencies are added to your project’s `composer.json` for easier maintenance, use the Drupal Recipe Unpack plugin:
