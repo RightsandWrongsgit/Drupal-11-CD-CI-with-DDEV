@@ -121,6 +121,7 @@ recipes/
 
 Inside `recipes/my_recipe/composer.json` File (Optional):
    - If your recipe depends on contributed modules or themes, include a `composer.json` file to specify these dependencies.
+   - This is noted as OPTIONAL because the 'install:' Key element of your `recipe.yml` file also has the ability to [install and enable Drupal modules as outlined here.](##install-and-enable-modules)
 ```composer.json
 {
   "name": "myvendor/my-recipe",
@@ -166,7 +167,7 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
    recipes:
      - core/recipes/administrator_role
    install:
-     - node
+     - views
      - pathauto
      - metatag
    config:
@@ -181,7 +182,39 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
            - 'create blog content'
            - 'edit own blog content'
    ```
-   - This example installs the `node`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
+
+## Install AND Enable modules:
+   - This example installs the `views`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
+
+<details>
+<summary>How does "install:" work in that yml file? (Click to Open)</summary>
+
+In a Drupal recipe, when the `recipe.yml` file includes a list of Drupal modules under the `install` key, it **both installs and enables** the modules. Here's how it works:
+
+- **Install**: The `install` key in the `recipe.yml` file specifies modules (or themes, or other dependencies) that need to be installed. This is equivalent to running `composer require` to add the module to the Drupal project, ensuring the module's code is downloaded and available in the codebase.
+- **Enable**: After installing the modules, Drupal recipes automatically enable the listed modules, similar to running `drush en module_name` or using the Drupal UI to enable them. This step activates the modules so they are functional in the Drupal site.
+
+For example, if your `recipe.yml` contains:
+
+```yaml
+install:
+  - views
+  - pathauto
+  - metatag
+```
+
+This will:
+1. Download and install the Pathauto and Metatag contributed modules (like `composer require drupal/views drupal/pathauto`). While the Views module is already installed in Drupal Core.
+2. Importantly is will Enable these modules (like `drush en node views pathauto`).
+
+### Key Points:
+- The `install` key handles both the installation (adding the module to the codebase) and enabling (activating the module) in one step.
+- If the module is already installed in the codebase (e.g., via Composer), the recipe will only ensure it is enabled.
+- If you only want to install a module without enabling it, you would typically manage that outside of the recipe (e.g., directly with Composer), as recipes are designed to both install and enable by default.
+
+This behavior is part of Drupal's recipe system, introduced in Drupal 10.2 and later, to streamline configuration and module management. If you need further clarification or have a specific use case, let me know!
+
+</details>
 
 You create the `my_recipe.info.yml` file like this:
 ```yml
