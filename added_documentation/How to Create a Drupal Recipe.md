@@ -26,8 +26,6 @@ Creating and installing a Drupal recipe in Drupal 11 involves defining a set of 
 [⬆️ Back to Top](#top)
 
 
-...
-
 # Recipe Structure
 
 The key items to have a successful recipe are to confirm or establish the `/recipes` directory off the project root and to prepare the two required YML files; `my_recipe.yml` and `my_recipe.info.yml`.  Of course you will replace the "my_recipe" part with whatever you want to call yours.  Since recipes can also set or change configuration characteristic of a site, you can include new or edited version of the files that appear in your `/config/sync` directory when you do a `drush config export` or `drush cex` or otherwise export the configuration of your site's database into yml file form.  And, recipes can also bring content into a Drupal site where you believe that would be helpful to better understand what the recipe provides by offering example material. 
