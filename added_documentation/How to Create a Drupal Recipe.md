@@ -121,7 +121,7 @@ recipes/
 
 Inside `recipes/my_recipe/composer.json` File (Optional):
    - If your recipe depends on contributed modules or themes, include a `composer.json` file to specify these dependencies.
-   - This is noted as OPTIONAL because the 'install:' Key element of your `recipe.yml` file also has the ability to [install and enable Drupal modules as outlined here.](##install-and-enable-modules)
+   - This is noted as OPTIONAL because the 'install:' Key element of your `recipe.yml` file also has the ability to [install and enable Drupal modules as outlined here.](#install-and-enable-modules)
 ```composer.json
 {
   "name": "myvendor/my-recipe",
@@ -183,7 +183,7 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
            - 'edit own blog content'
    ```
 
-## Install AND Enable modules:
+# Install AND Enable modules:
    - This example installs the `views`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
 
 <details>
