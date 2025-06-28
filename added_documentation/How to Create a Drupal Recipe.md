@@ -13,7 +13,7 @@
     - [Create a Custom Composer Package](#create-a-custom-composer-package)
     - [Create the recipe YML Files](#create-the-recipe-yml-files)
 4. [Handling UUIDs](#how-to-handle-uuids-in-recipes)
-5. [Adding Default Content](#add-default-content-optional)
+5. [Add Default Content](#add-default-content-optional)
 6. [Version Control](#version-control-the-recipe)
 7. [Installing a Recipe](#installing-a-drupal-recipe)
 8. [Troubleshooting & Best Practices](#additional-notes-and-tips)
@@ -112,7 +112,7 @@ recipes/
 
 ```
 
-  - config/install/: for standard Drupal configuration (content types, views, etc.)
+  - config/install/ for standard Drupal configuration (content types, views, etc.)
   - content/: for default entity content, such as example nodes
   - my_recipe.install: for any procedural setup needed
 
@@ -160,8 +160,8 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
      - `config`: Specifies configurations to import or actions to perform.
      - `recipes`: Lists dependent recipes, if any.
 
-   Example `my_recipe.yml` for a simple blog recipe:
-   ```yaml
+   Example `my_recipe.yml` for a simple article recipe:
+   ```yml
    name: 'Article Feature'
    description: 'Sets up an article content type with sample content.'
    type: 'Feature'
@@ -184,7 +184,7 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
            - 'edit own article content'
    ```
 
-   - This example installs the `views`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
+   - This example installs the `views`, `pathauto`, and `metatag` modules, imports a article content type configuration, and grants permissions to the administrator role.
 
 ---
 
@@ -221,11 +221,11 @@ This will:
 
 ---
 
-### You create the `my_recipe.info.yml` file like this:<
+### You create the `my_recipe.info.yml` file like this:
 ```yml
 name: 'My Recipe'
 type: recipe
-description: 'A recipe to set up a basic blog feature.'
+description: 'A recipe to set up a basic article feature.'
 core_version_requirement: ^11
 dependencies:
   - drupal:views
@@ -294,7 +294,7 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
 # Add Default Content (Optional)
 
    - Create a `content` directory (e.g., `recipes/my_recipe/content`) to include default content in YML format, leveraging the Default Content API.
-   - For example, a file like `node/article/default_content.my-first-article.yml` could define a sample blog post.
+   - For example, a file like `node/article/default_content.my-first-article.yml` could define a sample article post.
    - For content in the `content` directory (e.g., `node/article/default_content.my-first-article.yml`), UUIDs are also included to uniquely identify entities. Similar to configuration, you can omit UUIDs in content YML files, and Drupal’s Default Content API will generate new ones on import.
    - Example of a content file without a UUID:
 
@@ -419,7 +419,7 @@ When you run `php core/scripts/drupal recipe`, Drupal:
 3. Imports content from the `content` directory using the Default Content API, similarly handling UUIDs.
 4. Executes any `actions` defined in the `recipe.yml` (e.g., granting permissions).
 
-If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID), the import will fail unless `--force` is used or the UUID is omitted.
+If a UUID conflict occurs (e.g., a `node.type.article` exists with a different UUID), the import will fail unless `--force` is used or the UUID is omitted.
 
 </details>
 
