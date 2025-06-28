@@ -98,7 +98,6 @@ recipes/
 └── my_recipe/
     ├── composer.json
     ├── my_recipe.info.yml
-    ├── my_recipe.install
     ├── config/
     │   └── install/
     │       └── (configuration YML files)
@@ -114,7 +113,6 @@ recipes/
 
   - config/install/ for standard Drupal configuration (content types, views, etc.)
   - content/: for default entity content, such as example nodes
-  - my_recipe.install: for any procedural setup needed
 
 [⬆️ Back to Top](#top)
 
@@ -184,7 +182,7 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
            - 'edit own article content'
    ```
 
-   - This example installs the `views`, `pathauto`, and `metatag` modules, imports a article content type configuration, and grants permissions to the administrator role.
+   - This example installs the `views`, `pathauto`, and `metatag` modules, imports an article content type configuration, and grants permissions to the administrator role.
 
 ---
 
@@ -440,8 +438,8 @@ If a UUID conflict occurs (e.g., a `node.type.article` exists with a different U
     - Use `--force` to overwrite the existing configuration.
     - Manually delete the existing content type before applying the recipe (`drush config:delete node.type.article`).
 
-- **Recipe Testing**:
-  - Test your recipe on a clean Drupal 11 installation to confirm it applies without errors. Use tools like DDEV or Lando for quick setup:
+**Test on a Fresh Site**:
+   - When developing a recipe, test it on a fresh Drupal 11 installation to ensure it applies cleanly without UUID conflicts. A fresh site won’t have pre-existing configurations, so Drupal will assign new UUIDs to imported configurations.  Use tools like DDEV or Lando for quick setup:
     ```bash
     ddev start
     ddev drush site:install minimal
@@ -451,6 +449,18 @@ If a UUID conflict occurs (e.g., a `node.type.article` exists with a different U
 - **Drupal Recipe Limitations**:
   - Recipes are designed for initial setup and don’t handle ongoing configuration updates. If you need to update configurations later, consider using configuration management (`drush config:import`) and remember to also use the Configuration Split settings to uniquely leverage certain capabilities only appropriate to a given environment (e.g. testing in 'staged', analytics and mail only in production 'main', etc.).
 
+**Leverage Configuration Dependencies**:
+   - Ensure that your recipe’s `recipe.yml` specifies all necessary dependencies under the `dependencies` key in configuration files or the `install` section. This helps Drupal resolve dependencies correctly during import, reducing the risk of conflicts.
+   - Example from the `recipe.yml`:
+     ```yml
+     install:
+       - node
+       - pathauto
+     config:
+       import:
+         node:
+           - node.type.article
+     ```
 
 - **Use the Recipe Generator**:
   - The `recipe_generator` Drush add-on simplifies recipe creation by generating `my_recipe.yml` and `composer.json` files interactively:
@@ -458,10 +468,10 @@ If a UUID conflict occurs (e.g., a `node.type.article` exists with a different U
     composer require drupal/recipe_generator:^2.0
     drush recipe-generate
     ```
-    This creates a recipe in `recipes/custom` based on your input.[](https://www.drupal.org/project/recipe_generator)
+    This creates a recipe in `recipes/custom` based on your input.[More info.](https://www.drupal.org/project/recipe_generator)
 
 - **Composability**:
-  - Recipes can depend on other recipes, allowing you to build modular, reusable configurations. For example, a “Company Site” recipe might include a “Blog” recipe and an “SEO” recipe.
+  - Recipes can depend on other recipes, allowing you to build modular, reusable configurations. For example, a “Company Site” recipe might include a “Article” recipe and an “SEO” recipe.
 
 - **Best Practices**:
   - Keep recipes atomic and focused on specific functionality to maximize reusability.
@@ -480,27 +490,11 @@ If a UUID conflict occurs (e.g., a `node.type.article` exists with a different U
 
 ---
 # References
-This process leverages Drupal 11’s Recipe API, which is stable and functional as of version 11.1. For further details, consult the official Drupal Recipes documentation on Drupal.org or the Distributions and Recipes Initiative page.[](https://opensenselabs.com/blog/drupal-recipe-module)[](https://www.drupal.org/docs/extending-drupal/drupal-recipes/how-to-download-and-apply-drupal-recipes)[](https://www.drupal.org/project/distributions_recipes)
+This process leverages Drupal 11’s Recipe API, which is stable and functional as of version 11.1. For further details, consult the official Drupal Recipes documentation on Drupal.org or the Distributions and Recipes Initiative page.
+- [OpenSenseLabs: Drupal Recipe Module](https://opensenselabs.com/blog/drupal-recipe-module)
+- [How to Download and Apply Drupal Recipes](https://www.drupal.org/docs/extending-drupal/drupal-recipes/how-to-download-and-apply-drupal-recipes)
+- [Drupal Distributions and Recipes](https://www.drupal.org/project/distributions_recipes)
 
 [Back to Top](#top)
 
 
-4. **Test on a Fresh Site**:
-   - When developing a recipe, test it on a fresh Drupal 11 installation to ensure it applies cleanly without UUID conflicts. A fresh site won’t have pre-existing configurations, so Drupal will assign new UUIDs to imported configurations.
-   - Example command to create a fresh site:
-     ```bash
-     composer create-project drupal/recommended-project:11.x my_site
-     ```
-
-5. **Leverage Configuration Dependencies**:
-   - Ensure that your recipe’s `recipe.yml` specifies all necessary dependencies under the `dependencies` key in configuration files or the `install` section. This helps Drupal resolve dependencies correctly during import, reducing the risk of conflicts.
-   - Example from the `recipe.yml`:
-     ```yml
-     install:
-       - node
-       - pathauto
-     config:
-       import:
-         node:
-           - node.type.article
-     ```
