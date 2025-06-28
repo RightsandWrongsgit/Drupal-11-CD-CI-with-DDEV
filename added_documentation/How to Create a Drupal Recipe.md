@@ -382,8 +382,6 @@ When you run `php core/scripts/drupal recipe`, Drupal:
 
 If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID), the import will fail unless `--force` is used or the UUID is omitted.
 
-[⬆️ Back to Top](#top)
-
 </details>
 
 [⬆️ Back to Top](#top)
