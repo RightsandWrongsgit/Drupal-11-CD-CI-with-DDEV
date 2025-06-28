@@ -209,14 +209,13 @@ install:
 
 This will:
 1. Download and install the Pathauto and Metatag contributed modules (like `composer require drupal/views drupal/pathauto`). While the Views module is already installed in Drupal Core.
-2. Importantly is will Enable these modules (like `drush en node views pathauto`).
+2. Importantly it will Enable these modules (like doing  `drush en node views pathauto`).
 
 ### Key Points:
 - The `install` key handles both the installation (adding the module to the codebase) and enabling (activating the module) in one step.
 - If the module is already installed in the codebase (e.g., via Composer), the recipe will only ensure it is enabled.
 - If you only want to install a module without enabling it, you would typically manage that outside of the recipe (e.g., directly with Composer), as recipes are designed to both install and enable by default.
 
-This behavior is part of Drupal's recipe system, introduced in Drupal 10.2 and later, to streamline configuration and module management. If you need further clarification or have a specific use case, let me know!
 </details>
 
 ---
