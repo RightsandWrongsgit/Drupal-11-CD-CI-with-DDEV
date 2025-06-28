@@ -46,7 +46,7 @@ Finally there is the fact you should version control your recipe and how you go 
 ---
 
 <details>
-<summary>**Example Workflow** (Click to Open)<summary>
+<summary>**Example Workflow** (Click to Open)</summary>
 
 1. Create a recipe directory: `recipes/blog_feature`.
 2. Add `recipe.yml`, `config/node.type.blog.yml`, and `content/node/blog/1.yml` as shown above.
