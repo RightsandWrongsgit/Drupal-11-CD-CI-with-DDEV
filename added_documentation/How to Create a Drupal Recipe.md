@@ -29,7 +29,7 @@ The key items to have a successful recipe are to confirm or establish the `/reci
 
 The steps that follow will show you how you can create a Drupal recipe.  First there is a review of the key parts of its structure followed by an example directory layout you can use.  That is followed by how you can create a composer.json file at the Recipe level in case you need to bring additions to what your main site install brings.  In the [Trouble Shooting and Best Practices](#additional-notes-and-tips) section at the end, there is also a review of how to "unpack" recipes to fold them or parts of them into your main site Composer.json file.  
 
-The most important part to understand are the YML files and instruct the recipe and another that describes it to your Drupal site foundation so it connects properly.  See [Create the recipe YML File](#create-the-recipe-yml-files).
+The most important part to understand are the YML files.  One instructs what the recipe is to do and the other that describes the recipe to your Drupal site so that it connects to your site properly.  See [Create the recipe YML File](#create-the-recipe-yml-files).
 
 The sections about adding content and how it leverages configuration files help get more of the full depth of what a recipe can do.  Since configuration on an existing site is found in YML files, on an existing site they have UUIDs that could conflict, so there is a discussion on [Handling UUIDs](#how-to-handle-uuids-in-recipes).
 
