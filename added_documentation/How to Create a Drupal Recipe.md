@@ -2,8 +2,6 @@
 <a><h1>How to Create a Drupal Recipe<H1><a>
 ---
 <a name="top"></a>
-## Table of Contents
-...
 
 ## Table of Contents
 
