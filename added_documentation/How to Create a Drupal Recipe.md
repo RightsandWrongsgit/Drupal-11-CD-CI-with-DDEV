@@ -479,12 +479,12 @@ If a UUID conflict occurs (e.g., a `node.type.article` exists with a different U
   - Test recipes on a [minimal install profile to avoid configuration conflicts.](https://project.pages.drupalcode.org/distributions_recipes/getting_started.html)
 
 - **Limitations**:
-  - Recipes are applied once and do not remain active, so subsequent updates must be managed manually or via additional recipes.[](https://digitalprojex.com/en/blog/recipes-new-concept-drupal-10)
-  - They cannot include custom PHP code, hooks, or plugins; use modules for such functionality.[](https://www.specbee.com/blogs/cooking-irresistible-drupal-websites-with-recipes)
+  - Recipes are applied once and do not remain active, so subsequent updates [must be managed manually or via additional recipes.](https://digitalprojex.com/en/blog/recipes-new-concept-drupal-10)
+  - They cannot include custom PHP code, hooks, or plugins; [use modules for such functionality.](https://www.specbee.com/blogs/cooking-irresistible-drupal-websites-with-recipes)
 
 - **Community Resources**:
-  - Explore existing recipes on Drupal.org or repositories like `kevinquillen/drupal-base` or `kanopi/saplings` for inspiration.[](https://www.drupal.org/docs/extending-drupal/contributed-modules/contributed-module-documentation/distributions-and-recipes-initiative/recipes-cookbook)
-  - Join the `#recipes` channel on Drupal Slack for community support.[](https://www.drupal.org/about/starshot/initiatives/recipes)
+  - Explore existing recipes on Drupal.org or repositories like `kevinquillen/drupal-base` or `kanopi/saplings` for inspiration.  [Find more here](https://www.drupal.org/docs/extending-drupal/contributed-modules/contributed-module-documentation/distributions-and-recipes-initiative/recipes-cookbook)
+  - Join the `recipes` channel on [Drupal Slack for community support.](https://www.drupal.org/about/starshot/initiatives/recipes)
 
 [⬆️ Back to Top](#top)
 
