@@ -187,7 +187,7 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
    - This example installs the `views`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
 
 <details>
-<summary>How does "install:" work in that yml file? (Click to Open)</summary>
+<summary>   MORE on How "install:" work in that yml file? (Click to Open)</summary>
 
 In a Drupal recipe, when the `recipe.yml` file includes a list of Drupal modules under the `install` key, it **both installs and enables** the modules. Here's how it works:
 
