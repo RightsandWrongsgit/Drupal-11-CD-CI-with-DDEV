@@ -468,15 +468,15 @@ If a UUID conflict occurs (e.g., a `node.type.article` exists with a different U
     composer require drupal/recipe_generator:^2.0
     drush recipe-generate
     ```
-    This creates a recipe in `recipes/custom` based on your input.[More info.](https://www.drupal.org/project/recipe_generator)
+    This creates a recipe in `recipes/custom` based on your input. [More info](https://www.drupal.org/project/recipe_generator)
 
 - **Composability**:
-  - Recipes can depend on other recipes, allowing you to build modular, reusable configurations. For example, a “Company Site” recipe might include a “Article” recipe and an “SEO” recipe.
+  - Recipes can depend on other recipes, allowing you to build modular, reusable configurations. For example, a “Company Site” recipe might include an “Article” recipe and an “SEO” recipe.
 
 - **Best Practices**:
   - Keep recipes atomic and focused on specific functionality to maximize reusability.
-  - Avoid including theme-specific configurations in widely shared recipes, as they may not apply to all sites.[](https://project.pages.drupalcode.org/distributions_recipes/recipe.html)
-  - Test recipes on a minimal install profile to avoid configuration conflicts.[](https://project.pages.drupalcode.org/distributions_recipes/getting_started.html)
+  - Avoid including theme-specific configurations in [widely shared recipes, as they may not apply to all sites.](https://project.pages.drupalcode.org/distributions_recipes/recipe.html)
+  - Test recipes on a [minimal install profile to avoid configuration conflicts.](https://project.pages.drupalcode.org/distributions_recipes/getting_started.html)
 
 - **Limitations**:
   - Recipes are applied once and do not remain active, so subsequent updates must be managed manually or via additional recipes.[](https://digitalprojex.com/en/blog/recipes-new-concept-drupal-10)
@@ -495,6 +495,6 @@ This process leverages Drupal 11’s Recipe API, which is stable and functional 
 - [How to Download and Apply Drupal Recipes](https://www.drupal.org/docs/extending-drupal/drupal-recipes/how-to-download-and-apply-drupal-recipes)
 - [Drupal Distributions and Recipes](https://www.drupal.org/project/distributions_recipes)
 
-[Back to Top](#top)
+[⬆️ Back to Top](#top)
 
 
