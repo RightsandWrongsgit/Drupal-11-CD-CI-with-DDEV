@@ -147,7 +147,7 @@ Inside `recipes/my_recipe/composer.json` File (Optional):
 [⬆️ Back to Top](#top)
 
 # Create the Recipe YML Files
-
+---
 We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our recipe. The key differences are the Functional role of `my_recipe.yml` defining the actions and configuration the recipe applies vs the Metadata role of `my_recipe.info.yml` for Drupal's system to recognize the recipe. Both files are typically required for a recipe to work properly. Without `my_recipe.yml`, the recipe has no instructions to execute. Without `my_recipe.info.yml`, Drupal won't recognize the recipe.
 
 4. **Create the `my_recipe.yml` File**:
@@ -185,7 +185,6 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
 
 
    - This example installs the `views`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
-
 ---
 
 <details>
