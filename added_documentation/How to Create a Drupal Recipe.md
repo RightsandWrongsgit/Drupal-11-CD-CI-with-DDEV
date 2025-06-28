@@ -381,9 +381,10 @@ When you run `php core/scripts/drupal recipe`, Drupal:
 4. Executes any `actions` defined in the `recipe.yml` (e.g., granting permissions).
 
 If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID), the import will fail unless `--force` is used or the UUID is omitted.
-</details>
 
 [⬆️ Back to Top](#top)
+
+</details>
 
 ---
 # Additional Notes and Tips
