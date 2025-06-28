@@ -160,10 +160,10 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
      - `config`: Specifies configurations to import or actions to perform.
      - `recipes`: Lists dependent recipes, if any.
 
-   Example `recipe.yml` for a simple blog recipe:
+   Example `my_recipe.yml` for a simple blog recipe:
    ```yaml
-   name: 'Blog Feature'
-   description: 'Sets up a blog with a content type and sample content.'
+   name: 'Article Feature'
+   description: 'Sets up a article with a content type and sample content.'
    type: 'Feature'
    recipes:
      - core/recipes/administrator_role
@@ -174,14 +174,14 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
    config:
      import:
        node:
-         - node.type.blog
+         - node.type.article
        pathauto:
-         - pathauto.pattern.blog
+         - pathauto.pattern.article
      actions:
        user.role.administrator:
          grantPermissions:
-           - 'create blog content'
-           - 'edit own blog content'
+           - 'create article content'
+           - 'edit own article content'
    ```
 
    - This example installs the `views`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
@@ -243,7 +243,7 @@ dependencies:
 
 - **UUIDs in Drupal Configuration**:
   - Drupal’s configuration management system assigns Universally Unique Identifiers (UUIDs) to configuration entities (e.g., content types, fields, or roles) to track them across environments.
-  - When a recipe includes configuration files (e.g., `node.type.blog.yml`) with a UUID, applying that recipe to a new site could conflict if the site’s database already contains a configuration entity with the same UUID or if the configuration name (e.g., `node.type.blog`) already exists but with a different UUID.
+  - When a recipe includes configuration files (e.g., `node.type.article.yml`) with a UUID, applying that recipe to a new site could conflict if the site’s database already contains a configuration entity with the same UUID or if the configuration name (e.g., `node.type.article`) already exists but with a different UUID.
 
 - **Potential Issues**:
   - If the UUID in the recipe’s configuration file matches an existing UUID in the site’s database but the configuration differs, Drupal may throw an error or overwrite the existing configuration.
@@ -256,17 +256,17 @@ dependencies:
 To avoid UUID-related conflicts when creating and installing a Drupal recipe in Drupal 11, follow these best practices:
 
 5. **Omit UUIDs in any (Optional) Recipe Configuration Files**:
-   - When crafting configuration files for a recipe (e.g., `config/node.type.blog.yml`), **remove the `uuid` key** from the YML files. Drupal’s configuration import system will generate a new UUID automatically when the recipe is applied to a site.
-   - Example of a `node.type.blog.yml` without a UUID:
+   - When crafting configuration files for a recipe (e.g., `config/node.type.article.yml`), **remove the `uuid` key** from the YML files. Drupal’s configuration import system will generate a new UUID automatically when the recipe is applied to a site.
+   - Example of a `node.type.article.yml` without a UUID:
      ```yml
      langcode: en
      status: true
      dependencies:
        module:
          - menu_ui
-     name: Blog
-     type: blog
-     description: 'A blog post content type.'
+     name: Article
+     type: article
+     description: 'A article post content type.'
      help: ''
      new_revision: true
      display_submitted: true
@@ -276,11 +276,11 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
        parent: 'main:'
      ```
    - By omitting the UUID, Drupal creates a new one specific to the target site, preventing conflicts.
-   - Place these files in the `config` directory, and reference them in the `recipe.yml` under `config.import`.
+   - Place these files in the `config` directory, and reference them in the `my_recipe.yml` under `config.import`.
 
 6. **Ensure Configuration Names Are Unique**:
-   - Make sure the configuration names (e.g., `node.type.blog`) used in the recipe are unique or intended to override existing configurations. If a content type like `blog` already exists on the target site, the recipe’s configuration will replace it, which may or may not be desired.
-   - To avoid unintended overwrites, consider prefixing configuration names (e.g., `node.type.mycompany_blog`) or checking for existing configurations before applying the recipe.
+   - Make sure the configuration names (e.g., `node.type.article`) used in the recipe are unique or intended to override existing configurations. If a content type like `article` already exists on the target site, the recipe’s configuration will replace it, which may or may not be desired.
+   - To avoid unintended overwrites, consider prefixing configuration names (e.g., `node.type.mycompany_article`) or checking for existing configurations before applying the recipe.
 
 7. **Use the `force` Option for Overwrites**:
    - If you intentionally want to overwrite existing configurations (e.g., to update an existing content type), you can use the `--force` option when applying the recipe:
@@ -294,16 +294,16 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
 # Add Default Content (Optional)
 
    - Create a `content` directory (e.g., `recipes/my_recipe/content`) to include default content in YML format, leveraging the Default Content API.
-   - For example, a file like `node/blog/1.yml` could define a sample blog post.
-   - For content in the `content` directory (e.g., `node/blog/1.yml`), UUIDs are also included to uniquely identify entities. Similar to configuration, you can omit UUIDs in content YML files, and Drupal’s Default Content API will generate new ones on import.
+   - For example, a file like `node/article/default_content.my-first-article.yml` could define a sample blog post.
+   - For content in the `content` directory (e.g., `node/article/default_content.my-first-article.yml`), UUIDs are also included to uniquely identify entities. Similar to configuration, you can omit UUIDs in content YML files, and Drupal’s Default Content API will generate new ones on import.
    - Example of a content file without a UUID:
 
      ```yml
      langcode: en
-     type: blog
-     title: 'Sample Blog Post'
+     type: article
+     title: 'Sample Article Post'
      body:
-       value: 'This is a sample blog post created by the recipe.'
+       value: 'This is a sample article post created by the recipe.'
        format: basic_html
      status: 1
      ```
@@ -435,17 +435,17 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
   - If you’re using copies of an existing Drupal site's configuration YML files from the Config/sync directory (e.g., you did a `drush config:export`) of the database settings of an existing site, the exported YML files will include UUIDs. Before including them in a recipe to leverage all the settings in them configure how you like them, remember to manually remove the `uuid` key unless you specifically need to enforce the same UUID across environments.
   
 - **Existing Sites**:
-  - If applying a recipe to an existing site with a content type already in it (e.g. a `blog` in the examples through this documentation), you may need to either:
-    - Rename the content type in the recipe (e.g., `node.type.mycompany_blog`).
+  - If applying a recipe to an existing site with a content type already in it (e.g. a `article` in the examples through this documentation), you may need to either:
+    - Rename the content type in the recipe (e.g., `node.type.mycompany_article`).
     - Use `--force` to overwrite the existing configuration.
-    - Manually delete the existing content type before applying the recipe (`drush config:delete node.type.blog`).
+    - Manually delete the existing content type before applying the recipe (`drush config:delete node.type.article`).
 
 - **Recipe Testing**:
   - Test your recipe on a clean Drupal 11 installation to confirm it applies without errors. Use tools like DDEV or Lando for quick setup:
     ```bash
     ddev start
     ddev drush site:install minimal
-    ddev exec php core/scripts/drupal recipe ../recipes/blog_feature
+    ddev exec php core/scripts/drupal recipe ../recipes/article_feature
     ```
 
 - **Drupal Recipe Limitations**:
@@ -453,7 +453,7 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
 
 
 - **Use the Recipe Generator**:
-  - The `recipe_generator` Drush add-on simplifies recipe creation by generating `recipe.yml` and `composer.json` files interactively:
+  - The `recipe_generator` Drush add-on simplifies recipe creation by generating `my_recipe.yml` and `composer.json` files interactively:
     ```bash
     composer require drupal/recipe_generator:^2.0
     drush recipe-generate
