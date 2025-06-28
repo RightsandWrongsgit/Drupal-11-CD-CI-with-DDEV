@@ -369,7 +369,7 @@ Alternatively you can ...
      ```
    - This copies the recipe’s dependencies into your project’s `composer.json` and `composer.lock` files.
 
-[⬆️ Back to Top](#top)
+
 
 <details>
 <summary> **What Happens When a Recipe Is Applied** (Click to Open)</summary>
@@ -385,6 +385,8 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
 [⬆️ Back to Top](#top)
 
 </details>
+
+[⬆️ Back to Top](#top)
 
 ---
 # Additional Notes and Tips
