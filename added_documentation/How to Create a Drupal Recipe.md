@@ -210,7 +210,7 @@ install:
 
 This will:
 1. Download and install the Pathauto and Metatag contributed modules (like `composer require drupal/views drupal/pathauto`). While the Views module is already installed in Drupal Core.
-2. Importantly it will Enable these modules (like doing  `drush en node views pathauto`).
+2. Importantly it will Enable these modules (like doing  `drush en views pathauto metatag`).
 
 ### Key Points:
 - The `install` key handles both the installation (adding the module to the codebase) and enabling (activating the module) in one step.
@@ -502,5 +502,5 @@ This process leverages Drupal 11’s Recipe API, which is stable and functional 
      config:
        import:
          node:
-           - node.type.blog
+           - node.type.article
      ```
