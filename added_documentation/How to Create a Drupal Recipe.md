@@ -155,7 +155,7 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
      - `name`: A human-readable name for the recipe.
      - `description`: A brief explanation of the recipe’s purpose.
      - `type`: Categorizes the recipe (e.g., `Site`, `Content type`, `Feature`).
-     - `install`: Lists modules or themes to install.
+     - `install`: Lists modules or themes to install & enable.
      - `config`: Specifies configurations to import or actions to perform.
      - `recipes`: Lists dependent recipes, if any.
 
