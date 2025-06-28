@@ -198,10 +198,6 @@ In a Drupal recipe, when the `recipe.yml` file includes a list of Drupal modules
 - **Install**: The `install` key in the `recipe.yml` file specifies modules (or themes, or other dependencies) that need to be installed. This is equivalent to running `composer require` to add the module to the Drupal project, ensuring the module's code is downloaded and available in the codebase.
 - **Enable**: After installing the modules, Drupal recipes automatically enable the listed modules, similar to running `drush en module_name` or using the Drupal UI to enable them. This step activates the modules so they are functional in the Drupal site.
 <br>
----
-
-<a><h3>The 'my_recipe.info.yml' file<h3><a>
-
 
 For example, if your `recipe.yml` contains:
 
@@ -222,10 +218,10 @@ This will:
 - If you only want to install a module without enabling it, you would typically manage that outside of the recipe (e.g., directly with Composer), as recipes are designed to both install and enable by default.
 
 This behavior is part of Drupal's recipe system, introduced in Drupal 10.2 and later, to streamline configuration and module management. If you need further clarification or have a specific use case, let me know!
-
 </details>
+---
 
-You create the `my_recipe.info.yml` file like this:
+<a><h3>You create the `my_recipe.info.yml` file like this:<h3><a>
 ```yml
 name: 'My Recipe'
 type: recipe
