@@ -48,19 +48,19 @@ Finally there is the fact you should version control your recipe and how you go 
 <details>
 <summary>**Example Workflow** (Click to Open)</summary>
 
-1. Create a recipe directory: `recipes/blog_feature`.
-2. Add `recipe.yml`, `config/node.type.blog.yml`, and `content/node/blog/1.yml` as shown above.
+1. Create a recipe directory: `recipes/article_feature`.
+2. Add `recipe.yml`, `config/node.type.article.yml`, and `content/node/article/default_content.my-first-article.yml` as shown in example files later in this documentation.
 3. Add the recipe to Composer:
    ```bash
-   composer require my_vendor/blog_feature
+   composer require my_vendor/article_feature
    ```
 4. Apply the recipe:
    ```bash
    cd web
-   php core/scripts/drupal recipe ../recipes/blog_feature -v
+   php core/scripts/drupal recipe ../recipes/article_feature -v
    drush cr
    ```
-5. Verify that the blog content type and sample post are created in the Drupal admin interface.
+5. Verify that the article content type and sample post are created in the Drupal admin interface.
 
 6. Use the Default Content API for Content**:
    
