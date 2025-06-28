@@ -15,8 +15,7 @@
 6. [Version Control](#version-control-the-recipe)
 7. [Installing a Recipe](#installing-a-drupal-recipe)
 8. [Troubleshooting & Best Practices](#additional-notes-and-tips)
-9. [Example Workflow](#example-workflow)
-10. [References](#references)
+9. [References](#references)
 ---
 # Introduction
 
@@ -35,6 +34,37 @@ The most important part to understand are the YML files and instruct the recipe 
 The sections about adding content and how it leverages configuration files help get more of the full depth of what a recipe can do.  Since configuration on an existing site is found in YML files, on an existing site they have UUIDs that could conflict, so there is a discussion on [Handling UUIDs](#how-to-handle-uuids-in-recipes).
 
 Finally there is the fact you should version control your recipe and how you go about [Installing a Recipe](#installing-a-drupal-recipe).
+
+<details>
+<summary>**Example Workflow** (Click to Open)<summary>
+
+1. Create a recipe directory: `recipes/blog_feature`.
+2. Add `recipe.yml`, `config/node.type.blog.yml`, and `content/node/blog/1.yml` as shown above.
+3. Add the recipe to Composer:
+   ```bash
+   composer require my_vendor/blog_feature
+   ```
+4. Apply the recipe:
+   ```bash
+   cd web
+   php core/scripts/drupal recipe ../recipes/blog_feature -v
+   drush cr
+   ```
+5. Verify that the blog content type and sample post are created in the Drupal admin interface.
+
+6. Use the Default Content API for Content**:
+   
+7. Validate with Configuration Inspector**:
+   - Use the Configuration Inspector module (`drupal/config_inspector`) to validate your recipe’s configuration files before distribution. This helps identify potential UUID or dependency issues:
+     ```bash
+     composer require drupal/config_inspector
+     drush config-inspector
+     ```
+
+8. Consider Recipe Scope and Reusability**:
+   - If your recipe is meant for broad reuse across multiple sites, omitting UUIDs is critical to ensure it applies cleanly to any Drupal 11 site.
+   - If the recipe is for a specific site or distribution, you might retain UUIDs to enforce consistency, but document this clearly and use `--force` when applying.
+</details>
 
 # Understand the Recipe Structure:
 
@@ -55,7 +85,7 @@ recipes/
     ├── my_recipe.install
     ├── config/
     │   └── install/
-    │       └── (configuration YAML files)
+    │       └── (configuration YML files)
     ├── content/
     │   └── node/
     │       └── article/
@@ -134,7 +164,7 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
    ```
    - This example installs the `node`, `pathauto`, and `metatag` modules, imports a blog content type configuration, and grants permissions to the administrator role.
 
-You creat the `my_recipe.info.yml` file like this:
+You create the `my_recipe.info.yml` file like this:
 ```yml
 name: 'My Recipe'
 type: recipe
@@ -165,9 +195,9 @@ dependencies:
 To avoid UUID-related conflicts when creating and installing a Drupal recipe in Drupal 11, follow these best practices:
 
 5. **Omit UUIDs in any (Optional) Recipe Configuration Files**:
-   - When crafting configuration files for a recipe (e.g., `config/node.type.blog.yml`), **remove the `uuid` key** from the YAML files. Drupal’s configuration import system will generate a new UUID automatically when the recipe is applied to a site.
+   - When crafting configuration files for a recipe (e.g., `config/node.type.blog.yml`), **remove the `uuid` key** from the YML files. Drupal’s configuration import system will generate a new UUID automatically when the recipe is applied to a site.
    - Example of a `node.type.blog.yml` without a UUID:
-     ```yaml
+     ```yml
      langcode: en
      status: true
      dependencies:
@@ -201,12 +231,12 @@ To avoid UUID-related conflicts when creating and installing a Drupal recipe in 
 
 # Add Default Content (Optional)
 
-   - Create a `content` directory (e.g., `recipes/my_recipe/content`) to include default content in YAML format, leveraging the Default Content API.
+   - Create a `content` directory (e.g., `recipes/my_recipe/content`) to include default content in YML format, leveraging the Default Content API.
    - For example, a file like `node/blog/1.yml` could define a sample blog post.
-   - For content in the `content` directory (e.g., `node/blog/1.yml`), UUIDs are also included to uniquely identify entities. Similar to configuration, you can omit UUIDs in content YAML files, and Drupal’s Default Content API will generate new ones on import.
+   - For content in the `content` directory (e.g., `node/blog/1.yml`), UUIDs are also included to uniquely identify entities. Similar to configuration, you can omit UUIDs in content YML files, and Drupal’s Default Content API will generate new ones on import.
    - Example of a content file without a UUID:
 
-     ```yaml
+     ```yml
      langcode: en
      type: blog
      title: 'Sample Blog Post'
@@ -330,7 +360,7 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
 ### **Additional Notes and Tips**
 
 - **UUIDs in Development**:
-  - If you’re using copies of an existing Drupal site's configuration YML files from the Config/sync directory (e.g., you did a `drush config:export`) of the database settings of an existing site, the exported YAML files will include UUIDs. Before including them in a recipe to leverage all the settings in them configure how you like them, remember to manually remove the `uuid` key unless you specifically need to enforce the same UUID across environments.
+  - If you’re using copies of an existing Drupal site's configuration YML files from the Config/sync directory (e.g., you did a `drush config:export`) of the database settings of an existing site, the exported YML files will include UUIDs. Before including them in a recipe to leverage all the settings in them configure how you like them, remember to manually remove the `uuid` key unless you specifically need to enforce the same UUID across environments.
   
 - **Existing Sites**:
   - If applying a recipe to an existing site with a content type already in it (e.g. a `blog` in the examples through this documentation), you may need to either:
@@ -375,29 +405,10 @@ If a UUID conflict occurs (e.g., a `node.type.blog` exists with a different UUID
   - Join the `#recipes` channel on Drupal Slack for community support.[](https://www.drupal.org/about/starshot/initiatives/recipes)
 
 ---
-# Example Workflow
-### **Example Workflow**
-
-1. Create a recipe directory: `recipes/blog_feature`.
-2. Add `recipe.yml`, `config/node.type.blog.yml`, and `content/node/blog/1.yml` as shown above.
-3. Add the recipe to Composer:
-   ```bash
-   composer require my_vendor/blog_feature
-   ```
-4. Apply the recipe:
-   ```bash
-   cd web
-   php core/scripts/drupal recipe ../recipes/blog_feature -v
-   drush cr
-   ```
-5. Verify that the blog content type and sample post are created in the Drupal admin interface.
-
----
 # References
 This process leverages Drupal 11’s Recipe API, which is stable and functional as of version 11.1. For further details, consult the official Drupal Recipes documentation on Drupal.org or the Distributions and Recipes Initiative page.[](https://opensenselabs.com/blog/drupal-recipe-module)[](https://www.drupal.org/docs/extending-drupal/drupal-recipes/how-to-download-and-apply-drupal-recipes)[](https://www.drupal.org/project/distributions_recipes)
 
 
----
 
 
 4. **Test on a Fresh Site**:
@@ -410,7 +421,7 @@ This process leverages Drupal 11’s Recipe API, which is stable and functional 
 5. **Leverage Configuration Dependencies**:
    - Ensure that your recipe’s `recipe.yml` specifies all necessary dependencies under the `dependencies` key in configuration files or the `install` section. This helps Drupal resolve dependencies correctly during import, reducing the risk of conflicts.
    - Example from the `recipe.yml`:
-     ```yaml
+     ```yml
      install:
        - node
        - pathauto
@@ -420,17 +431,6 @@ This process leverages Drupal 11’s Recipe API, which is stable and functional 
            - node.type.blog
      ```
 
-6. **Use the Default Content API for Content**:
-   
-7. **Validate with Configuration Inspector**:
-   - Use the Configuration Inspector module (`drupal/config_inspector`) to validate your recipe’s configuration files before distribution. This helps identify potential UUID or dependency issues:
-     ```bash
-     composer require drupal/config_inspector
-     drush config-inspector
-     ```
 
-8. **Consider Recipe Scope and Reusability**:
-   - If your recipe is meant for broad reuse across multiple sites, omitting UUIDs is critical to ensure it applies cleanly to any Drupal 11 site.
-   - If the recipe is for a specific site or distribution, you might retain UUIDs to enforce consistency, but document this clearly and use `--force` when applying.
 
 ---
