@@ -196,8 +196,11 @@ In a Drupal recipe, when the `recipe.yml` file includes a list of Drupal modules
 - **Install**: The `install` key in the `recipe.yml` file specifies modules (or themes, or other dependencies) that need to be installed. This is equivalent to running `composer require` to add the module to the Drupal project, ensuring the module's code is downloaded and available in the codebase.
 - **Enable**: After installing the modules, Drupal recipes automatically enable the listed modules, similar to running `drush en module_name` or using the Drupal UI to enable them. This step activates the modules so they are functional in the Drupal site.
 <br>
+
 <a><h3>The 'my_recipe.info.yml' file<h3><a>
+
 <br>
+
 For example, if your `recipe.yml` contains:
 
 ```yaml
