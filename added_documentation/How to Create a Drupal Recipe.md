@@ -121,7 +121,7 @@ recipes/
 
 Inside `recipes/my_recipe/composer.json` File (Optional):
    - If your recipe depends on contributed modules or themes, include a `composer.json` file to specify these dependencies.
-   - This is noted as OPTIONAL because the 'install:' Key element of your `recipe.yml` file also has the ability to [install and enable Drupal modules as outlined here.](#install-and-enable-modules)
+   - This is noted as OPTIONAL because the 'install:' Key element of your `recipe.yml` file also has the ability to [install and enable Drupal modules as outlined here.](#install-and-enable-modules).   > ℹ️ Note that you will jump to a section inside a collapsed accordion, please click the section title open it.
 ```composer.json
 {
   "name": "myvendor/my-recipe",
@@ -188,7 +188,7 @@ We set up the `my_recipe.yml` file and the `my_recipe.info.yml` file for our rec
 ---
 
 <details>
-<summary>   MORE on How "install:" work in that yml file? (Click to Open)</summary>
+<summary>   MORE on How "install:" works in that yml file? (Click to Open)</summary>
 
 # Install AND Enable modules:
 
