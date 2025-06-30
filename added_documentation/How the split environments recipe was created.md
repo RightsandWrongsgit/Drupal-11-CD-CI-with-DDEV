@@ -1,6 +1,6 @@
 I would like you to make a Drupal 11 recipe called “Split_Environments”.   The Drupal 11 Project it will be associated with is called “Drupal 11 CD/CI with DDEV” and is set up as a GitHub Template specifically designed for local machine as well as SSH connected Git to GitHub branch updating with integration to Platform.sh hosting of each GitHub branch.  The `composer.json` file for this Drupal 11 project is provided here: `{
 
-``json
+```json
 "name": "platformsh/drupal11",
   "description": "This template builds Drupal 11 for Platform.sh based the \"Drupal Recommended\" Composer project.",
   "type": "project",
@@ -240,32 +240,20 @@ develop
 	.gitkeep
 	config_suite.settings.yml
 
-
-
-
 local
 	.gitkeep
 	.htaccess
 	stage_file_proxy.settings.yml
-
-
-
 
 main
 	.gitkeep
 	.htaccess
 	config_suite.settings.yml
 
-
-
-
 staged
 	.gitkeep
 	.htaccess
 	config_suite.settings.yml
-
-
-
 
 sync
 	.gitkeep
