@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7b5fb1d4840cbae49aa8739bcdaf76a",
+    "content-hash": "729d2205d8e1158d9e3590a07205320e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2716,6 +2716,24 @@
                 "source": "https://github.com/mck89/peast/tree/v1.17.1"
             },
             "time": "2025-06-27T14:33:03+00:00"
+        },
+        {
+            "name": "myvendor/split-environments",
+            "version": "dev-develop",
+            "dist": {
+                "type": "path",
+                "url": "recipes/split_environments",
+                "reference": "a2e8fecbfd07263850cd28c11902cb37bfc35c84"
+            },
+            "type": "drupal-recipe",
+            "license": [
+                "proprietary"
+            ],
+            "description": "A local Drupal recipe to manage split environment configurations.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "nikic/php-parser",
@@ -6555,7 +6573,7 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
