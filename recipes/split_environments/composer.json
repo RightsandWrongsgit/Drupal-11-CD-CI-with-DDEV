@@ -1,5 +1,5 @@
 {
-  "name": "myvendor/split-environments",
+  "name": "myvendor/split_environments",
   "description": "A local Drupal recipe to manage split environment configurations.",
   "type": "drupal-recipe",
   "license": "proprietary",
