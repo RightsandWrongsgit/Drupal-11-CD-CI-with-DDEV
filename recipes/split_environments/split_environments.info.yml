@@ -1,0 +1,10 @@
+name: Split Environments
+type: recipe
+description: Configures a Drupal 11 site with environment-specific configuration splits for local, develop, staged, and main environments, including user awareness signals via environment indicators and a customized front page.
+core_version_requirement: ^11
+dependencies:
+  - drupal:config_split
+  - drupal:environment_indicator
+  - drupal:stage_file_proxy
+  - drupal:structure_sync
+  - drupal:config_suite
