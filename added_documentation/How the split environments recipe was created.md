@@ -1,6 +1,12 @@
-I would like you to make a Drupal 11 recipe called “Split_Environments”.   The Drupal 11 Project it will be associated with is called “Drupal 11 CD/CI with DDEV” and is set up as a GitHub Template specifically designed for local machine as well as SSH connected Git to GitHub branch updating with integration to Platform.sh hosting of each GitHub branch.  The `composer.json` file for this Drupal 11 project is provided here: `{
+<a><h1>How the Split Environments Recipe is set up<h1><a>
+
+# Composer.Json Only Did Some Basics
+   The “Drupal 11 CD/CI with DDEV” and is set up as a GitHub Template specifically designed for your local machine to SSH connect between Git and the GitHub branches in a workflow. [More on GitHub SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh)  GitHub is set up in Platform.sh with  the hosting service ['integration' option.](https://docs.platform.sh/integrations/source/github.html)  Thus, each GitHub branch links back to and updates its paired Platform.sh environment.  You actually do your main work in Git:GitHub; a familiar working process to developers and very easy to use.  If you use [VSCode](https://code.visualstudio.com) managing your project with [Git and GitHub are especially easy.](https://www.youtube.com/watch?v=Fk12ELJ9Bww)   
+   
+   The main thing setting up a Drupal project is your `composer.json` which calls together all the resources for a base project and assembles them. The example `composer.json` file for this Drupal 11 project is provided here.  It is noted as an example because it may differ slightly from the actual operating file in this project if updates are made.  So look at the actual file if you are planning edits yourself.
 
 ```json
+{
 "name": "platformsh/drupal11",
   "description": "This template builds Drupal 11 for Platform.sh based the \"Drupal Recommended\" Composer project.",
   "type": "project",
@@ -102,15 +108,15 @@ I would like you to make a Drupal 11 recipe called “Split_Environments”.   T
     }
   }
 }
-`  
 ```
 
-The `composer.json` file installs Drush plus the Drupal stage_file_proxy, config_split and environment_indicator contributed modules.  These three contributed are used by the Drupal 11 project in `settings.php` to provide the unique ‘local’, ‘develop’, ‘staged’, and ‘main’ environment configurations with user awareness signals via interface labels and color coding.  A copy of the `settings.php` file is provided here: `<?php
+Notice that the `composer.json` file outlined above installs Drush plus the Drupal stage_file_proxy, config_split and environment_indicator contributed modules.  These three contributed modules are used by the Drupal 11 project in `settings.php` to provide the unique ‘local’, ‘develop’, ‘staged’, and ‘main’ environment configurations with user awareness signals via interface labels and color coding. This is a powerful driver of the CD/CI workflow splits; although it is dependent on the fact we set up the `config/sync` extra 'develop', 'local', 'main' and 'staged' subdirectories to work with it.  A copy of the `settings.php` file is provided here: `
 
 ```php
+<?php
 /**
  * @file
- * Platform.sh example settings.php file for Drupal 11.
+ * Platform.sh example settings.php file for Drupal 10.
  */
 
 // Default Drupal settings.
@@ -118,7 +124,7 @@ The `composer.json` file installs Drush plus the Drupal stage_file_proxy, config
 // These are already explained with detailed comments in Drupal's
 // default.settings.php file.
 //
-// See https://api.drupal.org/api/drupal/sites!default!default.settings.php/11
+// See https://api.drupal.org/api/drupal/sites!default!default.settings.php/10
 $databases = [];
 $config_directories = [];
 $settings['update_free_access'] = FALSE;
@@ -228,10 +234,16 @@ if (file_exists($app_root . '/' . $site_path . '/settings.platformsh.php')) {
 // Local settings. These come last so that they can override anything.
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
-`
+}
 ```
 
-So that the configuration files have appropriate homes, the project maintains a config subdirectory off of the project root that then has subdirectories below for ‘develop’, ‘local’, ’main’, ‘staged’, and ‘sync’. ‘sync’ is where the main yml files are stored during a drush cex to export the project database configuration.  The other four subdirectories are for configuration unique to their matching environment or branch name.  You will notice the subdirectories include a .gitkeep entry so they are retained if empty of any unique configuration file.  You will notice that each subdirectory contains a copy of a `config_suite.settings.yml` file whose contents are uniquely set for whether import and export should be automatic; a capability that users can set in the running project for their preference as they move through the CD/CI workflow (e.g. perhaps not automatic with ‘staged’ because release should be post-testing favorable results).  Also notice that the ‘local’ subdirectory has a separate ‘stage_file_proxy.settings.yml’ file so users who enable that module in the running Drupal 11 project can benefit from that contributed module. Here is the subdirectory structure with example file content (although the ‘sync’ yml list is highly abbreviated): `
+Here is an example of how the project maintains a config subdirectory off of the project root that then has subdirectories below for ‘develop’, ‘local’, ’main’, ‘staged’, and ‘sync’. ‘sync’.  The 'sync' subdirectory is where the main yml files are stored during a drush cex to export the project database configuration.  The other four subdirectories are for configuration unique to their matching environment or branch name.
+
+  Notice the subdirectories include a `.gitkeep` entry so they are retained if empty of any unique configuration file.  You will notice that each subdirectory contains a copy of a `config_suite.settings.yml` file whose contents are uniquely set for whether import and export should be automatic; a capability that users can set in the running project for their preference as they move through the CD/CI workflow.  For example, the recipe pre-set for the 'staged' environment is set to "true" to automatically import the configuration but "false" so as NOT to automatically export it.  (e.g. lets not automatic export ‘staged’ because are release should be after we achieve post-testing favorable results).  [For more discussion on Automatic Configuration Import and Export Triggering](https://armtec.services/cicd/autoconfig.html) 
+  
+  Also notice that the ‘local’ subdirectory has a separate ‘stage_file_proxy.settings.yml’ file so users who enable that module in the running Drupal 11 project can benefit from that contributed module. You will notice on the table showing our configuration splits that we have the Stage File Proxy module on just the ‘local’ split. Platform.sh is taking care of the code to database content relationship at the host with the container builds for each branch. And, really, it is the local-to-host connection with your internet speed dependency plus the size of your database that is important to use this module anyway. The logic behind this module is that as content grows more and more for your site, it represents transmission overhead to be passing all of it to your local development environment. Therefore, this module is sort of a ‘just-in-time’ line of thinking around what content to bring local. As a developer, when you are working on the site’s code, it is most likely you are working in some very specific section of the overall site so why bring all the content from the site to you local machine; save space and transmission time, especially on larger, content rich sites. This module does just that; pulling content with a context of what is related to what you are working on so you can see your work in a real world setting. 
+  
+  Here is the subdirectory structure with example file content (although the ‘sync’ yml list is highly abbreviated): `
 
 
 
@@ -260,7 +272,59 @@ sync
 	.htaccess
 	announcements_feed.settings.yml
 	automated_cron.settings.yml
-`
+
 ```
 
-I addition to enabling the composer.json installed modules and installing an enabling the additional modules needed to support  the outlined process, this recipe also project for the configuration yml files noted for the environments with config: import: entries and any actions: needed plus provide a content entry for a front page message of “Welcome to your Drupal 11 CI/CD with DDEV website.  We hope you enjoy your Drupal experience.  Below that state “The Drupal 11 template you installed took advantage of a very basic Drupal recipe to set up your starting point.  Here is an outline of the key next steps to follow (Insert a link to a file that will be in the project Git:GitHub repository under the added_documentation subdirectory off the project root named Next Steps.md)”  Below that provide a statement “Below are a list of resources to help you work with Drupal.  (Insert an unordered list of links to various Drupal training and tutorial sources)”  Below that provide a statement “Recipes are a great way to quickly get going with Drupal.  The recipe that started is project foundation is intentionally very basic so people who use it can go in any different directions; a strength of Drupal.  But you can add recipes to recipes so don’t be afraid to try more from the list below.  And remember, you established a workflow where you can try them and simply not move them up your workflow as a way to back out and return to what you had. (Provide the list of recipes from the drupal.org CMS project list here as an unordered list.)
+The composer.json installed modules but it doesn't automatically enable them.  This differs from a recipe `install:` key in the `recipe.yml` file which both installs and enables modules.  It also enables modules already installed as part of core or otherwise.   The `split_environments` recipe makes sure the modules that are needed are installed and enabled.  I assures the configuration yml files noted for the environments with `config:` `import:` entries plus any any `actions:` needed are handled.
+
+Since recipes can also be set up to provide `content:` a content entry for a front page message of “Welcome to your Drupal 11 CI/CD with DDEV website.  We hope you enjoy your Drupal experience..."  has been included.
+
+```yml
+name: Split Environments
+description: Configures a Drupal 11 site with environment-specific configuration splits for local, develop, staged, and main environments, with user awareness signals and a customized front page.
+type: project
+install:
+  - config_split
+  - environment_indicator
+  - stage_file_proxy
+  - structure_sync
+  - config_suite
+config:
+  import:
+    local:
+      - config_suite.settings
+      - stage_file_proxy.settings
+    develop:
+      - config_suite.settings
+    staged:
+      - config_suite.settings
+    main:
+      - config_suite.settings
+  actions:
+    local:
+      config_suite.settings:
+        import: true
+        export: true
+      stage_file_proxy.settings:
+        origin: ''
+    develop:
+      config_suite.settings:
+        import: true
+        export: true
+    staged:
+      config_suite.settings:
+        import: true
+        export: false
+    main:
+      config_suite.settings:
+        import: true
+        export: true
+content:
+  nodes:
+    - entity: node
+      type: page
+      title: Welcome to Your Drupal 11 CI/CD with DDEV Website
+      field_body:
+        value: |
+          Welcome to your Drupal 11 CI/CD with DDEV website. We hope you enjoy your Drupal experience.
+```

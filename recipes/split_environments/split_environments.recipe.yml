@@ -31,8 +31,8 @@ config:
         export: true
     staged:
       config_suite.settings:
-        import: false
-        export: true
+        import: true
+        export: false
     main:
       config_suite.settings:
         import: true
