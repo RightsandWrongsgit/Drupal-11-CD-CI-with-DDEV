@@ -1,0 +1,13 @@
+uuid: <uuid>
+langcode: en
+status: true
+dependencies: {}
+id: develop
+label: Development
+folder: ../config/develop
+module: {}
+theme: {}
+black_list: []
+grey_list: []
+grey_list_skip: []
+weight: 1

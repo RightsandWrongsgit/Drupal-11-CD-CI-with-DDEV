@@ -1,0 +1,10 @@
+_core:
+  default_config_hash: 
+automatic_import: true
+automatic_export: false
+dependencies:
+  module:
+    - config_suite
+  enforced:
+    module:
+      - config_suite

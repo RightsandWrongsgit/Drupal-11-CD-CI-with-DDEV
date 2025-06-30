@@ -1,0 +1,13 @@
+uuid: <uuid>
+langcode: en
+status: true
+dependencies: {}
+id: local
+label: Local
+folder: ../config/local
+module: {}
+theme: {}
+black_list: []
+grey_list: []
+grey_list_skip: []
+weight: 0

@@ -18,6 +18,11 @@ config:
       - config_suite.settings
     main:
       - config_suite.settings
+    sync:
+      - config_split.config_split.local
+      - config_split.config_split.develop
+      - config_split.config_split.staged
+      - config_split.config_split.main      
   actions:
     local:
       config_suite.settings:
