@@ -18,8 +18,8 @@
       "url": "recipes/*",
       "options": {
         "symlink": true
-      } 
-    } 
+      }
+    }
   ],
   "require": {
     "composer/installers": "^2.0",
