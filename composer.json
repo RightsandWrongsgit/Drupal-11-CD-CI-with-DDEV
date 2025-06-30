@@ -13,13 +13,13 @@
       "type": "composer",
       "url": "https://packages.drupal.org/8"
     },
-  {
+    {
       "type": "path",
       "url": "recipes/*",
       "options": {
         "symlink": true
       } 
-  } 
+    } 
   ],
   "require": {
     "composer/installers": "^2.0",
