@@ -4,9 +4,26 @@ It is yet to be completed!
 
 
 
+`ddev drush site-install standard --existing-config --config-dir=config/sync`
 
-
-
+system.site.yml with placeholder uuid
+```
+_core:
+  default_config_hash: 
+langcode: en
+uuid: 00000000-0000-0000-0000-000000000000
+name: 'Drupal 11 CD/CD with DDEV'
+mail: you@example.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node/1
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en
+mail_notification: null
+```
 
 
 
