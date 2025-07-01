@@ -2,6 +2,39 @@ THIS FILE IS AN OUTLINE OF HOW TO PROCEED AFTER DEPLOYING THE PROJECT AND RUNNIN
 
 It is yet to be completed!
 
+`ddev start`
+
+OUTLINE THE SET UP USING THE SCREEN CAPTURES HERE
+
+
+Check Drush Launcher:
+If you're running Drush commands without specifying the full path (e.g., ./vendor/bin/drush), ensure the Drush Launcher is installed globally to make drush accessible:
+
+'composer global require drush/drush-launcher'
+
+`composer require drush/drush`
+
+Verify Recipe Application:
+After running 
+`composer require myvendor/split-environments`
+, you must apply the recipe using Drush or Drupal Console. Run the following command from your Drupal project root:
+
+'drush recipe-apply myvendor/split-environments'
+
+or, if the recipe is in a subdirectory:
+
+'drush recipe-apply recipe/myvendor/split-environments'
+
+`ddev drush recipe /var/www/html/recipes/split_environments -v`
+
+
+
+
+
+
+
+
+
 
 
 `ddev drush site-install standard --existing-config --config-dir=config/sync`

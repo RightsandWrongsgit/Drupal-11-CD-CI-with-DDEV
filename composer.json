@@ -32,7 +32,7 @@
     "drupal/stage_file_proxy": "^3.1",
     "drupal/structure_sync": "^2.0",
     "drush/drush": "^13.6",
-    "myvendor/split-environments": "*",
+    "myvendor/split-environments": "dev-develop",
     "platformsh/config-reader": "^2.4"
   },
   "conflict": {

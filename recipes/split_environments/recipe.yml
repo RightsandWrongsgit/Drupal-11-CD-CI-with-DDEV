@@ -1,0 +1,52 @@
+name: Split Environments
+description: Configures a Drupal 11 site with environment-specific configuration splits for local, develop, staged, and main environments, with user awareness signals and a customized front page.
+type: project
+install:
+  - config_split
+  - environment_indicator
+  - stage_file_proxy
+  - structure_sync
+  - config_suite
+config:
+  import:
+    sync:
+      - config_split.config_split.local
+      - config_split.config_split.develop
+      - config_split.config_split.staged
+      - config_split.config_split.main
+      - config_suite.settings
+      - stage_file_proxy.settings  
+content:
+  nodes:
+    - entity: node
+      type: page
+      title: Welcome to Your Drupal 11 CI/CD with DDEV Website
+      field_body:
+        value: |
+          Welcome to your Drupal 11 CI/CD with DDEV website. We hope you enjoy your Drupal experience.
+
+          ## Next Steps for Your Drupal 11 CI/CD with DDEV Project
+
+          The Drupal 11 template you installed took advantage of a very basic Drupal recipe to set up your starting point. Here is an outline of the key next steps to follow: [Next Steps](https://github.com/YOUR_NAMESPACE/drupal11/blob/main/added_documentation/Next%20Steps.md).
+
+          ## Drupal Resources
+
+          Below are a list of resources to help you work with Drupal:
+          - [Drupal User Guide](https://www.drupal.org/docs/user_guide/en/index.html)
+          - [Drupalize.Me Tutorials](https://drupalize.me/)
+          - [Drupal.org Community Documentation](https://www.drupal.org/documentation)
+          - [Drupal Slack Community](https://www.drupal.org/slack)
+          - [WebWash Drupal Tutorials](https://www.webwash.net/)
+
+          ## Drupal Recipes
+
+          Recipes are a great way to quickly get going with Drupal. The recipe that started this project foundation is intentionally very basic so people who use it can go in any different directions; a strength of Drupal. But you can add recipes to recipes so don’t be afraid to try more from the list below. And remember, you established a workflow where you can try them and simply not move them up your workflow as a way to back out and return to what you had.
+
+          Available Drupal Recipes:
+          - [Blog](https://www.drupal.org/project/blog)
+          - [Standard](https://www.drupal.org/project/standard)
+          - [Umami](https://www.drupal.org/project/umami)
+          - [Commerce](https://www.drupal.org/project/commerce)
+          - [Group](https://www.drupal.org/project/group)
+          - [Open Social](https://www.drupal.org/project/social)
+          - [Learning Management System](https://www.drupal.org/project/opigno_lms)
