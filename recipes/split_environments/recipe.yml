@@ -9,13 +9,15 @@ install:
   - config_suite
 config:
   import:
-    sync:
+    config_split:
       - config_split.config_split.local
       - config_split.config_split.develop
       - config_split.config_split.staged
       - config_split.config_split.main
+    config_suite:
       - config_suite.settings
-      - stage_file_proxy.settings  
+    stage_file_proxy:
+      - stage_file_proxy.settings
 content:
   nodes:
     - entity: node
