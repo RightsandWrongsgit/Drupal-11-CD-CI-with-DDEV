@@ -2722,7 +2722,7 @@
             "version": "dev-develop",
             "dist": {
                 "type": "path",
-                "url": "recipes/split_environments",
+                "url": "recipes/split-environments",
                 "reference": "a2e8fecbfd07263850cd28c11902cb37bfc35c84"
             },
             "type": "drupal-recipe",
