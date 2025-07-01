@@ -81,7 +81,8 @@ hooks:
 
 # webserver_type: nginx-fpm, apache-fpm, genericn
 
-timezone: Zulu/UTC
+timezone: America/New York
+# The timezone to use in the containers.
 # If timezone is unset, DDEV will attempt to derive it from the host system timezone
 # using the $TZ environment variable or the /etc/localtime symlink.
 # This is the timezone used in the containers and by PHP;
