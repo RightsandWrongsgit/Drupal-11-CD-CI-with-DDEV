@@ -1,9 +1,9 @@
 _core:
   default_config_hash: 
 langcode: en
-uuid: 
+uuid: 00000000-0000-0000-0000-000000000000
 name: 'Drupal 11 CD/CD with DDEV'
-mail: emofsnead@gmail.com
+mail: you@example.com
 slogan: ''
 page:
   403: ''
