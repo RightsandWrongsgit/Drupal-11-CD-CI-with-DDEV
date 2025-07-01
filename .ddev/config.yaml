@@ -79,9 +79,9 @@ hooks:
 # Set to "xhgui" to enable XHGui features
 # "xhgui" will become default in a future major release
 
-# webserver_type: nginx-fpm, apache-fpm, generic
+# webserver_type: nginx-fpm, apache-fpm, genericn
 
-# timezone: Europe/Berlin
+timezone: Zulu/UTC
 # If timezone is unset, DDEV will attempt to derive it from the host system timezone
 # using the $TZ environment variable or the /etc/localtime symlink.
 # This is the timezone used in the containers and by PHP;
