@@ -6,6 +6,22 @@ It is yet to be completed!
 
 OUTLINE THE SET UP USING THE SCREEN CAPTURES HERE
 
+<img src="added_documentation/Drupal 11 Start 1.png" alt="Start up screenshot first step">
+
+<img src="added_documentation/Drupal 11 Start 2.png" alt="Start up screenshot 2nd step">
+
+<img src="added_documentation/Drupal 11 Start 3.png" alt="Start up screenshot 3rd step">
+
+<img src="added_documentation/Drupal 11 Start 4.png" alt="Start up screenshot 4th step">
+
+<img src="added_documentation/Drupal 11 Start 5.png" alt="Start up screenshot 5th step">
+
+<img src="added_documentation/Drupal 11 Start 6.png" alt="Start up screenshot 6th step">
+
+<img src="added_documentation/Drupal 11 Start 7.png" alt="Start up screenshot 7th step">
+
+<img src="added_documentation/Drupal 11 Start 8.png" alt="Start up screenshot 8th step">
+
 
 Check Drush Launcher:
 If you're running Drush commands without specifying the full path (e.g., ./vendor/bin/drush), ensure the Drush Launcher is installed globally to make drush accessible:
