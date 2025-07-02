@@ -22,6 +22,8 @@ OUTLINE THE SET UP USING THE SCREEN CAPTURES HERE
 
 <img src="added_documentation/Drupal 11 Start 8.png" alt="Start up screenshot 8th step">
 
+<img src="added_documentation/Drupal 11 Start 9.png" alt="Start up screenshot 8th step">
+
 
 `ddev drush cr`
 
