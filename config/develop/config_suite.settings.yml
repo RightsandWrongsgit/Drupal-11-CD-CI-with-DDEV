@@ -1,7 +1,7 @@
 _core:
   default_config_hash: 
-automatic_import: true
-automatic_export: true
+automatic_import: false
+automatic_export: false
 dependencies:
   module:
     - config_suite

@@ -23,6 +23,8 @@ OUTLINE THE SET UP USING THE SCREEN CAPTURES HERE
 <img src="added_documentation/Drupal 11 Start 8.png" alt="Start up screenshot 8th step">
 
 
+`ddev drush cr`
+
 Check Drush Launcher:
 If you're running Drush commands without specifying the full path (e.g., ./vendor/bin/drush), ensure the Drush Launcher is installed globally to make drush accessible:
 
@@ -42,6 +44,8 @@ or, if the recipe is in a subdirectory:
 'drush recipe-apply recipe/myvendor/split-environments'
 
 `ddev drush recipe /var/www/html/recipes/split_environments -v`
+
+`ddev drush cr`
 
 
 `ddev restart`
