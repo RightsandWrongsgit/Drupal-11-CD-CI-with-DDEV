@@ -44,7 +44,7 @@ or, if the recipe is in a subdirectory:
 `ddev drush recipe /var/www/html/recipes/split_environments -v`
 
 
-
+`ddev restart`
 
 
 
