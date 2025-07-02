@@ -1,0 +1,5 @@
+uuid: [generate with `uuidgen`]
+langcode: en
+name: Staged
+bg_color: '#FFA500'  # Orange
+fg_color: '#000000'  # Black text

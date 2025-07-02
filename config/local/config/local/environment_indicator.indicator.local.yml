@@ -1,0 +1,5 @@
+uuid: [generate with `uuidgen`]
+langcode: en
+name: Local
+bg_color: '#00FF00'  # Green
+fg_color: '#000000'  # Black text

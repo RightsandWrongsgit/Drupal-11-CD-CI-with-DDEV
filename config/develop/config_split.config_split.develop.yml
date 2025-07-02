@@ -1,0 +1,10 @@
+uuid: [generate with `uuidgen`]
+langcode: en
+status: true
+dependencies: {  }
+id: develop
+label: Develop
+description: 'Configuration split for development environment'
+weight: 0
+folder: config/develop
+state: state

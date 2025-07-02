@@ -1,0 +1,5 @@
+uuid: [generate with `uuidgen`]
+langcode: en
+name: Production
+bg_color: '#FF0000'  # Red
+fg_color: '#FFFFFF'  # White text

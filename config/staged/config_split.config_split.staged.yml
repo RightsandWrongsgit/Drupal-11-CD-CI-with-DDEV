@@ -1,0 +1,10 @@
+uuid: [generate with `uuidgen`]
+langcode: en
+status: true
+dependencies: {  }
+id: staged
+label: Staged
+description: 'Configuration split for staging environment'
+weight: 0
+folder: config/staged
+state: state

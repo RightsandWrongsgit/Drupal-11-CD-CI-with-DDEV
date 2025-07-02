@@ -1,0 +1,5 @@
+uuid: [generate with `uuidgen`]
+langcode: en
+name: Develop
+bg_color: '#FFFF00'  # Yellow
+fg_color: '#000000'  # Black text

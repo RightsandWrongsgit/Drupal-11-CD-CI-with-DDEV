@@ -18,6 +18,11 @@ config:
       - config_suite.settings
     stage_file_proxy:
       - stage_file_proxy.settings
+    environment_indicator:
+      - environment_indicator.indicator.local
+      - environment_indicator.indicator.develop
+      - environment_indicator.indicator.staged
+      - environment_indicator.indicator.main
 content:
   nodes:
     - entity: node

@@ -43,6 +43,9 @@ or, if the recipe is in a subdirectory:
 
 'drush recipe-apply recipe/myvendor/split-environments'
 
+Runs up to this point of actually applying the recipe; URL is clean and functional.
+When this one was run it exported all the yml files to the sync directory. And the site crashed!
+HASH was applied in the `core.extensions.yml` file and HASH and UUID in `system.site.yml` but the rest of the yml files just came over -- HASH and UUIDs came but it wasn't a change because nothing of there before hand.
 `ddev drush recipe /var/www/html/recipes/split_environments -v`
 
 `ddev drush cr`
