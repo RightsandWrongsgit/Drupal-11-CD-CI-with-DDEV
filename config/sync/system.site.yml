@@ -1,7 +1,7 @@
 _core:
-  default_config_hash: ijfbzDTN4CbE7Sr-6ubWzy_t1vH4OtU1doNCLssVz-4
+  default_config_hash: 
 langcode: en
-uuid: ce4cd859-8b36-47a2-a83a-3c937245321a
+uuid: 
 name: 'My New Drupal Site'
 mail: your_email@example.com
 slogan: ''
