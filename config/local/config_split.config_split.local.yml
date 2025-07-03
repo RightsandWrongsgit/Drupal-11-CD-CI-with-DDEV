@@ -1,10 +1,9 @@
-uuid: [generate with `uuidgen`]
 langcode: en
 status: true
-dependencies: {  }
+dependencies: {}
 id: local
 label: Local
 description: 'Configuration split for local environment'
 weight: 0
 folder: config/local
-state: state
+

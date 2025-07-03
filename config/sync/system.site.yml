@@ -1,10 +1,7 @@
-_core:
-  default_config_hash: 
 langcode: en
-uuid: [generate with `uuidgen`]
-name: 'My New Drupal Site'
+name: 'Drupal Site'
 mail: your_email@example.com
-slogan: ''
+slogan: 'Run Recipe at this point: see README.md'
 page:
   403: ''
   404: ''
@@ -13,3 +10,4 @@ admin_compact_mode: false
 weight_select_max: 100
 default_langcode: en
 mail_notification: null
+

@@ -1,4 +1,3 @@
-uuid: [generate with `uuidgen`]
 langcode: en
 status: true
 dependencies: {  }
@@ -7,4 +6,4 @@ label: Main
 description: 'Configuration split for production environment'
 weight: 0
 folder: config/main
-state: state
+

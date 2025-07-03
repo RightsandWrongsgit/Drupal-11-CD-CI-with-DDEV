@@ -1,4 +1,3 @@
-uuid: [generate with `uuidgen`]
 langcode: en
 name: Local
 bg_color: '#00FF00'  # Green
