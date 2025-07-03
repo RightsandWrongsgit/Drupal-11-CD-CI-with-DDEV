@@ -1,7 +1,7 @@
 _core:
   default_config_hash: 
 langcode: en
-uuid: 
+uuid: [generate with `uuidgen`]
 name: 'My New Drupal Site'
 mail: your_email@example.com
 slogan: ''
