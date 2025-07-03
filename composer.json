@@ -24,6 +24,7 @@
   "require": {
     "composer/installers": "^2.0",
     "drupal/config_split": "^2.0",
+    "drupal/config_suite": "2.x-dev@dev",
     "drupal/core-composer-scaffold": "^11.0",
     "drupal/core-project-message": "^11.0",
     "drupal/core-recommended": "^11.2",
@@ -31,6 +32,7 @@
     "drupal/stage_file_proxy": "^3.1",
     "drupal/structure_sync": "^2.0",
     "drush/drush": "^13.6",
+    "myvendor/split-environments": "dev-develop",
     "platformsh/config-reader": "^2.4"
   },
   "conflict": {

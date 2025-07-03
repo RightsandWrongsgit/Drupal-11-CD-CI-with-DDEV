@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad562fe3aa85eeffb2e69ab3e2121109",
+    "content-hash": "b116cbaa675adb44a0f3a504f30dd661",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1164,6 +1164,53 @@
                 "source": "https://git.drupalcode.org/project/config_split",
                 "issues": "https://www.drupal.org/project/issues/config_split",
                 "slack": "https://drupal.slack.com/archives/C45342CDD"
+            }
+        },
+        {
+            "name": "drupal/config_suite",
+            "version": "dev-2.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/config_suite.git",
+                "reference": "229e2d9279b0af1f54eddc66d8cc3f5b3b3354a9"
+            },
+            "require": {
+                "drupal/core": "^10.1 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
+                "drupal": {
+                    "version": "2.0.5+1-dev",
+                    "datestamp": "1751490264",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Boggs",
+                    "homepage": "https://www.drupal.org/u/greg-boggs",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "loopduplicate",
+                    "homepage": "https://www.drupal.org/user/717290"
+                }
+            ],
+            "description": "Config Suite is a set of improvements to configuration sync to make it automatic and easier to work with.",
+            "homepage": "https://www.drupal.org/project/config_suite",
+            "support": {
+                "source": "http://cgit.drupalcode.org/config_suite",
+                "issues": "https://www.drupal.org/project/issues/config_suite"
             }
         },
         {
@@ -2620,16 +2667,16 @@
         },
         {
             "name": "mck89/peast",
-            "version": "v1.17.2",
+            "version": "v1.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mck89/peast.git",
-                "reference": "465810689c477fbba17f4f949b75e4d0bdab13ea"
+                "reference": "90e01c0da3a5a1c2c06d94a56fa2e0594769d525"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mck89/peast/zipball/465810689c477fbba17f4f949b75e4d0bdab13ea",
-                "reference": "465810689c477fbba17f4f949b75e4d0bdab13ea",
+                "url": "https://api.github.com/repos/mck89/peast/zipball/90e01c0da3a5a1c2c06d94a56fa2e0594769d525",
+                "reference": "90e01c0da3a5a1c2c06d94a56fa2e0594769d525",
                 "shasum": ""
             },
             "require": {
@@ -2642,7 +2689,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.17.2-dev"
+                    "dev-master": "1.17.1-dev"
                 }
             },
             "autoload": {
@@ -2663,9 +2710,27 @@
             "description": "Peast is PHP library that generates AST for JavaScript code",
             "support": {
                 "issues": "https://github.com/mck89/peast/issues",
-                "source": "https://github.com/mck89/peast/tree/v1.17.2"
+                "source": "https://github.com/mck89/peast/tree/v1.17.1"
             },
-            "time": "2025-07-01T09:30:45+00:00"
+            "time": "2025-06-27T14:33:03+00:00"
+        },
+        {
+            "name": "myvendor/split-environments",
+            "version": "dev-develop",
+            "dist": {
+                "type": "path",
+                "url": "recipes/split-environments",
+                "reference": "a2e8fecbfd07263850cd28c11902cb37bfc35c84"
+            },
+            "type": "drupal-recipe",
+            "license": [
+                "proprietary"
+            ],
+            "description": "A local Drupal recipe to manage split environment configurations.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "nikic/php-parser",
@@ -6506,7 +6571,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "drupal/config_suite": 20,
+        "myvendor/split-environments": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {},
