@@ -37,6 +37,11 @@ If you're running Drush commands without specifying the full path (e.g., ./vendo
 Verify Recipe Application:
 After running 
 `composer require myvendor/split-environments`
+
+`composer update`
+
+`ddev drush cr`
+
 , you must apply the recipe using Drush or Drupal Console. Run the following command from your Drupal project root:
 
 'drush recipe-apply myvendor/split-environments'
