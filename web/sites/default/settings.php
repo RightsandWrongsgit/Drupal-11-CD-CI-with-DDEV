@@ -38,7 +38,10 @@ $config['config_split.config_split.staged']['status'] = FALSE;
 $config['config_split.config_split.main']['status'] = FALSE;
 
 // Detect Platform.sh environment from PLATFORM_BRANCH, default to 'local'.
-$platform_environment = getenv('PLATFORM_BRANCH') ?: 'local';
+$known_splits = ['develop', 'staged', 'main', 'local'];
+$platform_environment = in_array(getenv('PLATFORM_BRANCH'), $known_splits)
+  ? getenv('PLATFORM_BRANCH')
+  : 'local';
 $settings['platform_environment'] = $platform_environment;
 
 // Environment-specific configurations.
