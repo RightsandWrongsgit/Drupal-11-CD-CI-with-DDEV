@@ -55,9 +55,10 @@ mounts:
 # Configuration of the build of this application.
 build:
     flavor: composer
-    commands:
-         # Ensure config/sync exists in the container during build
-        - mkdir -p config/sync
+    copy:
+        # Ensure config/sync exists in the container during build
+        - source: 'config/sync'
+          destination: 'config/sync'
 
 # The web key configures the web server running in front of your app.
 # More information: https://docs.platform.sh/create-apps/app-reference.html#web
