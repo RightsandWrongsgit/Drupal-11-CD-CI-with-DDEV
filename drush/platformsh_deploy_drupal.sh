@@ -13,7 +13,10 @@ if $DRUSH status --field=bootstrap 2>/dev/null | grep -q 'Successful'; then
 
   CONFIG_PATH=$($DRUSH php:eval "echo realpath(Drupal\\Core\\Site\\Settings::get('config_sync_directory'));")
   if [ -n "$CONFIG_PATH" ] && ls "$CONFIG_PATH"/*.yml >/dev/null 2>&1; then
-    echo "📦 Config sync files found. Importing..."
+    echo "📦 Config sync files found. Sanitizing before import..."
+    /app/scripts/sanitize-config.sh
+
+    echo "📦 Importing sanitized config..."
     $DRUSH -y config:import
   else
     echo "⚠️ No config sync files found. Skipping config:import."
