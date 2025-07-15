@@ -25,15 +25,15 @@ relationships:
 disk: 2048
 
 # The 'mounts' describe writable, persistent filesystem mounts in the application.
+
 mounts:
-    # The default Drupal files directory.
-    '/web/sites/default/files':
-        source: local
-        source_path: 'files'
-    # Add configuration access to the Platform.sh container
-    '/web/sites/default/files': 'shared:files'
+  # The default Drupal files directory.
+    '/web/sites/default/files': 
+      source: local
+      source_path: 'files'
+  # Add configuration access to the Platform.sh container
     '/config': 'shared:config'
-       
+  
     # Drupal gets its own dedicated tmp directory. The settings.platformsh.php
     # file will automatically configure Drupal to use this directory.
     '/tmp':
