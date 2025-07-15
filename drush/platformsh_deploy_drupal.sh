@@ -5,8 +5,8 @@ DRUSH="./vendor/bin/drush"
 
 cd /app/web
 
-# Check if Drush can bootstrap Drupal.
-if [ -n "$($DRUSH status --field=bootstrap 2>/dev/null)" ]; then
+# Check if site is installed
+if $DRUSH status --field=bootstrap 2>/dev/null | grep -q 'Successful'; then
   echo "✅ Drupal detected. Running deployment tasks..."
 
   $DRUSH -y cache-rebuild
@@ -20,5 +20,5 @@ if [ -n "$($DRUSH status --field=bootstrap 2>/dev/null)" ]; then
     echo "⚠️ No config files to import. Skipping."
   fi
 else
-  echo "🚫 Drupal not installed or not bootstrapped. Skipping deploy tasks."
+  echo "🚫 Drupal not installed or bootstrap not successful. Skipping deploy tasks."
 fi
