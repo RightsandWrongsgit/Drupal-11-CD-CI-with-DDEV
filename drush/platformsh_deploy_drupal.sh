@@ -1,4 +1,33 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+DRUSH="./vendor/bin/drush"
+
+cd /app/web
+
+# Check if Drush can bootstrap Drupal.
+if [ -n "$($DRUSH status --field=bootstrap 2>/dev/null)" ]; then
+  echo "✅ Drupal detected. Running deployment tasks..."
+
+  $DRUSH -y cache-rebuild
+  $DRUSH -y updatedb
+
+  CONFIG_PATH=$($DRUSH php:eval "echo realpath(Drupal\\Core\\Site\\Settings::get('config_sync_directory'));")
+  if [ -n "$CONFIG_PATH" ] && ls "$CONFIG_PATH"/*.yml >/dev/null 2>&1; then
+    echo "🗂 Config files found. Importing..."
+    $DRUSH -y config-import
+  else
+    echo "⚠️ No config files to import. Skipping."
+  fi
+else
+  echo "🚫 Drupal not installed or not bootstrapped. Skipping deploy tasks."
+fi
+#
+
+
+
+
+#!/usr/bin/env bash
 #
 # We don't want to run drush commands if drupal isn't installed.
 # Similarly, we don't want to attempt to run config-import if there aren't any config files to import
@@ -19,27 +48,27 @@
 #
 
 # CHATGPT MODIFIED TO IMPROVE CONTAINER USE AND ERROR HANDLING 
-set -euo pipefail
+# set -euo pipefail
 
 # Originally was below:
 # DRUSH="./vendor/bin/drush"
-DRUSH="/app/web/vendor/bin/drush"  # Alternative path if needed
+# DRUSH="/app/web/vendor/bin/drush"  # Alternative path if needed
 
 
 # Ensure Drupal is bootstrapped before running commands.
-if [ -n "$($DRUSH status --field=bootstrap 2>/dev/null)" ]; then
-  echo "✅ Drupal detected. Starting deployment tasks..."
+# if [ -n "$($DRUSH status --field=bootstrap 2>/dev/null)" ]; then
+#  echo "✅ Drupal detected. Starting deployment tasks..."
 
-  $DRUSH -y cache-rebuild
-  $DRUSH -y updatedb
+#  $DRUSH -y cache-rebuild
+ # $DRUSH -y updatedb
 
-  CONFIG_PATH=$($DRUSH php:eval "echo realpath(Drupal\Core\Site\Settings::get('config_sync_directory'));")
-  if [ -n "$CONFIG_PATH" ] && ls "$CONFIG_PATH"/*.yml >/dev/null 2>&1; then
-    echo "🗂 Config files found. Importing..."
-    $DRUSH -y config-import
-  else
-    echo "⚠️ No config files to import. Skipping."
-  fi
-else
-  echo "🚫 Drupal not installed or not bootstrapped. Skipping deploy tasks."
-fi
+ # CONFIG_PATH=$($DRUSH php:eval "echo realpath(Drupal\Core\Site\Settings::get('config_sync_directory'));")
+ # if [ -n "$CONFIG_PATH" ] && ls "$CONFIG_PATH"/*.yml >/dev/null 2>&1; then
+#   echo "🗂 Config files found. Importing..."
+#   $DRUSH -y config-import
+#  else
+#    echo "⚠️ No config files to import. Skipping."
+#  fi
+# else
+#  echo "🚫 Drupal not installed or not bootstrapped. Skipping deploy tasks."
+# fi

@@ -176,8 +176,8 @@ hooks:
         #   - `cache-rebuild`
         #   - `updatedb`
         #   - and if config files are present, `config-import`
-        cd web
-        bash ../drush/platformsh_deploy_drupal.sh
+        #
+        bash drush/platformsh_deploy_drupal.sh
      # bash $PLATFORM_APP_DIR/drush/platformsh_deploy_drupal.sh
 
     # The post_deploy hook is run after the app container has been started and after it has started accepting requests.
