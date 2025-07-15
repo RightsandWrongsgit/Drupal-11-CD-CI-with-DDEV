@@ -163,6 +163,8 @@ hooks:
     # No services are available but the disk is writeable.
     build: |
         set -e
+        chmod +x drush/platformsh_deploy_drupal.sh
+
     # The deploy hook runs after your application has been deployed and started.
     # Code cannot be modified at this point but the database is available.
     # The site is not accepting requests while this script runs so keep it
@@ -188,7 +190,9 @@ crons:
     drupal:
         spec: '*/19 * * * *'
         commands:
-            start: 'cd web ; drush core-cron'
+            start: 'cd web && ../vendor/bin/drush core-cron'
+            # Changed from below to above for container compatibility with running drush
+            # start: 'cd web ; drush core-cron'
 
 # Customizations to your PHP or Lisp runtime. More information: https://docs.platform.sh/create-apps/app-reference.html#runtime
 runtime:
