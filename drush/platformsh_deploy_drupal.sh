@@ -1,24 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DRUSH="./vendor/bin/drush"
-
+DRUSH="/app/vendor/bin/drush"
 cd /app/web
 
-# Check if site is installed
+# Check if Drupal is installed
 if $DRUSH status --field=bootstrap 2>/dev/null | grep -q 'Successful'; then
-  echo "✅ Drupal detected. Running deployment tasks..."
+  echo "✅ Drupal is installed. Running post-deploy tasks..."
 
-  $DRUSH -y cache-rebuild
+  $DRUSH -y cache:rebuild
   $DRUSH -y updatedb
 
   CONFIG_PATH=$($DRUSH php:eval "echo realpath(Drupal\\Core\\Site\\Settings::get('config_sync_directory'));")
   if [ -n "$CONFIG_PATH" ] && ls "$CONFIG_PATH"/*.yml >/dev/null 2>&1; then
-    echo "🗂 Config files found. Importing..."
-    $DRUSH -y config-import
+    echo "📦 Config sync files found. Importing..."
+    $DRUSH -y config:import
   else
-    echo "⚠️ No config files to import. Skipping."
+    echo "⚠️ No config sync files found. Skipping config:import."
   fi
 else
-  echo "🚫 Drupal not installed or bootstrap not successful. Skipping deploy tasks."
+  echo "🚫 Skipping deploy tasks: Drupal is not installed or not bootstrapped."
 fi
