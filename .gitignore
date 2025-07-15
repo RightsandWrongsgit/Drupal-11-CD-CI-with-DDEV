@@ -82,7 +82,9 @@ sites/*/private
 # See https://www.drupal.org/docs/develop/configuration-management/configuration-split for
 /.ddev/.db-dumps/
 # Do NOT ignore config/sync at all — we want the full directory in Git and on Platform.sh
-!/config/sync/
+# Ignore all config except tracked subfolders
+!/config/
+!/config/sync/**
 !/config/develop/*
 !/config/staged/*
 !/config/main/*
