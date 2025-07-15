@@ -21,7 +21,10 @@
 # CHATGPT MODIFIED TO IMPROVE CONTAINER USE AND ERROR HANDLING 
 set -euo pipefail
 
-DRUSH="./vendor/bin/drush"
+# Originally was below:
+# DRUSH="./vendor/bin/drush"
+DRUSH="/app/web/vendor/bin/drush"  # Alternative path if needed
+
 
 # Ensure Drupal is bootstrapped before running commands.
 if [ -n "$($DRUSH status --field=bootstrap 2>/dev/null)" ]; then
