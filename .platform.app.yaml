@@ -30,6 +30,10 @@ mounts:
     '/web/sites/default/files':
         source: local
         source_path: 'files'
+    # Add configuration access to the Platform.sh container
+    '/web/sites/default/files': 'shared:files'
+    '/config': 'shared:config'
+       
     # Drupal gets its own dedicated tmp directory. The settings.platformsh.php
     # file will automatically configure Drupal to use this directory.
     '/tmp':
