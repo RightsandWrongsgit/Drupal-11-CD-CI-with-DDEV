@@ -81,15 +81,8 @@ sites/*/private
 # as needed for each environment.
 # See https://www.drupal.org/docs/develop/configuration-management/configuration-split for
 /.ddev/.db-dumps/
-/config/sync/*
-!/config/sync/.gitkeep
-!/config/sync/.htaccess
-!/config/sync/core.extension.yml
-!/config/sync/system.site.yml
-!/config/sync/config_split.config_split.local.yml
-!/config/sync/config_split.config_split.develop.yml
-!/config/sync/config_split.config_split.staged.yml
-!/config/sync/config_split.config_split.main.yml
+# Do NOT ignore config/sync at all — we want the full directory in Git and on Platform.sh
+!/config/sync/
 !/config/develop/*
 !/config/staged/*
 !/config/main/*
