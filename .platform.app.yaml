@@ -28,9 +28,9 @@ mounts:
   '/private/config':
     source: local
     source_path: 'config'
-  '/private/config/sync':          # <-- Added mount for config sync
+  '/private/config':          # <-- Added mount for config sync
     source: local
-    source_path: 'config/sync'
+    source_path: 'config'
 
 build:
   flavor: composer
@@ -47,19 +47,32 @@ hooks:
   deploy: |
     set -e
 
+    CONFIG_PATH="/app/private/config/sync"
+    DEFAULT_CONFIG_PATH="/app/starter-config"
+
+    echo "📂 Ensuring config sync directory at $CONFIG_PATH exists"
+    if [ ! -d "$CONFIG_PATH" ]; then
+      echo "📁 Creating missing config sync directory..."
+      mkdir -p "$CONFIG_PATH"
+    fi
+
+    if [ -z "$(ls -A "$CONFIG_PATH" 2>/dev/null)" ]; then
+      echo "📦 Populating config sync from $DEFAULT_CONFIG_PATH..."
+      if [ -d "$DEFAULT_CONFIG_PATH" ]; then
+        cp -R "$DEFAULT_CONFIG_PATH"/* "$CONFIG_PATH"/ || echo "⚠️ Failed to populate default config"
+      else
+        echo "⚠️ Default config directory $DEFAULT_CONFIG_PATH not found"
+      fi
+    else
+      echo "✅ Config sync already present."
+    fi
+
     echo "🚀 Generating Drush config..."
     php ./drush/platformsh_generate_drush_yml.php
 
-    CONFIG_PATH="/app/private/config/sync"
-
-    echo "📂 Checking config sync directory at $CONFIG_PATH"
-    if [ -d "$CONFIG_PATH" ]; then
-      echo "🧼 Sanitizing UUIDs and _core sections..."
-      find "$CONFIG_PATH" -type f -exec sed -i 's/^uuid: .*/uuid: /' {} \;
-      find "$CONFIG_PATH" -type f -exec sed -i '/^_core:/,/^[^ ]/d' {} \;
-    else
-      echo "⚠️ Directory $CONFIG_PATH not found. Skipping config sanitization."
-    fi
+    echo "🧼 Sanitizing UUIDs and _core sections..."
+    find "$CONFIG_PATH" -type f -exec sed -i 's/^uuid: .*/uuid: /' {} \;
+    find "$CONFIG_PATH" -type f -exec sed -i '/^_core:/,/^[^ ]/d' {} \;
 
     echo "📥 Running config import with Drush..."
     php vendor/bin/drush config-import --source="$CONFIG_PATH" -y || echo "⚠️ Drush config-import failed."
@@ -68,6 +81,7 @@ hooks:
     cp drush/platformsh_deploy_drupal.sh /tmp/deploy.sh
     chmod +x /tmp/deploy.sh
     /tmp/deploy.sh
+
 
 web:
   locations:
