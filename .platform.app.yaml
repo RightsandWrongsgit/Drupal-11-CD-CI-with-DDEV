@@ -40,32 +40,22 @@ hooks:
 
   deploy: |
     set -e
-
-    echo "DEBUG: Current working directory:"
-    pwd
-
-    echo "DEBUG: Contents of /app:"
-    ls -la /app
-
-    echo "DEBUG: Contents of /app/private:"
-    ls -la /app/private || echo "/app/private not found"
-
-    echo "DEBUG: Contents of /app/private/config:"
-    ls -la /app/private/config || echo "/app/private/config not found"
-
-    echo "DEBUG: Contents of /app/private/config/sync:"
-    ls -la /app/private/config/sync || echo "/app/private/config/sync not found"
-
     php ./drush/platformsh_generate_drush_yml.php
 
+    # DEBUG: list relevant directories
+    echo "DEBUG: Current working directory:"
+    pwd
+    echo "DEBUG: Contents of /app/private/config/sync:"
+    ls -alh /app/private/config/sync || echo "/app/private/config/sync not found"
+
     # Sanitize config files in the private config directory
-    find ../private/config/sync -type f -exec sed -i '' -e 's/uuid: .*/uuid: /' {} \;
+    find /app/private/config/sync -type f -exec sed -i '' -e 's/uuid: .*/uuid: /' {} \;
 
     # Import configuration from the correct directory
-    drush config-import --source=../private/config/sync -y
+    drush config-import --source=/app/private/config/sync -y
 
     bash drush/platformsh_deploy_drupal.sh
-
+  
 web:
   locations:
     '/':
