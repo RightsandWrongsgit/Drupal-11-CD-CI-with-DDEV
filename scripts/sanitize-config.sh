@@ -1,12 +1,28 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 
-echo "🔧 Sanitizing UUIDs and _core sections from config/sync..."
+CONFIG_DIR="${1:-/app/private/config/sync}"
 
-# Strip `uuid:` lines
-find config/sync -type f -name "*.yml" -exec sed -i '' '/^uuid: /d' {} +
+echo "🔧 Sanitizing UUIDs and _core sections in: $CONFIG_DIR"
 
-# Remove `_core:` and its indented block
-find config/sync -type f -name "*.yml" -exec sed -i '' '/^_core:$/,/^[^ ]/d' {} +
+if [ ! -d "$CONFIG_DIR" ]; then
+  echo "⚠️ Directory $CONFIG_DIR does not exist. Skipping sanitation."
+  exit 0
+fi
+
+# Remove `uuid:` lines
+find "$CONFIG_DIR" -type f -name "*.yml" -print0 | while IFS= read -r -d '' file; do
+  sed -i '/^uuid: /d' "$file"
+done
+
+# Remove `_core:` and its indented block (until the next top-level key)
+find "$CONFIG_DIR" -type f -name "*.yml" -print0 | while IFS= read -r -d '' file; do
+  awk '
+    BEGIN { skip = 0 }
+    /^_core:$/ { skip = 1; next }
+    /^[^[:space:]]/ { skip = 0 }
+    !skip { print }
+  ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
+done
 
 echo "✅ Config sanitized."

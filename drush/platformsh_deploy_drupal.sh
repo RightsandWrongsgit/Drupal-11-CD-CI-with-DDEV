@@ -2,6 +2,8 @@
 set -euo pipefail
 
 DRUSH="/app/vendor/bin/drush"
+CONFIG_SYNC_DIR="/app/private/config/sync"
+
 cd /app/web
 
 # Check if Drupal is installed
@@ -11,15 +13,14 @@ if $DRUSH status --field=bootstrap 2>/dev/null | grep -q 'Successful'; then
   $DRUSH -y cache:rebuild
   $DRUSH -y updatedb
 
-  CONFIG_PATH=$($DRUSH php:eval "echo realpath(Drupal\\Core\\Site\\Settings::get('config_sync_directory'));")
-  if [ -n "$CONFIG_PATH" ] && ls "$CONFIG_PATH"/*.yml >/dev/null 2>&1; then
-    echo "📦 Config sync files found. Sanitizing before import..."
-    /app/scripts/sanitize-config.sh
+  if [ -d "$CONFIG_SYNC_DIR" ] && ls "$CONFIG_SYNC_DIR"/*.yml >/dev/null 2>&1; then
+    echo "📦 Config sync files found in $CONFIG_SYNC_DIR. Sanitizing before import..."
+    /app/scripts/sanitize-config.sh "$CONFIG_SYNC_DIR"
 
-    echo "📦 Importing sanitized config..."
-    $DRUSH -y config:import
+    echo "📥 Importing sanitized config..."
+    $DRUSH -y config:import --source="$CONFIG_SYNC_DIR"
   else
-    echo "⚠️ No config sync files found. Skipping config:import."
+    echo "⚠️ No config sync files found in $CONFIG_SYNC_DIR. Skipping config:import."
   fi
 else
   echo "🚫 Skipping deploy tasks: Drupal is not installed or not bootstrapped."
