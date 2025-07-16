@@ -27,6 +27,8 @@ disk: 2048
 # The 'mounts' describe writable, persistent filesystem mounts in the application.
 
 mounts:
+    '/private/config/sync': 'shared:files/private/config/sync'
+
   # The default Drupal files directory.
     '/web/sites/default/files': 
       source: local

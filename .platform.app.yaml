@@ -25,9 +25,9 @@ mounts:
   '/drush-backups':
     source: local
     source_path: 'drush-backups'
-  '/private/config':
+  '/private/config/sync':
     source: local
-    source_path: 'config'
+    source_path: 'config/sync'
 
 build:
   flavor: composer
