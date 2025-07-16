@@ -1,4 +1,4 @@
-# Complete list of all available properties: https://docs.platform.sh/create-apps/app-reference.html
+# .platform.app.yaml
 
 name: 'drupal'
 type: 'php:8.3'
@@ -25,9 +25,9 @@ mounts:
   '/drush-backups':
     source: local
     source_path: 'drush-backups'
-  '/private/config/sync':
+  '/private/config':
     source: local
-    source_path: 'config/sync'
+    source_path: 'config'
 
 build:
   flavor: composer
@@ -40,23 +40,26 @@ hooks:
 
   deploy: |
     set -e
+    echo "Running deploy hook..."
+
+    # Generate Drush configuration
     php ./drush/platformsh_generate_drush_yml.php
 
-    # DEBUG: list relevant directories
     echo "DEBUG: Current working directory:"
     pwd
+
     echo "DEBUG: Contents of /app/private/config/sync:"
     ls -alh /app/private/config/sync || echo "/app/private/config/sync not found"
 
-    # Sanitize config files in the private config directory
+    # Sanitize config UUIDs before import
     find /app/private/config/sync -type f -exec sed -i '' -e 's/uuid: .*/uuid: /' {} \;
 
-    # Import configuration from the correct directory
+    # Import sanitized configuration
     drush config-import --source=/app/private/config/sync -y
 
+    # Custom deploy tasks
     bash drush/platformsh_deploy_drupal.sh
 
-  
 web:
   locations:
     '/':
@@ -102,9 +105,3 @@ runtime:
 dependencies:
   php:
     composer/composer: "^2.7.0"
-
-source:
-  operations:
-    auto-update:
-      command: |
-        curl -fsS https://raw.githubusercontent.com/platformsh/source-operations/main/setup.sh | { bash /dev/fd/3 sop-autoupdate; } 3<&0
