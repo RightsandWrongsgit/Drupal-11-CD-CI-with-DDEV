@@ -35,26 +35,20 @@ build:
 hooks:
   build: |
     set -e
-    echo "🔧 Running build hook..."
-
     if [ -f .platform/.environment ]; then
-      echo "🌍 Loading .platform/.environment..."
       . .platform/.environment
     fi
-
-    chmod +x drush/platformsh_deploy_drupal.sh || true
-    chmod +x scripts/*.sh || true
+    chmod +x drush/platformsh_deploy_drupal.sh
+    chmod +x scripts/*.sh
 
   deploy: |
     set -e
-    echo "🚀 Running deploy hook..."
-
+    # Ensure the environment file is sourced BEFORE calling drush
     if [ -f .platform/.environment ]; then
-      echo "🌍 Loading .platform/.environment..."
       . .platform/.environment
     fi
 
-    echo "⚙️ Generating Drush config..."
+    echo "🚀 Generating Drush config..."
     php ./drush/platformsh_generate_drush_yml.php
 
     echo "📂 Checking config sync directory:"
@@ -66,8 +60,9 @@ hooks:
     echo "📥 Running config import with Drush..."
     drush config-import --source=/app/private/config/sync -y
 
-    echo "🛠 Running post-deploy script..."
+    chmod +x drush/platformsh_deploy_drupal.sh
     ./drush/platformsh_deploy_drupal.sh
+
 
 web:
   locations:
