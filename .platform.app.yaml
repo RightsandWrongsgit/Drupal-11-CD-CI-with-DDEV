@@ -40,25 +40,24 @@ hooks:
 
   deploy: |
     set -e
-    echo "Running deploy hook..."
 
-    # Generate Drush configuration
+    # Generate Drush config
     php ./drush/platformsh_generate_drush_yml.php
 
-    echo "DEBUG: Current working directory:"
-    pwd
+    echo "DEBUG: Working dir: $(pwd)"
+    echo "DEBUG: /app/private/config/sync:"
+    ls -alh /app/private/config/sync || echo "Not found"
 
-    echo "DEBUG: Contents of /app/private/config/sync:"
-    ls -alh /app/private/config/sync || echo "/app/private/config/sync not found"
-
-    # Sanitize config UUIDs before import
+    # Sanitize UUIDs
     find /app/private/config/sync -type f -exec sed -i '' -e 's/uuid: .*/uuid: /' {} \;
 
-    # Import sanitized configuration
-    drush config-import --source=/app/private/config/sync -y
+    # Use full path to Drush
+    ../vendor/bin/drush config-import --source=/app/private/config/sync -y
 
-    # Custom deploy tasks
-    bash drush/platformsh_deploy_drupal.sh
+    # Run deploy script with full path
+    chmod +x drush/platformsh_deploy_drupal.sh
+    ./drush/platformsh_deploy_drupal.sh
+
 
 web:
   locations:
