@@ -95,9 +95,7 @@ sites/*/private
 !/config/local/
 !/config/local/**
 
-# Track starter config (used only for seeding)
-!/starter-config/
 
 # Ignore active runtime config sync (mounted at runtime)
-private/config/sync/*
+/private/config/sync/*
 !private/config/sync/.gitkeep

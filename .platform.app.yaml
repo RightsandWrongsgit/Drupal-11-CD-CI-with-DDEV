@@ -25,9 +25,10 @@ mounts:
   '/drush-backups':
     source: local
     source_path: 'drush-backups'
-  '/private/config':
+  /private/config/sync:
     source: local
-    source_path: 'config'
+    source_path: config/sync
+
 
 build:
   flavor: composer
@@ -41,43 +42,44 @@ hooks:
     chmod +x drush/platformsh_deploy_drupal.sh
     chmod +x scripts/*.sh
 
-  deploy: |
-    set -e
+deploy: |
+  set -e
 
-    CONFIG_PATH="/app/private/config/sync"
-    DEFAULT_CONFIG_PATH="/app/starter-config"
+  CONFIG_PATH="/app/private/config/sync"
+  DEFAULT_CONFIG_PATH="/app/config/sync"
 
-    echo "📂 Ensuring config sync directory at $CONFIG_PATH exists"
-    if [ ! -d "$CONFIG_PATH" ]; then
-      echo "📁 Creating missing config sync directory..."
-      mkdir -p "$CONFIG_PATH"
-    fi
+  echo "📂 Ensuring config sync directory at $CONFIG_PATH exists"
+  if [ ! -d "$CONFIG_PATH" ]; then
+    echo "📁 Creating missing config sync directory..."
+    mkdir -p "$CONFIG_PATH"
+  fi
 
-    if [ -z "$(ls -A "$CONFIG_PATH" 2>/dev/null)" ]; then
-      echo "📦 Populating config sync from $DEFAULT_CONFIG_PATH..."
-      if [ -d "$DEFAULT_CONFIG_PATH" ]; then
-        cp -R "$DEFAULT_CONFIG_PATH"/* "$CONFIG_PATH"/ || echo "⚠️ Failed to populate default config"
-      else
-        echo "⚠️ Default config directory $DEFAULT_CONFIG_PATH not found"
-      fi
+  if [ -z "$(ls -A "$CONFIG_PATH" 2>/dev/null)" ]; then
+    echo "📦 Populating config sync from $DEFAULT_CONFIG_PATH..."
+    if [ -d "$DEFAULT_CONFIG_PATH" ]; then
+      cp -R "$DEFAULT_CONFIG_PATH"/* "$CONFIG_PATH"/ || echo "⚠️ Failed to populate config sync from tracked files"
     else
-      echo "✅ Config sync already present."
+      echo "⚠️ Default config directory $DEFAULT_CONFIG_PATH not found"
     fi
+  else
+    echo "✅ Config sync already present."
+  fi
 
-    echo "🚀 Generating Drush config..."
-    php ./drush/platformsh_generate_drush_yml.php
+  echo "🚀 Generating Drush config..."
+  php ./drush/platformsh_generate_drush_yml.php || echo "⚠️ Drush config generation failed."
 
-    echo "🧼 Sanitizing UUIDs and _core sections..."
-    find "$CONFIG_PATH" -type f -exec sed -i 's/^uuid: .*/uuid: /' {} \;
-    find "$CONFIG_PATH" -type f -exec sed -i '/^_core:/,/^[^ ]/d' {} \;
+  echo "🧼 Sanitizing UUIDs and _core sections..."
+  find "$CONFIG_PATH" -type f -exec sed -i 's/^uuid: .*/uuid: /' {} \;
+  find "$CONFIG_PATH" -type f -exec sed -i '/^_core:/,/^[^ ]/d' {} \;
 
-    echo "📥 Running config import with Drush..."
-    php vendor/bin/drush config-import --source="$CONFIG_PATH" -y || echo "⚠️ Drush config-import failed."
+  echo "📥 Running config import with Drush..."
+  php vendor/bin/drush config-import --source="$CONFIG_PATH" -y || echo "⚠️ Drush config-import failed."
 
-    echo "▶️ Running deploy script..."
-    cp drush/platformsh_deploy_drupal.sh /tmp/deploy.sh
-    chmod +x /tmp/deploy.sh
-    /tmp/deploy.sh
+  echo "▶️ Running deploy script..."
+  cp drush/platformsh_deploy_drupal.sh /tmp/deploy.sh
+  chmod +x /tmp/deploy.sh
+  /tmp/deploy.sh
+
 
 
 web:
