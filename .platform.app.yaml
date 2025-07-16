@@ -47,22 +47,24 @@ hooks:
     echo "🚀 Generating Drush config..."
     php ./drush/platformsh_generate_drush_yml.php
 
-    echo "📂 Checking config sync directory:"
-    ls -alh /app/private/config/sync || echo "Not found"
+    CONFIG_PATH="/app/private/config/sync"
 
-    echo "🧼 Sanitizing UUIDs..."
-    find /app/private/config/sync -type f -exec sed -i 's/^uuid: .*/uuid: /' {} \;
+    echo "📂 Checking config sync directory at $CONFIG_PATH"
+    if [ -d "$CONFIG_PATH" ]; then
+      echo "🧼 Sanitizing UUIDs and _core sections..."
+      find "$CONFIG_PATH" -type f -exec sed -i 's/^uuid: .*/uuid: /' {} \;
+      find "$CONFIG_PATH" -type f -exec sed -i '/^_core:/,/^[^ ]/d' {} \;
+    else
+      echo "⚠️ Directory $CONFIG_PATH not found. Skipping config sanitization."
+    fi
 
     echo "📥 Running config import with Drush..."
-    php vendor/bin/drush config-import --source=/app/private/config/sync -y
+    php vendor/bin/drush config-import --source="$CONFIG_PATH" -y || echo "⚠️ Drush config-import failed."
 
     echo "▶️ Running deploy script..."
     cp drush/platformsh_deploy_drupal.sh /tmp/deploy.sh
     chmod +x /tmp/deploy.sh
     /tmp/deploy.sh
-
-
-
 
 web:
   locations:
@@ -72,40 +74,4 @@ web:
       passthru: '/index.php'
       allow: false
       rules:
-        '\.(avif|webp|jpe?g|png|gif|svgz?|css|js|map|ico|bmp|eot|woff2?|otf|ttf)$':
-          allow: true
-        '^/robots\.txt$':
-          allow: true
-        '^/sitemap\.xml$':
-          allow: true
-        '^/sites/sites\.php$':
-          scripts: false
-        '^/sites/[^/]+/settings.*?\.php$':
-          scripts: false
-
-    '/sites/default/files':
-      allow: true
-      expires: 5m
-      passthru: '/index.php'
-      root: 'web/sites/default/files'
-      scripts: false
-      rules:
-        '^/sites/default/files/(css|js)':
-          expires: 2w
-
-crons:
-  drupal:
-    spec: '*/19 * * * *'
-    commands:
-      start: 'cd web && ../vendor/bin/drush core-cron'
-
-runtime:
-  extensions:
-    - redis
-    - sodium
-    - apcu
-    - blackfire
-
-dependencies:
-  php:
-    composer/composer: "^2.7.0"
+        '\.(avif|webp|jpe?g|png|gif|svgz?|css|js|map|ico|bmp|eot|woff2?|ot
