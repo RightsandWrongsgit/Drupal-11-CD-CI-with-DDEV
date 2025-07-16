@@ -35,25 +35,38 @@ build:
 hooks:
   build: |
     set -e
-    chmod +x drush/platformsh_deploy_drupal.sh scripts/*.sh
+    echo "🔧 Running build hook..."
+
+    if [ -f .platform/.environment ]; then
+      echo "🌍 Loading .platform/.environment..."
+      . .platform/.environment
+    fi
+
+    chmod +x drush/platformsh_deploy_drupal.sh || true
+    chmod +x scripts/*.sh || true
 
   deploy: |
     set -e
+    echo "🚀 Running deploy hook..."
 
-    # Generate Drush config
+    if [ -f .platform/.environment ]; then
+      echo "🌍 Loading .platform/.environment..."
+      . .platform/.environment
+    fi
+
+    echo "⚙️ Generating Drush config..."
     php ./drush/platformsh_generate_drush_yml.php
 
-    echo "DEBUG: Working dir: $(pwd)"
-    echo "DEBUG: /app/private/config/sync:"
+    echo "📂 Checking config sync directory:"
     ls -alh /app/private/config/sync || echo "Not found"
 
-    # Sanitize UUIDs for config import
+    echo "🧼 Sanitizing UUIDs..."
     find /app/private/config/sync -type f -exec sed -i 's/^uuid: .*/uuid: /' {} \;
 
-    # Import config
-    /app/vendor/bin/drush config-import --source=/app/private/config/sync -y
+    echo "📥 Running config import with Drush..."
+    drush config-import --source=/app/private/config/sync -y
 
-    # Run deploy script
+    echo "🛠 Running post-deploy script..."
     ./drush/platformsh_deploy_drupal.sh
 
 web:
@@ -101,4 +114,3 @@ runtime:
 dependencies:
   php:
     composer/composer: "^2.7.0"
-
