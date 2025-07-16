@@ -38,9 +38,13 @@ hooks:
     chmod +x drush/platformsh_deploy_drupal.sh
     chmod +x scripts/*.sh
 
-  deploy: |
+  deploy: | 
     set -e
     php ./drush/platformsh_generate_drush_yml.php
+    # Sanitize config files in the private config directory
+    find ../private/config/sync -type f -exec sed -i '' -e 's/uuid: .*/uuid: /' {} \;
+    # Import configuration from the correct directory
+    drush config-import --source=../private/config/sync -y
     bash drush/platformsh_deploy_drupal.sh
 
 web:
