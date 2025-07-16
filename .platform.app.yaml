@@ -55,6 +55,7 @@ hooks:
     drush config-import --source=/app/private/config/sync -y
 
     bash drush/platformsh_deploy_drupal.sh
+
   
 web:
   locations:
