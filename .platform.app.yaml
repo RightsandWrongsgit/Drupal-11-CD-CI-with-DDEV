@@ -28,6 +28,9 @@ mounts:
   '/private/config':
     source: local
     source_path: 'config'
+  '/private/config/sync':          # <-- Added mount for config sync
+    source: local
+    source_path: 'config/sync'
 
 build:
   flavor: composer
