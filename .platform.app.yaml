@@ -35,8 +35,7 @@ build:
 hooks:
   build: |
     set -e
-    chmod +x drush/platformsh_deploy_drupal.sh
-    chmod +x scripts/*.sh
+    chmod +x drush/platformsh_deploy_drupal.sh scripts/*.sh
 
   deploy: |
     set -e
@@ -48,16 +47,14 @@ hooks:
     echo "DEBUG: /app/private/config/sync:"
     ls -alh /app/private/config/sync || echo "Not found"
 
-    # Sanitize UUIDs
-    find /app/private/config/sync -type f -exec sed -i '' -e 's/uuid: .*/uuid: /' {} \;
+    # Sanitize UUIDs for config import
+    find /app/private/config/sync -type f -exec sed -i 's/^uuid: .*/uuid: /' {} \;
 
-    # Use full path to Drush
-    ../vendor/bin/drush config-import --source=/app/private/config/sync -y
+    # Import config
+    /app/vendor/bin/drush config-import --source=/app/private/config/sync -y
 
-    # Run deploy script with full path
-    chmod +x drush/platformsh_deploy_drupal.sh
+    # Run deploy script
     ./drush/platformsh_deploy_drupal.sh
-
 
 web:
   locations:
@@ -104,3 +101,4 @@ runtime:
 dependencies:
   php:
     composer/composer: "^2.7.0"
+
