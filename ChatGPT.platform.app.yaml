@@ -1,0 +1,127 @@
+# .platform.app.yaml
+
+name: 'drupal'
+type: 'php:8.3'
+
+relationships:
+  database: 'db:mysql'
+  redis: 'cache:redis'
+
+disk: 2048
+
+mounts:
+  '/web/sites/default/files':
+    source: local
+    source_path: 'files'
+  '/tmp':
+    source: local
+    source_path: 'tmp'
+  '/private':
+    source: local
+    source_path: 'private'
+  '/.drush':
+    source: local
+    source_path: 'drush'
+  '/drush-backups':
+    source: local
+    source_path: 'drush-backups'
+  /private/config/sync:
+    source: local
+    source_path: config/sync
+
+
+build:
+  flavor: composer
+
+hooks:
+  build: |
+    set -e
+    if [ -f .platform/.environment ]; then
+      . .platform/.environment
+    fi
+    chmod +x drush/platformsh_deploy_drupal.sh
+    chmod +x scripts/*.sh
+
+  deploy: |
+    set -e
+
+    CONFIG_PATH="/app/private/config/sync"
+    DEFAULT_CONFIG_PATH="/app/config/sync"
+
+    echo "📂 Ensuring config sync directory at $CONFIG_PATH exists"
+    if [ ! -d "$CONFIG_PATH" ]; then
+      echo "📁 Creating missing config sync directory..."
+      mkdir -p "$CONFIG_PATH"
+    fi
+
+    if [ -z "$(ls -A "$CONFIG_PATH" 2>/dev/null)" ]; then
+      echo "📦 Populating config sync from $DEFAULT_CONFIG_PATH..."
+      if [ -d "$DEFAULT_CONFIG_PATH" ]; then
+        cp -R "$DEFAULT_CONFIG_PATH"/* "$CONFIG_PATH"/ || echo "⚠️ Failed to populate config sync from tracked files"
+      else
+        echo "⚠️ Default config directory $DEFAULT_CONFIG_PATH not found"
+      fi
+    else
+      echo "✅ Config sync already present."
+    fi
+
+    echo "🚀 Generating Drush config..."
+    php ./drush/platformsh_generate_drush_yml.php || echo "⚠️ Drush config generation failed."
+
+    echo "🧼 Sanitizing UUIDs and _core sections..."
+    find "$CONFIG_PATH" -type f -exec sed -i 's/^uuid: .*/uuid: /' {} \;
+    find "$CONFIG_PATH" -type f -exec sed -i '/^_core:/,/^[^ ]/d' {} \;
+
+    echo "📥 Running config import with Drush..."
+    php vendor/bin/drush config-import --source="$CONFIG_PATH" -y || echo "⚠️ Drush config-import failed."
+
+    echo "▶️ Running deploy script..."
+    cp drush/platformsh_deploy_drupal.sh /tmp/deploy.sh
+    chmod +x /tmp/deploy.sh
+    /tmp/deploy.sh
+
+web:
+  locations:
+    '/':
+      root: 'web'
+      expires: 5m
+      passthru: '/index.php'
+      allow: false
+      rules:
+        '\.(avif|webp|jpe?g|png|gif|svgz?|css|js|map|ico|bmp|eot|woff2?|otf|ttf)$':
+          allow: true
+        '^/robots\.txt$':
+          allow: true
+        '^/sitemap\.xml$':
+          allow: true
+        '^/sites/sites\.php$':
+          scripts: false
+        '^/sites/[^/]+/settings.*?\.php$':
+          scripts: false
+
+    '/sites/default/files':
+      allow: true
+      expires: 5m
+      passthru: '/index.php'
+      root: 'web/sites/default/files'
+      scripts: false
+      rules:
+        '^/sites/default/files/(css|js)':
+          expires: 2w
+
+crons:
+  drupal:
+    spec: '*/19 * * * *'
+    commands:
+      start: 'cd web && ../vendor/bin/drush core-cron'
+
+runtime:
+  extensions:
+    - redis
+    - sodium
+    - apcu
+    - blackfire
+
+dependencies:
+  php:
+    composer/composer: "^2.7.0"
