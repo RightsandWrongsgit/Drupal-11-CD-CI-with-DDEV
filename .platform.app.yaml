@@ -25,15 +25,11 @@ relationships:
 disk: 2048
 
 # The 'mounts' describe writable, persistent filesystem mounts in the application.
-
 mounts:
-    '/private/config/sync': 'shared:files/private/config/sync'
-
-  # The default Drupal files directory.
-    '/web/sites/default/files': 
-      source: local
-      source_path: 'files'
-  
+    # The default Drupal files directory.
+    '/web/sites/default/files':
+        source: local
+        source_path: 'files'
     # Drupal gets its own dedicated tmp directory. The settings.platformsh.php
     # file will automatically configure Drupal to use this directory.
     '/tmp':
@@ -54,11 +50,9 @@ mounts:
         source: local
         source_path: 'drush-backups'
 
+# Configuration of the build of this application.
 build:
-  flavor: Composer
-  commands:
-    - cp -R config/sync config/sync_backup
-
+    flavor: composer
 
 # The web key configures the web server running in front of your app.
 # More information: https://docs.platform.sh/create-apps/app-reference.html#web
@@ -169,9 +163,6 @@ hooks:
     # No services are available but the disk is writeable.
     build: |
         set -e
-        chmod +x drush/platformsh_deploy_drupal.sh
-        chmod +x scripts/*.sh
-
     # The deploy hook runs after your application has been deployed and started.
     # Code cannot be modified at this point but the database is available.
     # The site is not accepting requests while this script runs so keep it
@@ -183,9 +174,8 @@ hooks:
         #   - `cache-rebuild`
         #   - `updatedb`
         #   - and if config files are present, `config-import`
-        #
-        bash drush/platformsh_deploy_drupal.sh
-     # bash $PLATFORM_APP_DIR/drush/platformsh_deploy_drupal.sh
+        cd web
+        bash $PLATFORM_APP_DIR/drush/platformsh_deploy_drupal.sh
 
     # The post_deploy hook is run after the app container has been started and after it has started accepting requests.
     # More information: https://docs.platform.sh/create-apps/hooks/hooks-comparison.html#deploy-hook
@@ -198,9 +188,7 @@ crons:
     drupal:
         spec: '*/19 * * * *'
         commands:
-            start: 'cd web && ../vendor/bin/drush core-cron'
-            # Changed from below to above for container compatibility with running drush
-            # start: 'cd web ; drush core-cron'
+            start: 'cd web ; drush core-cron'
 
 # Customizations to your PHP or Lisp runtime. More information: https://docs.platform.sh/create-apps/app-reference.html#runtime
 runtime:
