@@ -30,15 +30,16 @@ $settings['state_cache'] = TRUE;
 //
 // This is defined inside the read-only "config" directory, deployed via Git.
 // $settings['config_sync_directory'] = '../config/sync';
-
-if (getenv('PLATFORM_PROJECT') !== false) {
-  // Running on Platform.sh
-  $settings['config_sync_directory'] = '../private/config/sync';
-}
-else {
-  // Running locally (e.g. DDEV)
-  $settings['config_sync_directory'] = '../config/sync';
-}
+/** 
+*if (getenv('PLATFORM_PROJECT') !== false) {
+*  // Running on Platform.sh
+*  $settings['config_sync_directory'] = '../private/config/sync';
+* *}
+* else {
+*  // Running locally (e.g. DDEV)
+*  $settings['config_sync_directory'] = '../config/sync';
+* }
+ */
 
 // Config splits are activated based on the environment (local, develop, staged, main).
 $config['config_split.config_split.local']['status'] = FALSE;
