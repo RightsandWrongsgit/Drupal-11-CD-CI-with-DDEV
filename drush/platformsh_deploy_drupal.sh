@@ -1,27 +1,19 @@
 #!/usr/bin/env bash
-set -euo pipefail
+#
+# We don't want to run drush commands if drupal isn't installed.
+# Similarly, we don't want to attempt to run config-import if there aren't any config files to import
+# @todo expand further to pass --uri for all sites, with an eye towards multisite
+#
 
-DRUSH="/app/vendor/bin/drush"
-CONFIG_SYNC_DIR="/app/private/config/sync"
 
-cd /app/web
-
-# Check if Drupal is installed
-if $DRUSH status --field=bootstrap 2>/dev/null | grep -q 'Successful'; then
-  echo "✅ Drupal is installed. Running post-deploy tasks..."
-
-  $DRUSH -y cache:rebuild
-  $DRUSH -y updatedb
-
-  if [ -d "$CONFIG_SYNC_DIR" ] && ls "$CONFIG_SYNC_DIR"/*.yml >/dev/null 2>&1; then
-    echo "📦 Config sync files found in $CONFIG_SYNC_DIR. Sanitizing before import..."
-    /app/scripts/sanitize-config.sh "$CONFIG_SYNC_DIR"
-
-    echo "📥 Importing sanitized config..."
-    $DRUSH -y config:import --source="$CONFIG_SYNC_DIR"
+if [ -n "$(drush status --field=bootstrap)" ]; then
+  drush -y cache-rebuild
+  drush -y updatedb
+  if [ -n "$(ls $(drush php:eval "echo realpath(Drupal\Core\Site\Settings::get('config_sync_directory'));")/*.yml 2>/dev/null)" ]; then
+    drush -y config-import
   else
-    echo "⚠️ No config sync files found in $CONFIG_SYNC_DIR. Skipping config:import."
+    echo "No config to import. Skipping."
   fi
 else
-  echo "🚫 Skipping deploy tasks: Drupal is not installed or not bootstrapped."
+  echo "Drupal not installed. Skipping standard Drupal deploy steps"
 fi
