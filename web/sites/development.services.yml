@@ -1,25 +1,39 @@
 # Local development services.
 #
-# The development.services.yml file allows the developer to override
-# container parameters for debugging.
+# This file allows the developer to override container parameters and
+# service definitions for debugging and local development.
 #
-# To activate this feature, follow the instructions at the top of the
-# 'example.settings.local.php' file, which sits next to this file.
+# To activate this feature, settings.local.php must include:
+# $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
 #
-# Be aware that in Drupal's configuration system, all the files that
-# provide container definitions are merged using a shallow merge approach
-# within \Drupal\Core\DependencyInjection\YamlFileLoader.
-# This means that if you want to override any value of a parameter, the
-# whole parameter array needs to be copied from
-# sites/default/default.services.yml or from core/core.services.yml file.
+# Remember that in Drupal's container, all YML files are merged using a
+# shallow merge. If you override a parameter, you must provide the full
+# parameter definition.
+
 parameters:
+  # Enable Twig debugging. This provides theme information in HTML comments.
+  twig.config:
+    debug: true
+    auto_reload: true
+    cache: false
+  
+  # Enable HTTP response debug headers for cacheability troubleshooting.
   http.response.debug_cacheability_headers: true
+
 services:
+  # Use the null cache backend for bins specified in settings.local.php.
+  # It is defined here so the class is always available.
   cache.backend.null:
     class: Drupal\Core\Cache\NullBackendFactory
+  
+  # A custom logger channel for the configuration schema checker.
   logger.channel.config_schema:
     parent: logger.channel_base
-    arguments: [ 'config_schema' ]
+    arguments: ['config_schema']
+
+  # Enable a lenient configuration schema checker. This is a debugging tool
+  # that helps identify config schema issues during development without
+  # stopping the site.
   config.schema_checker:
     class: Drupal\Core\Config\Development\LenientConfigSchemaChecker
     arguments:
@@ -28,3 +42,14 @@ services:
       - '@logger.channel.config_schema'
     tags:
       - { name: event_subscriber }
+
+  # Example for Webprofiler.
+  # This section provides an example of how to register services for a
+  # development module like Webprofiler. The module must be enabled and
+  # excluded from configuration exports via settings.local.php.
+  # webprofiler.logger:
+  #   class: Drupal\Core\Logger\LoggerChannel
+  #   arguments: ['webprofiler']
+  #   tags:
+  #     - { name: logger.channel }
+
