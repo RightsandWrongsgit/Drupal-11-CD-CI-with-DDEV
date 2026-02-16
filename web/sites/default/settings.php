@@ -99,7 +99,7 @@ switch ($platform_environment) {
     // Dynamic stage_file_proxy origin for local env using Platform.sh relationships (if available).
     $config['stage_file_proxy.settings']['origin'] = '';
     if (getenv('PLATFORM_RELATIONSHIPS')) {
-      $relationships = json_decode(base64_decode(getenv('PLATFORM_RELATIONSHIPS')), TRUE);
+      $relationships = json_decode(getenv('PLATFORM_RELATIONSHIPS'), TRUE);
       if (!empty($relationships['website'])) {
         $config['stage_file_proxy.settings']['origin'] = 'https://' . $relationships['website'][0]['host'];
       }
