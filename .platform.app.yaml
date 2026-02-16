@@ -16,13 +16,14 @@ type: "php:8.3"
 # The left-hand side is the name of the relationship as it will be exposed
 # to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
 # side is in the form `<service name>:<endpoint name>`.
+# Commented out lines 22, 23, and 26 because they are more properly in the services.yml file
 # More information: https://docs.platform.sh/create-apps/app-reference.html#relationships
-relationships:
-    database: 'db:mysql'
-    redis: 'cache:redis'
+# relationships:
+#     database: 'db:mysql'
+#     redis: 'cache:redis'
 
 # The size of the persistent disk of the application (in MB). Minimum value is 128.
-disk: 2048
+# disk: 2048
 
 # The 'mounts' describe writable, persistent filesystem mounts in the application.
 mounts:
