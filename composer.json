@@ -1,6 +1,6 @@
 {
   "name": "platformsh/drupal11",
-  "description": "This template builds Drupal 11 for Platform.sh based the \"Drupal Recommended\" Composer project.",
+  "description": "Drupal 11 project for Platform.sh with Redis, Environment Indicator, Stage File Proxy, and Structure Sync.",
   "type": "project",
   "license": "GPL-2.0-or-later",
   "homepage": "https://www.drupal.org/project/drupal",
@@ -11,7 +11,7 @@
   "repositories": [
     {
       "type": "composer",
-      "url": "https://packages.drupal.org/8"
+      "url": "https://packages.drupal.org/9"
     },
     {
       "type": "path",
@@ -24,13 +24,14 @@
   "require": {
     "composer/installers": "^2.0",
     "drupal/config_split": "^2.0",
-    "drupal/config_suite": "2.x-dev@dev",
+    "drupal/config_suite": "^2.0",
     "drupal/core-composer-scaffold": "^11.2",
     "drupal/core-project-message": "^11.2",
     "drupal/core-recommended": "^11.2",
     "drupal/environment_indicator": "^4.0",
     "drupal/stage_file_proxy": "^3.1",
     "drupal/structure_sync": "^2.0",
+    "drupal/redis": "^1.0",
     "drush/drush": "^13.6",
     "platformsh/config-reader": "^3.0"
   },
@@ -52,59 +53,3 @@
   },
   "extra": {
     "drupal-scaffold": {
-      "locations": {
-        "web-root": "web/"
-      }
-    },
-    "installer-paths": {
-      "web/core": [
-        "type:drupal-core"
-      ],
-      "web/libraries/{$name}": [
-        "type:drupal-library"
-      ],
-      "web/modules/contrib/{$name}": [
-        "type:drupal-module"
-      ],
-      "web/profiles/contrib/{$name}": [
-        "type:drupal-profile"
-      ],
-      "web/themes/contrib/{$name}": [
-        "type:drupal-theme"
-      ],
-      "drush/Commands/contrib/{$name}": [
-        "type:drupal-drush"
-      ],
-      "web/modules/custom/{$name}": [
-        "type:drupal-custom-module"
-      ],
-      "web/profiles/custom/{$name}": [
-        "type:drupal-custom-profile"
-      ],
-      "web/themes/custom/{$name}": [
-        "type:drupal-custom-theme"
-      ]
-    },
-    "drupal-core-project-message": {
-      "include-keys": [
-        "homepage",
-        "support"
-      ],
-      "post-create-project-cmd-message": [
-        "<bg=blue;fg=white>                                                         </>",
-        "<bg=blue;fg=white>  Congratulations, you\u2019ve installed the Drupal codebase  </>",
-        "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
-        "<bg=blue;fg=white>                                                         </>",
-        "",
-        "<bg=yellow;fg=black>Next steps</>:",
-        "  * Install the site: https://www.drupal.org/docs/installing-drupal",
-        "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
-        "  * Get support: https://www.drupal.org/support",
-        "  * Get involved with the Drupal community:",
-        "      https://www.drupal.org/getting-involved",
-        "  * Remove the plugin that prints this message:",
-        "      composer remove drupal/core-project-message"
-      ]
-    }
-  }
-}
